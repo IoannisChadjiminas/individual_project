@@ -1,5 +1,5 @@
-from .models import Post
-from .serializers import PostSerializer
+from api.models import Post
+from api.serializers import PostSerializer
 from rest_framework import generics
 # Create your views here.
 
