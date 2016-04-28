@@ -3,3 +3,5 @@ db.sqlite3
 node_modules
 myenv
 package.json
+webpack.config.js
+webpack.prod.config.js

@@ -1,12 +1,12 @@
-{% load static %}
+{% load render_bundle from webpack_loader %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Test</title>
-    <link rel="stylesheet" href="{% static 'api/api.css' %}">
-</head>
+    </head>
 <body>
-    <p> Hello Kousio! </p>
+    <div id="container"> Hello </div>
+    {% render_bundle 'main' %}
 </body>
 </html>
