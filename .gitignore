@@ -1,3 +1,5 @@
 mysite/staticfiles/
 db.sqlite3
-
+node_modules
+myenv
+package.json
