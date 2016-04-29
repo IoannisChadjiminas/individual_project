@@ -5,3 +5,7 @@ myenv
 package.json
 webpack.config.js
 webpack.prod.config.js
+webpack.base.config.js
+webpack.local.config.js
+webpack-stats.json
+api/static/api/assets/bundles/

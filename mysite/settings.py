@@ -29,7 +29,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 # Application definition
@@ -157,11 +157,13 @@ WEBPACK_LOADER = {
     }
 }
 
-#if not DEBUG:
-   # WEBPACK_LOADER.update({
-   #     'BUNDLE_DIR_NAME': 'dist/',
-   #     'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json')
-  #  })
+if not DEBUG:
+    WEBPACK_LOADER.update({
+        'DEFAULT': {
+            'BUNDLE_DIR_NAME': 'api/assets/dist/',
+            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json')
+        }
+    })
 
 # REST_FRAMEWORK = {
 #    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
