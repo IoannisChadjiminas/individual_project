@@ -2,7 +2,7 @@ var React = require('react')
 var ReactDOM = require('react-dom')
 
 var BooksList = React.createClass({
-    loadBooksFromServer: function(){
+    loadItemsFromServer: function(){
         $.ajax({
             url: this.props.url,
             datatype: 'json',
@@ -18,23 +18,22 @@ var BooksList = React.createClass({
     },
 
     componentDidMount: function() {
-        this.loadBooksFromServer();
-        setInterval(this.loadBooksFromServer, 
+        this.loadItemsFromServer();
+        setInterval(this.loadItemsFromServer, 
                     this.props.pollInterval)
     }, 
     render: function() {
         if (this.state.data) {
             console.log('DATA!')
-            var bookNodes = this.state.data.map(function(book){
-                return <li> {book.title} </li>
+            var itemNodes = this.state.data.map(function(item){
+                return <div className="storyItem">
+                        <a className="storyTitle-link" href={item.url}> {item.title} </a>
+                       </div>
             })
         }
         return (
             <div>
-                <h1>Hello React!</h1>
-                <ul>
-                    {bookNodes}
-                </ul>
+             {itemNodes}
             </div>
         )
     }
