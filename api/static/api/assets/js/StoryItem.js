@@ -6,7 +6,25 @@ var NewsItem = React.createClass({
   getDomain: function () {
     return url.parse(this.props.item.url).hostname;
   },
+
+  getRank: function () {
+    return (
+      <div className="newsItem-rank">
+        {this.props.rank}.
+      </div>
+    );
+  },
   
+  getVote: function () {
+    return (
+      <div className="newsItem-vote">
+        <a href={'https://news.ycombinator.com/vote?for=' + '&dir=up&whence=news'}>
+          <img src="/static/api/assets/img/grayarrow2x.gif" width="10"/>
+        </a>
+      </div>
+    );
+  },
+
   getSubtext: function () {
     return (
       <div className="newsItem-subtext">
@@ -28,10 +46,14 @@ var NewsItem = React.createClass({
 
   render: function () {
     return (
-     <div className="newsItem">
-        {this.getTitle()}
-        {this.getSubtext()}
-     </div>
+      <div className="newsItem">
+        {this.getRank()}
+        {this.getVote()}
+        <div className="newsItem-itemText">
+          {this.getTitle()}
+          {this.getSubtext()}
+        </div>
+      </div>
     );
   }
 });
