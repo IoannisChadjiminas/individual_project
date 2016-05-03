@@ -1,9 +1,14 @@
-.storyItem {
+.newsItem {
   color: #828282;
   margin-top: 5px;
 }
 
-.storyTitle-link {
+.newsItem-titleLink {
   font-size: 10pt;
   text-decoration: none;
+}
+
+.newsItem-domain {
+  font-size: 8pt;
+  margin-left: 5px;
 }

@@ -1,43 +1,14 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
+var NewsItem = require('./StoryItem');
 
-var BooksList = React.createClass({
-    loadItemsFromServer: function(){
-        $.ajax({
-            url: this.props.url,
-            datatype: 'json',
-            cache: false,
-            success: function(data) {
-                this.setState({data: data});
-            }.bind(this)
-        })
-    },
 
-    getInitialState: function() {
-        return {data: []};
-    },
 
-    componentDidMount: function() {
-        this.loadItemsFromServer();
-        setInterval(this.loadItemsFromServer, 
-                    this.props.pollInterval)
-    }, 
-    render: function() {
-        if (this.state.data) {
-            console.log('DATA!')
-            var itemNodes = this.state.data.map(function(item){
-                return <div className="storyItem">
-                        <a className="storyTitle-link" href={item.url}> {item.title} </a>
-                       </div>
-            })
-        }
-        return (
-            <div>
-             {itemNodes}
-            </div>
-        )
-    }
-})
-
-ReactDOM.render(<BooksList url='/post/' pollInterval={1000} />, 
-    document.getElementById('container'))
+$.ajax({
+  url: '/post/'
+}).then(function (items) {
+  // Log the data so we can inspect it in the developer console.
+  console.log('items', items);
+  // Use a fake rank for now.
+  ReactDOM.render(<NewsItem item={items[0]} rank={1}/>, $('#container')[0]);
+});
