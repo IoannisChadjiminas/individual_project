@@ -20,4 +20,6 @@ from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^', include('api.urls')),
     url(r'^index/', TemplateView.as_view(template_name="index.html")),
+    url(r'^list/', TemplateView.as_view(template_name="NewsList.html")),
+    url(r'^header/', TemplateView.as_view(template_name="StoryHeader.html")),
 ]

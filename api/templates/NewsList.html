@@ -1,0 +1,18 @@
+{% load render_bundle from webpack_loader %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StoryHeader</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'api/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'api/assets/css/StoryHeader.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'api/assets/css/app.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'api/assets/css/StoryItem.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'api/assets/css/NewList.css' %}">
+</head>
+<body>
+    <div id="content"></div>
+    {% render_bundle 'main' %}
+</body>
+</html>
