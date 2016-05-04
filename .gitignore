@@ -2,12 +2,12 @@ mysite/staticfiles/
 db.sqlite3
 node_modules
 myenv
-package.json
-webpack.config.js
-webpack.prod.config.js
-webpack.base.config.js
-webpack.local.config.js
-api/static/api/assets/bundles/
-.eslintrc
+# package.json
+# webpack.config.js
+# webpack.prod.config.js
+# webpack.base.config.js
+# webpack.local.config.js
+# api/static/api/assets/bundles/
+# .eslintrc
 dbdumb
-webpack-stats.json
+# webpack-stats.json
