@@ -1,11 +1,11 @@
 {
   "name": "glacial-caverns-82286",
   "version": "1.0.0",
-  "description": "",
+  "description": "git clone https://github.com/IoannisChadjiminas/dissertation_imperial.git npm init . npm install python3 -m venv myenv source myenv/bin/activate pip install -r requirements.txt",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/.bin/webpack --config webpack.local.config.js",
-    "build-production": "./node_modules/.bin/webpack --config webpack.prod.config.js --progress --colors",
+    "build": "webpack --config webpack.local.config.js",
+    "build-production": "webpack --config webpack.prod.config.js --progress --colors",
     "watch": "node server.js"
   },
   "repository": {
