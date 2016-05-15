@@ -5,7 +5,8 @@ var Grid = require('react-bootstrap').Grid
 var Row = require('react-bootstrap').Row
 var Col = require('react-bootstrap').Col
 var StoryNav = require('./StoryNav')
-var StoryItem = require('./StoryItem')
+var StoryBox = require('./StoryBox')
+
 
 class GridLayout extends React.Component{
   render() {
@@ -20,60 +21,16 @@ class GridLayout extends React.Component{
     <br />
 
     <Row className="show-grid">
-     <Col    xsHidden smHidden md={2}>    </Col>
-      <Col  md={7}> <StoryItem title= {this.props.title} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> </Col>
+      <Col  xsHidden smHidden md={2}>    </Col>
+      <Col  md={7}> <StoryBox url={this.props.url} pollInterval={this.props.pollInterval}/>  </Col>
       <Col  xsHidden smHidden md={3}> </Col>
-      <br />
     </Row>
-
-    <br />
-    <br />
-
-    <Row className="show-grid">
-      <Col  xsHidden smHidden md={2}>    </Col>
-      <Col  md={7}> <StoryItem title= {this.props.title} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> </Col>
-      <Col  xsHidden smHidden md={3}>  </Col>
-      <br />
-    </Row>
-
-    <br />
-    <br />
-
-    <Row className="show-grid">
-      <Col  xsHidden smHidden md={2}>   </Col>
-      <Col  md={7}> <StoryItem title= {this.props.title} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> </Col>
-      <br />
-    </Row>
-
-    <br />
-    <br />
-
-    <Row className="show-grid">
-      <Col  xsHidden smHidden md={2}>   </Col>
-      <Col  md={7}> <StoryItem title= {this.props.title} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> </Col>
-      <br />
-    </Row>
-
-    <br />
-    <br />
-
-    <Row className="show-grid">
-      <Col  xsHidden smHidden md={2}>   </Col>
-      <Col  md={7}> <StoryItem title= {this.props.title} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> </Col>
-      <br />
-    </Row>
-
-    <br />
-    <br />
-
-    <Row className="show-grid">
-      <Col  xsHidden smHidden md={2}>    </Col>
-      <Col md={7}> <StoryItem title= {this.props.title} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> </Col>
-    </Row>
-
   </Grid>)
   }
 }
 
 
-ReactDOM.render(<GridLayout title="Hezbollah says commander killed by Syrian insurgent shelling" url="http://www.dailymail.co.uk/wires/pa/article-3588667/New-London-Mayor-vows-clean-capitals-toxic-air.html" by="Ioannis" site_host="Guardian"/>, document.getElementById('container'))
+
+ReactDOM.render(<GridLayout url="https://glacial-caverns-82286.herokuapp.com/post.json" pollInterval={2000}/>, document.getElementById('container'))
+
+//ReactDOM.render(<GridLayout title="Hezbollah says commander killed by Syrian insurgent shelling" url="http://www.dailymail.co.uk/wires/pa/article-3588667/New-London-Mayor-vows-clean-capitals-toxic-air.html" by="Ioannis" site_host="Guardian"/>, document.getElementById('container'))

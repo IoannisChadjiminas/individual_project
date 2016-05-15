@@ -46,7 +46,7 @@ class EmoticonButton extends React.Component {
            <img className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>
            <CommentLink />
            <ShareLink />
-           </div>
+    </div>
 
     </div>
     )
@@ -72,15 +72,34 @@ class ShareLink extends React.Component {
 
 class StoryItem extends React.Component {
     render() {
-      return  <div  className="storyItem-storyItems">
-            <hr />
-            <StoryWrapTitle title={this.props.title} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> 
-            <EmoticonButton />
+      return(  
+        <div>
+          <div  className="storyItem-storyItems">
+              <hr />
+              <StoryWrapTitle title={this.props.title} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> 
+              <EmoticonButton />
+          </div>
+          <br />
         </div>
+        )
     }
 }
 
-module.exports = StoryItem;
+class StoryList extends React.Component {
+  render() {
+    return (
+      <div className="storyList">
+          {this.props.data.map(function(story){
+            return (
+              <StoryItem key={story.id} title={story.title} url={story.url} by={story.by} site_host={story.site_host} />
+            )
+          })}
+      </div>
+    )
+  }
+}
+
+module.exports = StoryList;
 
 
 
