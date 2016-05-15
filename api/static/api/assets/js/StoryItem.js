@@ -1,61 +1,86 @@
-var React = require('react');
-var url = require('url');
-var moment = require('moment');
+var React = require('react')
+require("../css/storyItem.scss")
 
-var NewsItem = React.createClass({
-  getDomain: function () {
-    return url.parse(this.props.item.url).hostname;
-  },
-
-  getRank: function () {
+class StoryTitle extends React.Component {
+  render() {
     return (
-      <div className="newsItem-rank">
-        {this.props.rank}.
+      <div className="storyTitle-storyItems">
+        <a className="storyTitle_Link-storyItems" target="_blank" href={this.props.url}> {this.props.title} </a>
       </div>
-    );
-  },
-  
-  getVote: function () {
-    return (
-      <div className="newsItem-vote">
-        <a href={'https://news.ycombinator.com/vote?for=' + '&dir=up&whence=news'}>
-          <img src="/static/api/assets/img/grayarrow2x.gif" width="10"/>
-        </a>
-      </div>
-    );
-  },
-
-  getSubtext: function () {
-    return (
-      <div className="newsItem-subtext">
-        {this.props.item.score} points by {this.props.item.by}
-      </div>
-    );
-  },
-
-  getTitle: function() {
-    return (
-        <div className="newsItem-title">
-            <a className="newsItem-titleLink" href={this.props.item.url}>{this.props.item.title}</a>
-            <span className="newsItem-domain">
-                ({this.getDomain()})
-            </span>
-        </div>
-    );
-  },
-
-  render: function () {
-    return (
-      <div className="newsItem">
-        {this.getRank()}
-        {this.getVote()}
-        <div className="newsItem-itemText">
-          {this.getTitle()}
-          {this.getSubtext()}
-        </div>
-      </div>
-    );
+    )
   }
-});
+}
 
-module.exports = NewsItem;
+class StorySubtitle extends React.Component {
+  render() {
+    return (
+      <div className="storySubtitle-storyItems">
+        <strong> story shared by {this.props.by} 8 hours ago via the {this.props.site_host} </strong>
+      </div>
+    )
+  }
+}
+
+class StoryWrapTitle extends React.Component {
+  render() {
+    return (
+      <div className="storyWrapTitle-storyItems">
+        <StoryTitle title={this.props.title} url={this.props.url}/>
+        <StorySubtitle by={this.props.by} site_host={this.props.site_host}/>
+      </div>
+    )
+  }
+}
+
+class EmoticonButton extends React.Component {
+  render() {
+    return (
+     <div className="storyEmoticons-storyItems"> 
+        <br />
+        <hr />
+          <div className="box">
+           <img className="storyLol-storyItems" src="/static/api/assets/img/emoticons/lol.png" /> 
+           <img className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" />
+           <img className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> 
+           <img className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
+           <img className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>
+           <CommentLink />
+           <ShareLink />
+           </div>
+
+    </div>
+    )
+  }
+}
+
+class CommentLink extends React.Component {
+    render() {
+        return (
+            <a className="storyComment-storyItems" href=""> <strong>comment</strong> </a>
+        )
+    }
+}
+
+
+class ShareLink extends React.Component {
+    render() {
+        return (
+            <a className="storyShare-storyItems" href=""> <strong>share</strong> </a>
+        )
+    }
+}
+
+class StoryItem extends React.Component {
+    render() {
+      return  <div  className="storyItem-storyItems">
+            <hr />
+            <StoryWrapTitle title={this.props.title} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> 
+            <EmoticonButton />
+        </div>
+    }
+}
+
+module.exports = StoryItem;
+
+
+

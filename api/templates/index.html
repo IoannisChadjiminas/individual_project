@@ -6,11 +6,11 @@
     <meta charset="UTF-8">
     <title>HomePage</title>
     <link rel="stylesheet" type="text/css" href="{% static 'api/assets/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'api/assets/css/StoryItem.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'api/assets/css/app.css' %}">
+    {% render_bundle 'main' 'css' %}
 </head>
 <body>
-    <div id="container"> Hello </div>
-    {% render_bundle 'main' %}
+    <div id='container'> </div>
+    {% render_bundle 'main' 'js'%}
+
 </body>
 </html>
