@@ -35,6 +35,6 @@ class GridLayout extends React.Component{
 //module.exports = StoryForm;
 
 //ReactDOM.render(<StoryForm />, document.getElementById('container'))
-ReactDOM.render(<GridLayout url="http://localhost:5000/post.json" url_post="http://localhost:5000/post/" pollInterval={2000}/>, document.getElementById('container'))
+ReactDOM.render(<GridLayout url="https://glacial-caverns-82286.herokuapp.com/post.json" url_post="https://glacial-caverns-82286.herokuapp.com/post/" pollInterval={2000}/>, document.getElementById('container'))
 
 //ReactDOM.render(<GridLayout title="Hezbollah says commander killed by Syrian insurgent shelling" url="http://www.dailymail.co.uk/wires/pa/article-3588667/New-London-Mayor-vows-clean-capitals-toxic-air.html" by="Ioannis" site_host="Guardian"/>, document.getElementById('container'))
