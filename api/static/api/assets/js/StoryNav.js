@@ -5,6 +5,7 @@ var divStyle ={
   float: 'right'
 }
 
+
 class StoryNav extends React.Component {
     render() {
         return (

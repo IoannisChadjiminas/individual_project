@@ -1,6 +1,7 @@
 var React = require('react')
 var $ = require('jquery')
 var StoryForm = require('./StoryForm')
+require('../css/shareStory.scss')
 
 class StorySubmit extends React.Component {
   constructor(){

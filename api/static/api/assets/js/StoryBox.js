@@ -8,7 +8,6 @@ class StoryBox extends React.Component {
     super();
     this.state = {data: []}
     this.loadDataFromServer = this.loadDataFromServer.bind(this)
-    //this.handleStorySubmit = this.handleStorySubmit.bind(this)
   }
 
   loadDataFromServer () {
