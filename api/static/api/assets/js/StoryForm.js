@@ -38,6 +38,7 @@ class StoryForm extends React.Component {
         return;
       }
       this.props.onStorySubmit({by:by, title:title, url:url, site_host:site_host})
+      
       this.setState({by:'', title:'', url: '', site_host:''})
 
     }
