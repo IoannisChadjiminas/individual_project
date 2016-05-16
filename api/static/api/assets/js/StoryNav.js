@@ -24,6 +24,4 @@ class StoryNav extends React.Component {
     }
 }
 
-            //<li style={divStyle}> <a className="active" href=""> About </a> </li>
-
 module.exports = StoryNav;
