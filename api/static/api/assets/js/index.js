@@ -30,5 +30,5 @@ class GridLayout extends React.Component{
   }
 }
 
-//ReactDOM.render(<GridLayout url="http://localhost:5000/post.json" url_post="http://localhost:5000/post/" pollInterval={2000}/>, document.getElementById('container'))
-ReactDOM.render(<GridLayout url="https://glacial-caverns-82286.herokuapp.com/post.json/" url_post="https://glacial-caverns-82286.herokuapp.com/post/" pollInterval={2000}/>, document.getElementById('container'))
+ReactDOM.render(<GridLayout url="http://localhost:5000/post.json" url_post="http://localhost:5000/post/" pollInterval={2000}/>, document.getElementById('container'))
+//ReactDOM.render(<GridLayout url="https://glacial-caverns-82286.herokuapp.com/post.json/" url_post="https://glacial-caverns-82286.herokuapp.com/post/" pollInterval={2000}/>, document.getElementById('container'))

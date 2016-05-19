@@ -71,7 +71,7 @@ class EmoticonButton extends React.Component {
 
   handleAngryclick() {
     this.setState({angry: this.state.angry + 1, total:this.state.total +1})
-    this.handleReactPoint({score: this.state.total})
+    this.handleReactPoint({score: this.state.total+1})
   }
 
   handleReactPoint(reactPoint) {
@@ -137,7 +137,7 @@ class StoryItem extends React.Component {
           <div  className="storyItem-storyItems">
               <hr />
               <StoryWrapTitle  title={this.props.title} score={this.props.score} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> 
-              <EmoticonButton  id={this.props.id} score={this.props.score} url={"https://glacial-caverns-82286.herokuapp.com/post/" + this.props.id + "/"} />
+              <EmoticonButton  id={this.props.id} score={this.props.score} url={"http://localhost:5000/post/" + this.props.id + "/"} />
           </div>
           <p className="storyItem-br"/>
         </div>
