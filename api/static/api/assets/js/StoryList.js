@@ -137,7 +137,7 @@ class StoryItem extends React.Component {
           <div  className="storyItem-storyItems">
               <hr />
               <StoryWrapTitle  title={this.props.title} score={this.props.score} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> 
-              <EmoticonButton  id={this.props.id} score={this.props.score} url={"http://localhost:5000/post/" + this.props.id + "/"} />
+              <EmoticonButton  id={this.props.id} score={this.props.score} url={"/api/post/" + this.props.id + "/"} />
           </div>
           <p className="storyItem-br"/>
         </div>

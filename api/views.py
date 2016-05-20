@@ -27,7 +27,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     '''
-    This viewset automatically provides 'list' and 'deatail' action
+    This viewset automatically provides 'list' and 'detail' action
     '''
     permission_classes = (IsAdminUser,)
     queryset = User.objects.all()
