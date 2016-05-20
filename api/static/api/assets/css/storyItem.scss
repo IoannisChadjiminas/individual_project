@@ -98,6 +98,13 @@ hr {
           transition: all 0ms ease;*/
 }
 
+.box:hover img {
+    opacity: 0.55;
+    filter: alpha(opacity=55); 
+    cursor: pointer;
+
+}
+
 .box:hover img:hover {
     opacity: 1.0;
     filter: alpha(opacity=100); 
@@ -105,12 +112,6 @@ hr {
 
 }
 
-.box:hover img{
-  width: 20px;
-  /* This is 52px total. 1/2 of that is for top and the other half is for bottom. */
-  height: 20px;
-
-}
 
 .pplReacted {
     float: right;
