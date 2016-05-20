@@ -3,11 +3,12 @@ from api.serializers import PostSerializer, UserSerializer
 from rest_framework import generics
 from rest_framework import viewsets
 from django.contrib.auth.models import User
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 # Create your views here.
 
 
 class PostViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
