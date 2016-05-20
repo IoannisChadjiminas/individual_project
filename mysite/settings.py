@@ -45,7 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'api',
     'rest_framework',
-    'webpack_loader',
+    'webpack_loader'
 )
 
 
@@ -90,8 +90,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'react_db',
-        'USER': 'ioannis_chadjiminas',
+        'NAME': 'storiesdb',
+        'USER': 'ioannischadjiminas',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',

@@ -5,9 +5,11 @@ from django.contrib.auth import get_user_model
 
 
 class PostSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Post
-        fields = ('id', 'title', 'post_type', 'by', 'site_host', 'score',
+        fields = ('id', 'owner', 'title', 'post_type', 'by', 'site_host', 'score',
                   'url', 'text', 'published_date')
 
 
@@ -17,6 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
     '''
 
     password = serializers.CharField(write_only=True)
+    posts = serializers.PrimaryKeyRelatedField(many=True, queryset=Post.objects.all())
 
     def create(self, validated_data):
         user = get_user_model().objects.create(
@@ -27,4 +30,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'password')
+        fields = ('id', 'username', 'password', 'posts')
