@@ -2,6 +2,7 @@ from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from api import views
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 
 # Create a router and register our viewsets with it
 router = DefaultRouter()
@@ -20,3 +21,6 @@ urlpatterns += [
     url(r'^api-auth/', include('rest_framework.urls',
         namespace='rest_framework'))
     ]
+
+# This is a view that returns tokes if you pass valid username/password
+urlpatterns += [url(r'^obtain-auth-token/$', obtain_auth_token)]
