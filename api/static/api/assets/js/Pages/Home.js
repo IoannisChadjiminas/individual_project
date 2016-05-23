@@ -34,7 +34,7 @@ const Home = React.createClass({
     <Row className="show-grid">
       <Col  xsHidden smHidden md={2}>    </Col>
       <Col  md={6}> <StoryBox url={this.props.url} pollInterval={this.props.pollInterval}/>  </Col>
-      <Col  xsHidden smHidden md={4}> {this.state.loggedIn ? (<StorySubmit />) : (<Button> Submit a Story </Button>)}</Col>
+      <Col  xsHidden smHidden md={4}> {this.state.loggedIn ? (<StorySubmit url_post={this.props.url_post} />) : (<Button> Submit a Story </Button>)}</Col>
     </Row>
   </Grid>
   )}

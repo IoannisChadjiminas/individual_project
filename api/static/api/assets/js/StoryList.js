@@ -1,4 +1,5 @@
 var React = require('react')
+var auth = require('./auth')
 require("../css/storyItem.scss")
 
 class StoryTitle extends React.Component {
@@ -81,6 +82,9 @@ class EmoticonButton extends React.Component {
       contetType: "application/json", //when sending data to the server, use the content types
       type: 'PUT',
       data: reactPoint,
+      headers: {
+                'Authorization': 'Token ' + localStorage.token
+            },
       success: function(data) {
         this.setState({data: data});
       }.bind(this),

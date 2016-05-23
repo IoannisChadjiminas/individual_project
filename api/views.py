@@ -4,7 +4,7 @@ from rest_framework import generics
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
-from rest_framework.permissions import AllowAny                      
+from rest_framework.permissions import AllowAny                  
 from django.contrib.auth import get_user_model
 from api.permissions import IsOwnerOrReadOnly
 # Create your views here.
@@ -19,8 +19,7 @@ class PostList(generics.ListCreateAPIView):
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)  # IsOwnerOrReadOnly
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 

@@ -2,6 +2,7 @@ var React = require('react')
 var $ = require('jquery')
 var StoryForm = require('./StoryForm')
 require('../css/shareStory.scss')
+var auth = require('./auth')
 
 class StorySubmit extends React.Component {
   constructor(){
@@ -16,6 +17,9 @@ class StorySubmit extends React.Component {
       dataType: 'json',
       type: 'POST',
       data: storyDetails,
+      headers: {
+                'Authorization': 'Token ' + localStorage.token
+            },
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
