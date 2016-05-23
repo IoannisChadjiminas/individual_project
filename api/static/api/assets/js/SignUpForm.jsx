@@ -1,4 +1,10 @@
 var React = require('react')
+var Form = require('react-bootstrap').Form
+var FormGroup = require('react-bootstrap').FormGroup
+var ControlLabel = require('react-bootstrap').ControlLabel
+var Button = require('react-bootstrap').Button
+var FormControl = require('react-bootstrap').FormControl
+var Col = require('react-bootstrap').Col
 
 class SignUpForm extends React.Component {
     constructor(){
@@ -29,22 +35,39 @@ class SignUpForm extends React.Component {
     }
 
     render() {
-       return ( <form className="form" onSubmit={this.handleSubmit} > 
-            <input 
-                type="text" 
-                placeholder="username"
-                onChange={this.handleUsernameChange} 
-            />
-            <input 
-                type="password" 
-                placeholder="password" 
-                onChange={this.handlePassChange}
-            />
+       return ( 
 
-            <input 
-                type="submit" value="POST"
-            />
-        </form>
+          <Form horizontal onSubmit={this.handleSubmit}>
+            <FormGroup controlId="formInlineName">
+             <Col  xsHidden smHidden md={4}>    </Col>
+             <Col md={4}>
+              <ControlLabel>Name</ControlLabel>
+              {' '}
+             <FormControl type="text" placeholder="Jane Doe" onChange={this.handleUsernameChange}  />
+             </Col>
+            <Col  xsHidden smHidden md={4}>    </Col>
+            </FormGroup>
+            {' '}
+            <FormGroup controlId="formInlineEmail">
+            <Col  xsHidden smHidden md={4}>    </Col>
+            <Col md={4}>
+              <ControlLabel>Password</ControlLabel>
+              {' '}
+              <FormControl type="password" placeholder="password" onChange={this.handlePassChange}/>
+            </Col>
+            <Col  xsHidden smHidden md={4}>    </Col>
+            </FormGroup>
+            {' '}
+            <FormGroup>
+            <Col  xsHidden smHidden md={4}>    </Col>
+            <Col md={4}>
+            <Button type="submit" value="POST">
+              signUp
+            </Button>
+            </Col>
+            <Col  xsHidden smHidden md={4}>    </Col>
+            </FormGroup>
+          </Form>
         )
     }
 }

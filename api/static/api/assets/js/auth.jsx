@@ -1,21 +1,29 @@
+var React = require('react')
+
 module.exports = {
     login: function(username, pass, cb) {
-        if (localStorage.token) {
-            if (cb) cb(true)
-            return
-        }
+         cb = arguments[arguments.length - 1]
+         if (localStorage.token) {
+              if (cb) cb(true)
+              this.onChange(true)
+              return
+         }
         this.getToken(username, pass, (res) => {
             if (res.authenticated) {
                 localStorage.token = res.token
                 if (cb) cb(true)
+                  this.onChange(true)
             } else {
                 if (cb) cb(false)
+                  this.onChange(false)
             }
         })
     },        
     
-    logout: function() {
+    logout: function(cb) {
         delete localStorage.token
+        if (cb) cb()
+            this.onChange(false)
     },
 
     loggedIn: function() {
@@ -25,6 +33,10 @@ module.exports = {
     signup: function() {
 
     },
+
+    onChange:function() {},
+
+    onChange_home:function() {},
 
     getToken: function(username, pass, cb) {
         $.ajax({

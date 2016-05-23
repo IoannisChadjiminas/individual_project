@@ -1,40 +1,58 @@
-/*var React = require('react')
+//ReactDOM.render(<GridLayout url="/api/post.json" url_post="/api/post/" pollInterval={2000}/>, document.getElementById('container'))
+var React = require('react')
 var ReactDOM = require('react-dom')
-require("../css/storyItem.scss")
-var Grid = require('react-bootstrap').Grid
-var Row = require('react-bootstrap').Row
-var Col = require('react-bootstrap').Col
+var Router = require('react-router')
+var Home = require('./Pages/Home.js')
+var LolStories = require('./Pages/LolStories.jsx')
+var HappyStories = require('./Pages/HappyStories.jsx')
+var WowStories = require('./Pages/WowStories.jsx')
+var SadStories = require('./Pages/SadStories.jsx')
+var AngryStories = require('./Pages/AngryStories.jsx')
 var StoryNav = require('./StoryNav')
-var StoryBox = require('./StoryBox')
-var StorySubmit = require('./StorySubmit')
-
-
-class GridLayout extends React.Component{
-  render() {
-  return (
-    <Grid>
-
-    <Row className="show-grid">
-    <Col md={12}> <StoryNav /> </Col>
-    </Row>
-
-    <br />
-    <br />
-
-    <Row className="show-grid">
-      <Col  xsHidden smHidden md={2}>    </Col>
-      <Col  md={6}> <StoryBox url={this.props.url} pollInterval={this.props.pollInterval}/>  </Col>
-      <Col  xsHidden smHidden md={4}> <StorySubmit url_post={this.props.url_post} /> </Col>
-    </Row>
-  </Grid>)
+var signUp = require('./SignUpForm.jsx')
+var App = require('./app')
+var Login = require('./login')
+var auth = require('./auth')
+var Logout = require('./Logout.jsx')
+var HomeWrapper = React.createClass ({
+  render: function() {
+    return (
+      <Home url="/api/post.json" url_post="/api/post/" pollInterval={2000} />
+    )
   }
+})
+
+function requireAuth(nextState, replace) {
+    if (!auth.loggedIn()) {
+        replace({ 
+            pathname:'SignIn',
+            state: {nextPathname: '/'}
+        })
+    }
 }
 
-ReactDOM.render(<GridLayout url="/api/post.json" url_post="/api/post/" pollInterval={2000}/>, document.getElementById('container'))
+
+ReactDOM.render(
+    <Router.Router history={Router.hashHistory}>
+        <Router.Route path='/' component={StoryNav} >
+          <Router.IndexRoute component={HomeWrapper} />
+          <Router.Route path='LolStories' component={LolStories}/>
+          <Router.Route path='WowStories' component={WowStories}/>
+          <Router.Route path='SadStories' component={SadStories}/>
+          <Router.Route path='AngryStories' component={AngryStories}/>
+          <Router.Route path='SignUp' component={signUp} />
+          <Router.Route path='SignIn' component={Login} />
+          <Router.Route path='Logout' component={Logout} />
+          <Router.Route path='HappyStories' component={HappyStories}/>
+        </Router.Route>
+      </Router.Router>,
+    document.getElementById('container')
+)
 //ReactDOM.render(<GridLayout url="https://glacial-caverns-82286.herokuapp.com/post.json/" url_post="https://glacial-caverns-82286.herokuapp.com/post/" pollInterval={2000}/>, document.getElementById('container'))
 
 
-/*var React = require('react')
+/*
+var React = require('react')
 var ReactDOM = require('react-dom')
 var Router = require('react-router')
 var App = require('./app')
@@ -57,9 +75,10 @@ ReactDOM.render(
         
     </Router.Router>,
     document.getElementById('container')
-)*/
+)
+*/
 
-var React = require('react')
+/*var React = require('react')
 var SignUpForm = require('./SignUpForm')
 var ReactDOM = require('react-dom')
 
@@ -96,4 +115,4 @@ class SignUpSubmit extends React.Component {
     }
 }
 
-ReactDOM.render(<SignUpSubmit />, document.getElementById('container'))
+ReactDOM.render(<SignUpSubmit />, document.getElementById('container'))*/

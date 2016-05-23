@@ -35,4 +35,4 @@ class SignUpSubmit extends React.Component {
     }
 }
 
-ReactDOM.render(<SignUpSubmit />, document.getElementById('container'))
+module.exports = SignUpSubmit;
