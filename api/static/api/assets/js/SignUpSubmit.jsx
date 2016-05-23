@@ -1,13 +1,12 @@
 var React = require('react')
-var SignUpForm = require('./SignUpForm')
+var SignUpForm = require('./SignUpForm.jsx')
 var ReactDOM = require('react-dom')
 
 class SignUpSubmit extends React.Component {
-    constructor() {
-        super()
-        this.state = {data: []}
-        this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this)
-
+    constructor(){
+      super()
+      this.state = {data: []}
+      this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this)
     }
 
     handleSignUpSubmit(userDetails) {
@@ -29,7 +28,7 @@ class SignUpSubmit extends React.Component {
     render() {
         return (
          <div>
-            <SignUpForm onSignUpSubmit={this.handleSignUpSubmit} />
+            <SignUpForm onSignSubmit={this.handleSignUpSubmit} />
          </div>
         )
     }

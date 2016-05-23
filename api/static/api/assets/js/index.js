@@ -9,11 +9,12 @@ var WowStories = require('./Pages/WowStories.jsx')
 var SadStories = require('./Pages/SadStories.jsx')
 var AngryStories = require('./Pages/AngryStories.jsx')
 var StoryNav = require('./StoryNav')
-var signUp = require('./SignUpForm.jsx')
+var signUp = require('./SignUpSubmit')
 var App = require('./app')
 var Login = require('./login')
 var auth = require('./auth')
 var Logout = require('./Logout.jsx')
+
 var HomeWrapper = React.createClass ({
   render: function() {
     return (

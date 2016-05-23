@@ -42,7 +42,7 @@ const login = withRouter(
       return {
         error: false,
         username: '',
-        password: ''
+        password: '',
       }
     },
 
@@ -60,8 +60,6 @@ const login = withRouter(
 
     handleSubmit(event) {
       event.preventDefault()
-
-      event.preventDefault();
       var username = this.state.username.trim()
       var password = this.state.password.trim()
       if (!username || !password) {
@@ -72,7 +70,8 @@ const login = withRouter(
         this.context.router.replace('/')
 
       })
-      this.setState({username:' ', password:' '})
+
+      this.setState({error:false, username:' ', password:''})
 
       if (!auth.loggedIn())
         this.setState({error:true})
@@ -86,7 +85,7 @@ const login = withRouter(
              <Col md={4}>
               <ControlLabel>Name</ControlLabel>
               {' '}
-             <FormControl type="text" placeholder="Jane Doe" onChange={this.handleUsernameChange}  />
+             <FormControl type="text" placeholder="Jane Doe" value={this.state.username} onChange={this.handleUsernameChange}  />
              </Col>
             <Col  xsHidden smHidden md={4}>    </Col>
             </FormGroup>
@@ -96,7 +95,7 @@ const login = withRouter(
             <Col md={4}>
               <ControlLabel>Password</ControlLabel>
               {' '}
-              <FormControl type="password" placeholder="password" onChange={this.handlePassChange}/>
+              <FormControl type="password" placeholder="password" value={this.state.password} onChange={this.handlePassChange}/>
             </Col>
             <Col  xsHidden smHidden md={4}>    </Col>
             </FormGroup>

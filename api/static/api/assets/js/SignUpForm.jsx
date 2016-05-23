@@ -7,31 +7,31 @@ var FormControl = require('react-bootstrap').FormControl
 var Col = require('react-bootstrap').Col
 
 class SignUpForm extends React.Component {
-    constructor(){
-        super()
-        this.state = {username:'', password: ''}
-        this.handleUsernameChange = this.handleUsernameChange.bind(this)
-        this.handlePassChange = this.handlePassChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+    constructor() {
+      super()
+      this.state = {username:'', password: ''}
+      this.handleUsernameChange = this.handleUsernameChange.bind(this)
+      this.handlePassChange = this.handlePassChange.bind(this)
+      this.handleSubmit = this.handleSubmit.bind(this)
     }
     
-    handleUsernameChange(event){
+    handleUsernameChange (event) {
         this.setState({username: event.target.value})
     }
 
-    handlePassChange(event) {
+    handlePassChange (event) {
         this.setState({password: event.target.value})
     }
 
-    handleSubmit(event){
+    handleSubmit (event) {
         event.preventDefault();
         var username = this.state.username.trim()
         var password = this.state.password.trim()
         if (!username || !password) {
             return;
         }
-        this.props.onSignUpSubmit({username: username, password: password})
-        this.setState({username:' ', password:' '})
+        this.props.onSignSubmit({username: username, password: password})
+        this.setState({username:'', password:''})
     }
 
     render() {
@@ -43,7 +43,7 @@ class SignUpForm extends React.Component {
              <Col md={4}>
               <ControlLabel>Name</ControlLabel>
               {' '}
-             <FormControl type="text" placeholder="Jane Doe" onChange={this.handleUsernameChange}  />
+             <FormControl type="text" placeholder="Jane Doe" value={this.state.username} onChange={this.handleUsernameChange}  />
              </Col>
             <Col  xsHidden smHidden md={4}>    </Col>
             </FormGroup>
@@ -53,7 +53,7 @@ class SignUpForm extends React.Component {
             <Col md={4}>
               <ControlLabel>Password</ControlLabel>
               {' '}
-              <FormControl type="password" placeholder="password" onChange={this.handlePassChange}/>
+              <FormControl type="password" placeholder="password" value={this.state.password} onChange={this.handlePassChange}/>
             </Col>
             <Col  xsHidden smHidden md={4}>    </Col>
             </FormGroup>
