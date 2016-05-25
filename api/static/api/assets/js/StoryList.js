@@ -36,7 +36,7 @@ class StoryWrapTitle extends React.Component {
 class EmoticonButton extends React.Component {
   constructor(){
     super()
-    this.state = {lol: 0, satisfied: 0, wow: 0, cry:0, angry:0, total:0}
+    this.state = {lol: 0, happy: 0, wow: 0, sad:0, angry:0, total:0}
     this.handleLolclick = this.handleLolclick.bind(this)
     this.handleSatisfiedclick = this.handleSatisfiedclick.bind(this)
     this.handleWowclick = this.handleWowclick.bind(this)
@@ -47,33 +47,38 @@ class EmoticonButton extends React.Component {
   }
 
   componentDidMount(){
-    this.setState({lol: this.props.score, total: this.props.score})
+    this.setState({lol: this.props.score_lol, total: this.props.score, happy: this.props.score_happy,
+      wow: this.props.score_wow, sad: this.props.score_sad, angry: this.props.score_angry })
   }
   
   handleLolclick() {
-    this.setState({lol: this.state.lol +1, total:this.state.total +1})
-    this.handleReactPoint({score: this.state.total+1})
+    this.setState({lol: this.state.lol, total:this.state.total})
+    this.handleReactPoint({score: this.state.total, score_lol:this.state.lol, emotion:1})
+    this.handleReactVote({post: this.props.id})
 
   }
 
   handleSatisfiedclick() {
-    this.setState({satisfied: this.state.satisfied + 1, total:this.state.total +1})
-    this.handleReactPoint({score: this.state.total+1})
+    this.setState({happy: this.state.happy, total:this.state.total})
+    this.handleReactPoint({score: this.state.total, score_happy:this.state.happy, emotion:2})
+    this.handleReactVote({post: this.props.id})
   }
 
   handleWowclick() {
-    this.setState({wow: this.state.wow + 1, total:this.state.total +1})
-    this.handleReactPoint({score: this.state.total+1})
+    this.setState({wow: this.state.wow, total:this.state.total})
+    this.handleReactPoint({score: this.state.total, score_wow: this.state.wow, emotion:3})
+    this.handleReactVote({post: this.props.id})
   }
 
   handleCryclick() {
-    this.setState({cry: this.state.cry + 1, total:this.state.total +1})
-    this.handleReactPoint({score: this.state.total+1})
+    this.setState({sad: this.state.sad, total:this.state.total})
+    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, emotion:4})
+    this.handleReactVote({post: this.props.id})
   }
 
   handleAngryclick() {
     this.setState({angry: this.state.angry, total:this.state.total})
-    this.handleReactPoint({score: this.state.total})
+    this.handleReactPoint({score: this.state.total, score_angry: this.state.angry, emotion:5})
     this.handleReactVote({post: this.props.id})
   }
 
@@ -123,11 +128,11 @@ class EmoticonButton extends React.Component {
         <br />
         <hr />
           <div className="box">
-           <img  onClick={this.handleLolclick}  className="storyLol-storyItems" src="/static/api/assets/img/emoticons/lol.png" /> 
-           <img  onClick={this.handleSatisfiedclick}  className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" />
-           <img  onClick={this.handleWowclick}  className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> 
-           <img  onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
-           <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>
+           <span> {this.props.score_lol} </span> <img  onClick={this.handleLolclick}  className="storyLol-storyItems" src="/static/api/assets/img/emoticons/lol.png" /> 
+           <span> {this.props.score_happy} </span> <img  onClick={this.handleSatisfiedclick}  className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" />
+           <span> {this.props.score_wow} </span> <img  onClick={this.handleWowclick}  className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> 
+           <span> {this.props.score_sad} </span> <img  onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
+           <span> {this.props.score_angry} </span> <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>
            <CommentLink />
            <ShareLink />
            <span className="pplReacted"> <strong className="pplReacted-number"> {this.props.score} </strong> <span className="pplReacted-text"> reacted to this! </span> </span>
@@ -161,8 +166,10 @@ class StoryItem extends React.Component {
         <div>
           <div  className="storyItem-storyItems">
               <hr />
-              <StoryWrapTitle  title={this.props.title} score={this.props.score} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> 
-              <EmoticonButton  id={this.props.id} score={this.props.score} url={"/api/post/" + this.props.id + "/"} url_voter="/api/voter/" />
+              <StoryWrapTitle  title={this.props.title} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow}  
+                score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> 
+              <EmoticonButton  id={this.props.id} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow}  
+                score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={"/api/post/" + this.props.id + "/"} url_voter="/api/voter/" />
           </div>
           <p className="storyItem-br"/>
         </div>
@@ -176,7 +183,8 @@ class StoryList extends React.Component {
       <div className="storyList">
           {this.props.data.map(function(story){
             return (
-              <StoryItem key={story.id} id={story.id} score={story.score} title={story.title} url={story.url} by={story.by} site_host={story.site_host} />
+              <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} by={story.by} site_host={story.site_host} />
             )
           })}
       </div>

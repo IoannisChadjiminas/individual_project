@@ -8,6 +8,12 @@ class Post (models.Model):
     post_type = models.CharField(max_length=100, default='type')
     by = models.CharField(max_length=100, default='by')
     site_host = models.CharField(max_length=100, default='host')
+    score_lol = models.IntegerField(default=0)
+    score_happy = models.IntegerField(default=0)
+    score_wow = models.IntegerField(default=0)
+    score_sad = models.IntegerField(default=0)
+    score_angry = models.IntegerField(default=0)
+    emotion = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
     enable_score = models.CharField(max_length=5, default="True")
     url = models.CharField(max_length=200, default='url')
@@ -15,7 +21,7 @@ class Post (models.Model):
     published_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('score',)
+        ordering = ('-score',)
 
 
 class Voter (models.Model):
