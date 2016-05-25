@@ -54,32 +54,28 @@ class EmoticonButton extends React.Component {
   handleLolclick() {
     this.setState({lol: this.state.lol, total:this.state.total})
     this.handleReactPoint({score: this.state.total, score_lol:this.state.lol, emotion:1})
-    this.handleReactVote({post: this.props.id})
 
   }
 
   handleSatisfiedclick() {
     this.setState({happy: this.state.happy, total:this.state.total})
     this.handleReactPoint({score: this.state.total, score_happy:this.state.happy, emotion:2})
-    this.handleReactVote({post: this.props.id})
   }
 
   handleWowclick() {
     this.setState({wow: this.state.wow, total:this.state.total})
     this.handleReactPoint({score: this.state.total, score_wow: this.state.wow, emotion:3})
-    this.handleReactVote({post: this.props.id})
   }
 
   handleCryclick() {
     this.setState({sad: this.state.sad, total:this.state.total})
     this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, emotion:4})
-    this.handleReactVote({post: this.props.id})
   }
 
   handleAngryclick() {
     this.setState({angry: this.state.angry, total:this.state.total})
     this.handleReactPoint({score: this.state.total, score_angry: this.state.angry, emotion:5})
-    this.handleReactVote({post: this.props.id})
+    
   }
 
   handleReactPoint(reactPoint) {
@@ -94,6 +90,7 @@ class EmoticonButton extends React.Component {
             },
       success: function(data) {
         this.setState({data: data});
+        this.handleReactVote({post: this.props.id})
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
