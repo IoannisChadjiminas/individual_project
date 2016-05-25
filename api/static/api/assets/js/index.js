@@ -18,7 +18,7 @@ var Logout = require('./Logout.jsx')
 var HomeWrapper = React.createClass ({
   render: function() {
     return (
-      <Home url="/api/post.json" url_post="/api/post/" pollInterval={2000} />
+      <Home url="/api/post.json" url_post="/api/post/" pollInterval={500} />
     )
   }
 })
