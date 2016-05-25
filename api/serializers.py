@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Post
+from api.models import Post, Voter
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
@@ -9,7 +9,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'owner', 'title', 'post_type', 'by', 'site_host', 'score',
+        fields = ('id', 'enable_score', 'owner', 'title', 'post_type', 'by', 'site_host', 'score',
                   'url', 'text', 'published_date')
 
 
@@ -31,3 +31,11 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('id', 'username', 'password', 'posts')
+
+
+class VoterSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+
+    class Meta:
+        model = Voter
+        fields = ('id', 'post', 'user')

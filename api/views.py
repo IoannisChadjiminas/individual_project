@@ -1,19 +1,24 @@
-from api.models import Post
-from api.serializers import PostSerializer, UserSerializer
+from api.models import Post, Voter
+from api.serializers import PostSerializer, UserSerializer, VoterSerializer
 from rest_framework import generics
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
-from rest_framework.permissions import AllowAny                  
+from rest_framework.permissions import AllowAny              
 from django.contrib.auth import get_user_model
 from api.permissions import IsOwnerOrReadOnly
 # Create your views here.
 
 
 class PostList(generics.ListCreateAPIView):
+    '''
+    View to list or create a post in the system
+    '''
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+    # when a post is created is associated with the authenticated author
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
@@ -22,6 +27,39 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)  # IsOwnerOrReadOnly
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    # When performing PUT through AJAX I am checking if there is a relation between the current post and
+    # the current user. If there is not, then I increase the counter by one.
+
+    def perform_update(self, serializer):
+        post = Post.objects.get(pk=self.kwargs['pk'])
+        if Voter.objects.filter(post=post.id, user=self.request.user).exists():
+            pass
+        else:
+            serializer.save(score=int(self.request.data['score']) + 1)
+    '''
+    def perform_update(self, serializer):
+        post = Post.objects.get(pk=self.kwargs['pk'])
+        if Post.objects.filter(enable_score="True", id=post.id):
+            serializer.save(score=int(self.request.data['score'])+1)
+    '''
+
+
+class VoterList(generics.ListCreateAPIView):
+    '''
+    View to list or create a post in the system
+    '''
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    queryset = Voter.objects.all()
+    serializer_class = VoterSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class VoterDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Voter.objects.all()
+    serializer_class = VoterSerializer
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):

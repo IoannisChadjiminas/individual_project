@@ -11,6 +11,8 @@ router.register(r'users', views.UserViewSet)
 urlpatterns = [
     url(r'^post/$', views.PostList.as_view()),
     url(r'^post/(?P<pk>[0-9]+)/$', views.PostDetail.as_view()),
+    url(r'^voter/$', views.VoterList.as_view()),
+    url(r'^voter/(?P<pk>[0-9]+)/$', views.VoterDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

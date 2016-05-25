@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'storiesdb',
+        'NAME': 'stdb',
         'USER': 'ioannischadjiminas',
         'PASSWORD': '',
         'HOST': 'localhost',

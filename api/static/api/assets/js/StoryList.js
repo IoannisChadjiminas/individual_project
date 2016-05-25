@@ -43,6 +43,7 @@ class EmoticonButton extends React.Component {
     this.handleCryclick = this.handleCryclick.bind(this)
     this.handleAngryclick = this.handleAngryclick.bind(this)
     this.handleReactPoint = this.handleReactPoint.bind(this)
+    this.handleReactVote = this.handleReactVote.bind(this)
   }
 
   componentDidMount(){
@@ -71,8 +72,9 @@ class EmoticonButton extends React.Component {
   }
 
   handleAngryclick() {
-    this.setState({angry: this.state.angry + 1, total:this.state.total +1})
-    this.handleReactPoint({score: this.state.total+1})
+    this.setState({angry: this.state.angry, total:this.state.total})
+    this.handleReactPoint({score: this.state.total})
+    this.handleReactVote({post: this.props.id})
   }
 
   handleReactPoint(reactPoint) {
@@ -95,6 +97,25 @@ class EmoticonButton extends React.Component {
 
   }
 
+  handleReactVote(reactVote) {
+    $.ajax({
+      url: '/api/voter/',
+      dataType: 'json',
+      type: 'POST',
+      data: reactVote,
+      headers: {
+                'Authorization': 'Token ' + localStorage.token
+            },
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('/api/voter/', status, err.toString());
+      }.bind(this)
+    });
+
+  }
+
 
   render() {
     return (
@@ -109,7 +130,7 @@ class EmoticonButton extends React.Component {
            <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>
            <CommentLink />
            <ShareLink />
-           <span className="pplReacted"> <strong className="pplReacted-number"> {this.state.total} </strong> <span className="pplReacted-text"> reacted to this! </span> </span>
+           <span className="pplReacted"> <strong className="pplReacted-number"> {this.props.score} </strong> <span className="pplReacted-text"> reacted to this! </span> </span>
     </div>
 
     </div>
@@ -141,7 +162,7 @@ class StoryItem extends React.Component {
           <div  className="storyItem-storyItems">
               <hr />
               <StoryWrapTitle  title={this.props.title} score={this.props.score} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> 
-              <EmoticonButton  id={this.props.id} score={this.props.score} url={"/api/post/" + this.props.id + "/"} />
+              <EmoticonButton  id={this.props.id} score={this.props.score} url={"/api/post/" + this.props.id + "/"} url_voter="/api/voter/" />
           </div>
           <p className="storyItem-br"/>
         </div>
