@@ -15,12 +15,52 @@ class PostList(generics.ListCreateAPIView):
     View to list or create a post in the system
     '''
     permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-score')
     serializer_class = PostSerializer
 
     # when a post is created is associated with the authenticated author
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class PostLolList(generics.ListAPIView):
+    '''
+    View to list or create a post in the system
+    '''
+    queryset = Post.objects.all().order_by('-score_lol')
+    serializer_class = PostSerializer
+
+
+class PostHappyList(generics.ListAPIView):
+    '''
+    View to list or create a post in the system
+    '''
+    queryset = Post.objects.all().order_by('-score_happy')
+    serializer_class = PostSerializer
+
+
+class PostWowList(generics.ListAPIView):
+    '''
+    View to list or create a post in the system
+    '''
+    queryset = Post.objects.all().order_by('-score_wow')
+    serializer_class = PostSerializer
+
+
+class PostSadList(generics.ListAPIView):
+    '''
+    View to list or create a post in the system
+    '''
+    queryset = Post.objects.all().order_by('-score_sad')
+    serializer_class = PostSerializer
+
+
+class PostAngryList(generics.ListAPIView):
+    '''
+    View to list or create a post in the system
+    '''
+    queryset = Post.objects.all().order_by('-score_angry')
+    serializer_class = PostSerializer
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -54,19 +94,6 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         if Post.objects.filter(enable_score="True", id=post.id):
             serializer.save(score=int(self.request.data['score'])+1)
     '''
-
-
-class PostLolList(generics.ListCreateAPIView):
-    '''
-    View to list or create a post in the system
-    '''
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-
-    # when a post is created is associated with the authenticated author
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
 
 
 class VoterList(generics.ListCreateAPIView):

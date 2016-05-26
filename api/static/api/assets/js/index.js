@@ -26,7 +26,39 @@ var HomeWrapper = React.createClass ({
 var LolStoriesWrapper = React.createClass ({
   render: function() {
     return (
-      <LolStories url="/api/post.json" url_post="/api/post/" pollInterval={1000} />
+      <LolStories url="/api/post_lol.json" url_post="/api/post/" pollInterval={1000} />
+    )
+  }
+})
+
+var HappyStoriesWrapper = React.createClass ({
+  render: function() {
+    return (
+      <HappyStories url="/api/post_happy.json" url_post="/api/post/" pollInterval={1000} />
+    )
+  }
+})
+
+var WowStoriesWrapper = React.createClass ({
+  render: function() {
+    return (
+      <WowStories url="/api/post_wow.json" url_post="/api/post/" pollInterval={1000} />
+    )
+  }
+})
+
+var SadStoriesWrapper = React.createClass ({
+  render: function() {
+    return (
+      <SadStories url="/api/post_sad.json" url_post="/api/post/" pollInterval={1000} />
+    )
+  }
+})
+
+var AngryStoriesWrapper = React.createClass ({
+  render: function() {
+    return (
+      <AngryStories url="/api/post_angry.json" url_post="/api/post/" pollInterval={1000} />
     )
   }
 })
@@ -46,13 +78,13 @@ ReactDOM.render(
         <Router.Route path='/' component={StoryNav} >
           <Router.IndexRoute component={HomeWrapper} />
           <Router.Route path='LolStories' component={LolStoriesWrapper}/>
-          <Router.Route path='WowStories' component={WowStories}/>
-          <Router.Route path='SadStories' component={SadStories}/>
-          <Router.Route path='AngryStories' component={AngryStories}/>
+          <Router.Route path='WowStories' component={WowStoriesWrapper}/>
+          <Router.Route path='SadStories' component={SadStoriesWrapper}/>
+          <Router.Route path='AngryStories' component={AngryStoriesWrapper}/>
           <Router.Route path='SignUp' component={signUp} />
           <Router.Route path='SignIn' component={Login} />
           <Router.Route path='Logout' component={Logout} />
-          <Router.Route path='HappyStories' component={HappyStories}/>
+          <Router.Route path='HappyStories' component={HappyStoriesWrapper}/>
         </Router.Route>
       </Router.Router>,
     document.getElementById('container')

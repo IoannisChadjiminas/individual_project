@@ -1,9 +1,9 @@
 var React = require('react')
 var $ = require('jquery')
-var StoryLolList = require('./StoryList').StoryLolList
+var StorySadList = require('./StoryList').StorySadList
 var StoryForm = require('./StoryForm')
 
-class StoryLolBox extends React.Component {
+class StorySadBox extends React.Component {
   constructor(){
     super();
     this.state = {data: []}
@@ -37,10 +37,10 @@ class StoryLolBox extends React.Component {
   render() {
     return (
       <div className="storyBox">
-        <StoryLolList data={this.state.data} />
+        <StorySadList data={this.state.data} />
       </div>
     );
   }
 }
 
-module.exports = StoryLolBox;
+module.exports = StorySadBox;

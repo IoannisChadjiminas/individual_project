@@ -20,8 +20,8 @@ class Post (models.Model):
     text = models.TextField(default=0)
     published_date = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        ordering = ('-score',)
+   # class Meta:
+    #    ordering = ('-score',)
 
 
 class Voter (models.Model):

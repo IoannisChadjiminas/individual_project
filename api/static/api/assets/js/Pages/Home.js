@@ -4,10 +4,11 @@ var Grid = require('react-bootstrap').Grid
 var Row = require('react-bootstrap').Row
 var Col = require('react-bootstrap').Col
 var StoryNav = require('../StoryNav')
-var StoryBox = require('../StoryBox')
+var StoryBox = require('../StoryBox.jsx')
 var StorySubmit = require('../StorySubmit')
 var Button = require('react-bootstrap').Button
 var auth = require('../auth.jsx')
+var StoryList = require('../StoryList.js').StoryList
 
 const Home = React.createClass({
   getInitialState() {
@@ -33,12 +34,15 @@ const Home = React.createClass({
     <br />
     <Row className="show-grid">
       <Col  xsHidden smHidden md={2}>    </Col>
-      <Col  md={6}> <StoryBox url={this.props.url} pollInterval={this.props.pollInterval}/>  </Col>
+      <Col  md={6}> <StoryBox url={this.props.url} pollInterval={this.props.pollInterval} /> </Col>
       <Col  xsHidden smHidden md={4}> {this.state.loggedIn ? (<StorySubmit url_post={this.props.url_post} />) : (<Button> Submit a Story </Button>)}</Col>
     </Row>
   </Grid>
   )}
 })
+
+
+module.exports = Home;
 
 
 module.exports = Home;

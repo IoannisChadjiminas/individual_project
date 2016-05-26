@@ -34,9 +34,9 @@ export class StoryWrapTitle extends React.Component {
   }
 }
 
-//var spanimagestyle = {
-  //fontSize: '5px'
-//}
+var spanimagestyle = {
+  fontSize: '8px'
+}
 
 export class EmoticonButton extends React.Component {
   constructor(){
@@ -130,14 +130,18 @@ export class EmoticonButton extends React.Component {
         <br />
         <hr />
           <div className="box">
-           <span > <strong> {this.props.score_lol} </strong> </span> <img  onClick={this.handleLolclick}  className="storyLol-storyItems" src="/static/api/assets/img/emoticons/lol.png" /> 
-           <span > <strong> {this.props.score_happy} </strong> </span> <img  onClick={this.handleSatisfiedclick}  className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" />
-           <span > <strong> {this.props.score_wow} </strong> </span> <img  onClick={this.handleWowclick}  className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> 
-           <span > <strong> {this.props.score_sad} </strong> </span> <img  onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
-           <span > <strong> {this.props.score_angry} </strong> </span> <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>
+           <span className="imageBox" >
+           <span style={spanimagestyle}> <strong> {this.props.score_lol} </strong> </span> <img  onClick={this.handleLolclick}  className="storyLol-storyItems" src="/static/api/assets/img/emoticons/lol.png" /> 
+           <span style={spanimagestyle}> <strong> {this.props.score_happy} </strong> </span> <img  onClick={this.handleSatisfiedclick}  className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" />
+           <span style={spanimagestyle}> <strong> {this.props.score_wow} </strong> </span> <img  onClick={this.handleWowclick}  className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> 
+           <span style={spanimagestyle}> <strong> {this.props.score_sad} </strong> </span> <img  onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
+           <span style={spanimagestyle}> <strong> {this.props.score_angry} </strong> </span> <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>
            <CommentLink />
            <ShareLink />
-           <span className="pplReacted"> <strong className="pplReacted-number"> {this.props.score} </strong> <span className="pplReacted-text"> reacted to this! </span> </span>
+           </span>
+           {this.props.source=="home_list" ? <span className="pplReacted"> <strong className="pplReacted-number"> {this.props.score_display} </strong> <span className="pplReacted-text"> reacted!</span> </span>
+           :<span className="imageRank"> <span className="pplReacted"> <strong className="pplReacted-number"> {this.props.score_display} </strong> <span className="pplReacted-text"> </span> </span> <img src={"/static/api/assets/img/emoticons/"+ this.props.source}/> </span>}
+
     </div>
 
     </div>
@@ -171,7 +175,7 @@ export class StoryItem extends React.Component {
               <StoryWrapTitle  title={this.props.title} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow}  
                 score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={this.props.url} by={this.props.by} site_host={this.props.site_host} /> 
               <EmoticonButton  id={this.props.id} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow}  
-                score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={"/api/post/" + this.props.id + "/"} url_voter="/api/voter/" />
+                score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={"/api/post/" + this.props.id + "/"} url_voter="/api/voter/" score_display={this.props.score_display} source={this.props.source}/>
           </div>
           <p className="storyItem-br"/>
         </div>
@@ -185,7 +189,7 @@ export class StoryList extends React.Component {
       <div className="storyList">
           {this.props.data.map(function(story){
               return <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
-                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} by={story.by} site_host={story.site_host} />
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} by={story.by} site_host={story.site_host} score_display={story.score} source={'home_list'}  />
           })}
       </div>
 
@@ -201,7 +205,7 @@ export class StoryLolList extends React.Component {
           {this.props.data.map(function(story){
             return story.score_lol> story.score_happy && story.score_lol> story.score_wow && story.score_lol> story.score_sad && story.score_lol> story.score_angry ?
               <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
-                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} by={story.by} site_host={story.site_host} />
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} by={story.by} site_host={story.site_host} score_display={story.score_lol} source={'lol.png'} />
               : <span key={story.id}  />
           })}
       </div>
@@ -210,4 +214,67 @@ export class StoryLolList extends React.Component {
   }
 }
 
+export class StoryHappyList extends React.Component {
+  render() {
+    return (
+      <div className="storyList">
+          {this.props.data.map(function(story){
+            return story.score_happy> story.score_lol && story.score_happy> story.score_wow && story.score_happy> story.score_sad && story.score_happy> story.score_angry ?
+              <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} by={story.by} site_host={story.site_host}score_display={story.score_happy} source={'happy.png'}  />
+              : <span key={story.id}  />
+          })}
+      </div>
+
+    )
+  }
+}
+
+export class StoryWowList extends React.Component {
+  render() {
+    return (
+      <div className="storyList">
+          {this.props.data.map(function(story){
+            return story.score_wow> story.score_happy && story.score_wow> story.score_lol && story.score_wow> story.score_sad && story.score_wow> story.score_angry ?
+              <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} by={story.by} site_host={story.site_host}score_display={story.score_wow} source={'wow.png'}  />
+              : <span key={story.id}  />
+          })}
+      </div>
+
+    )
+  }
+}
+
+export class StorySadList extends React.Component {
+  render() {
+    return (
+      <div className="storyList">
+          {this.props.data.map(function(story){
+            return story.score_sad> story.score_happy && story.score_sad> story.score_wow && story.score_sad> story.score_lol && story.score_sad> story.score_angry ?
+              <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} by={story.by} site_host={story.site_host} score_display={story.score_sad} source={'cry.png'} />
+              : <span key={story.id}  />
+          })}
+      </div>
+
+    )
+  }
+}
+
+export class StoryAngryList extends React.Component {
+  render() {
+    return (
+      <div className="storyList">
+          {this.props.data.map(function(story){
+            return story.score_angry> story.score_happy && story.score_angry> story.score_wow && story.score_angry> story.score_lol && story.score_angry> story.score_sad ?
+              <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} by={story.by} site_host={story.site_host} score_display={story.score_angry} source={'angry.png'} />
+              : <span key={story.id}  />
+          })}
+      </div>
+
+    )
+  }
+}
 
