@@ -23,6 +23,14 @@ var HomeWrapper = React.createClass ({
   }
 })
 
+var LolStoriesWrapper = React.createClass ({
+  render: function() {
+    return (
+      <LolStories url="/api/post.json" url_post="/api/post/" pollInterval={1000} />
+    )
+  }
+})
+
 function requireAuth(nextState, replace) {
     if (!auth.loggedIn()) {
         replace({ 
@@ -37,7 +45,7 @@ ReactDOM.render(
     <Router.Router history={Router.hashHistory}>
         <Router.Route path='/' component={StoryNav} >
           <Router.IndexRoute component={HomeWrapper} />
-          <Router.Route path='LolStories' component={LolStories}/>
+          <Router.Route path='LolStories' component={LolStoriesWrapper}/>
           <Router.Route path='WowStories' component={WowStories}/>
           <Router.Route path='SadStories' component={SadStories}/>
           <Router.Route path='AngryStories' component={AngryStories}/>

@@ -2,7 +2,8 @@ var React = require('react')
 var auth = require('./auth')
 require("../css/storyItem.scss")
 
-class StoryTitle extends React.Component {
+
+export class StoryTitle extends React.Component {
   render() {
     return (
       <div className="storyTitle-storyItems">
@@ -12,7 +13,7 @@ class StoryTitle extends React.Component {
   }
 }
 
-class StorySubtitle extends React.Component {
+export class StorySubtitle extends React.Component {
   render() {
     return (
       <div className="storySubtitle-storyItems">
@@ -22,7 +23,7 @@ class StorySubtitle extends React.Component {
   }
 }
 
-class StoryWrapTitle extends React.Component {
+export class StoryWrapTitle extends React.Component {
   render() {
     return (
       <div className="storyWrapTitle-storyItems">
@@ -33,7 +34,11 @@ class StoryWrapTitle extends React.Component {
   }
 }
 
-class EmoticonButton extends React.Component {
+//var spanimagestyle = {
+  //fontSize: '5px'
+//}
+
+export class EmoticonButton extends React.Component {
   constructor(){
     super()
     this.state = {lol: 0, happy: 0, wow: 0, sad:0, angry:0, total:0}
@@ -90,7 +95,7 @@ class EmoticonButton extends React.Component {
             },
       success: function(data) {
         this.setState({data: data});
-        this.handleReactVote({post: this.props.id})
+        this.handleReactVote({post: this.props.id}) //I added the net ajax call after the success of the previous one
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -125,11 +130,11 @@ class EmoticonButton extends React.Component {
         <br />
         <hr />
           <div className="box">
-           <span> {this.props.score_lol} </span> <img  onClick={this.handleLolclick}  className="storyLol-storyItems" src="/static/api/assets/img/emoticons/lol.png" /> 
-           <span> {this.props.score_happy} </span> <img  onClick={this.handleSatisfiedclick}  className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" />
-           <span> {this.props.score_wow} </span> <img  onClick={this.handleWowclick}  className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> 
-           <span> {this.props.score_sad} </span> <img  onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
-           <span> {this.props.score_angry} </span> <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>
+           <span > <strong> {this.props.score_lol} </strong> </span> <img  onClick={this.handleLolclick}  className="storyLol-storyItems" src="/static/api/assets/img/emoticons/lol.png" /> 
+           <span > <strong> {this.props.score_happy} </strong> </span> <img  onClick={this.handleSatisfiedclick}  className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" />
+           <span > <strong> {this.props.score_wow} </strong> </span> <img  onClick={this.handleWowclick}  className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> 
+           <span > <strong> {this.props.score_sad} </strong> </span> <img  onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
+           <span > <strong> {this.props.score_angry} </strong> </span> <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>
            <CommentLink />
            <ShareLink />
            <span className="pplReacted"> <strong className="pplReacted-number"> {this.props.score} </strong> <span className="pplReacted-text"> reacted to this! </span> </span>
@@ -140,7 +145,7 @@ class EmoticonButton extends React.Component {
   }
 }
 
-class CommentLink extends React.Component {
+export class CommentLink extends React.Component {
     render() {
         return (
             <a className="storyComment-storyItems" href=""> <strong>comment</strong> </a>
@@ -149,7 +154,7 @@ class CommentLink extends React.Component {
 }
 
 
-class ShareLink extends React.Component {
+export class ShareLink extends React.Component {
     render() {
         return (
             <a className="storyShare-storyItems" href=""> <strong>share</strong> </a>
@@ -157,7 +162,7 @@ class ShareLink extends React.Component {
     }
 }
 
-class StoryItem extends React.Component {
+export class StoryItem extends React.Component {
     render() {
       return(  
         <div>
@@ -174,15 +179,13 @@ class StoryItem extends React.Component {
     }
 }
 
-class StoryList extends React.Component {
+export class StoryList extends React.Component {
   render() {
     return (
       <div className="storyList">
           {this.props.data.map(function(story){
-            return (
-              <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
+              return <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
                 score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} by={story.by} site_host={story.site_host} />
-            )
           })}
       </div>
 
@@ -190,7 +193,21 @@ class StoryList extends React.Component {
   }
 }
 
-module.exports = StoryList;
 
+export class StoryLolList extends React.Component {
+  render() {
+    return (
+      <div className="storyList">
+          {this.props.data.map(function(story){
+            return story.score_lol> story.score_happy && story.score_lol> story.score_wow && story.score_lol> story.score_sad && story.score_lol> story.score_angry ?
+              <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} by={story.by} site_host={story.site_host} />
+              : <span key={story.id}  />
+          })}
+      </div>
+
+    )
+  }
+}
 
 

@@ -1,9 +1,10 @@
 var React = require('react')
 var $ = require('jquery')
-var StoryList = require('./StoryList').StoryList
+var StoryList = require('./StoryList')
+var StoryLolList = require('./StoryList').StoryLolList
 var StoryForm = require('./StoryForm')
 
-class StoryBox extends React.Component {
+class StoryLolBox extends React.Component {
   constructor(){
     super();
     this.state = {data: []}
@@ -32,15 +33,15 @@ class StoryBox extends React.Component {
   componentWillUnmount () {
     this.loadInterval && clearInterval(this.loadInterval);
     this.loadInterval = false;
-}
+ }
 
   render() {
     return (
       <div className="storyBox">
-        <StoryList data={this.state.data} />
+        <StoryLolList data={this.state.data} />
       </div>
     );
   }
 }
 
-module.exports = StoryBox;
+module.exports = StoryLolBox;

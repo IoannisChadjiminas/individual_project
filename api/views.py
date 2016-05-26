@@ -56,6 +56,19 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
 
 
+class PostLolList(generics.ListCreateAPIView):
+    '''
+    View to list or create a post in the system
+    '''
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    # when a post is created is associated with the authenticated author
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
 class VoterList(generics.ListCreateAPIView):
     '''
     View to list or create a post in the system

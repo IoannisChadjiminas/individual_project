@@ -1,9 +1,9 @@
 var React = require('react')
 var $ = require('jquery')
-var StoryList = require('./StoryList').StoryList
+var StoryList = require('./StoryList')
 var StoryForm = require('./StoryForm')
 
-class StoryBox extends React.Component {
+class StoryLoLBox extends React.Component {
   constructor(){
     super();
     this.state = {data: []}
@@ -26,21 +26,26 @@ class StoryBox extends React.Component {
 
   componentDidMount() {
     this.loadDataFromServer();
-    this.loadInterval = setInterval(this.loadDataFromServer, this.props.pollInterval);
+    setInterval(this.loadDataFromServer, this.props.pollInterval);
   }
 
-  componentWillUnmount () {
-    this.loadInterval && clearInterval(this.loadInterval);
-    this.loadInterval = false;
-}
-
   render() {
+    var maxStoryLol;
+
+    if ((this.state.data.score_lol > this.state.data.score_happy) &&
+        (this.state.data.score_lol > this.state.data.score_wow) &&
+        (this.state.data.score_lol > this.state.data.score_sad) &&
+        (this.state.data.score_lol > this.state.data.score_angry)) 
+        {
+          maxStoryLol = <StoryList data={this.state.data} />
+        }
+
     return (
       <div className="storyBox">
-        <StoryList data={this.state.data} />
+        {maxStoryLol}
       </div>
     );
   }
 }
 
-module.exports = StoryBox;
+module.exports = StoryLoLBox;
