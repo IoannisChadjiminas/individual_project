@@ -8,6 +8,7 @@ var StoryAngryBox = require('../StoryAngryBox.jsx')
 var StorySubmit = require('../StorySubmit')
 var Button = require('react-bootstrap').Button
 var auth = require('../auth.jsx')
+var Link = require('react-router').Link
 
 const AngryStories = React.createClass({
   getInitialState() {
@@ -26,6 +27,7 @@ const AngryStories = React.createClass({
     auth.onChange_home = this.updateAuth
     auth.login()
   },
+
   render() {
   return (
     <Grid>
@@ -33,8 +35,9 @@ const AngryStories = React.createClass({
     <br />
     <Row className="show-grid">
       <Col  xsHidden smHidden md={2}>    </Col>
-      <Col  md={6}> <StoryAngryBox select={'angry'} url={this.props.url} pollInterval={this.props.pollInterval}/>  </Col>
-      <Col  xsHidden smHidden md={4}> {this.state.loggedIn ? (<StorySubmit url_post={this.props.url_post} />) : (<Button> Submit a Story </Button>)}</Col>
+      <Col  md={6}> <StoryAngryBox url={this.props.url} pollInterval={this.props.pollInterval} /> </Col>
+        {this.state.loggedIn ? (<Col  xsHidden smHidden md={4} className="storyForm"> <Col  xsHidden smHidden md={12}> <StorySubmit url_post={this.props.url_post} /> </Col> </Col>) 
+        : (<Col  xsHidden smHidden md={4}> <Link to="signIn"> <Button bsStyle="primary" bsSize="large" active block >   Submit Story  </Button> </Link> </Col>  )}
     </Row>
   </Grid>
   )}

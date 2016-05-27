@@ -15,7 +15,7 @@ var Login = require('./login')
 var auth = require('./auth')
 var Logout = require('./Logout.jsx')
 
-var HomeWrapper = React.createClass ({
+export var HomeWrapper = React.createClass ({
   render: function() {
     return (
       <Home url="/api/post.json" url_post="/api/post/" pollInterval={1000} />
@@ -23,7 +23,7 @@ var HomeWrapper = React.createClass ({
   }
 })
 
-var LolStoriesWrapper = React.createClass ({
+export var LolStoriesWrapper = React.createClass ({
   render: function() {
     return (
       <LolStories url="/api/post_lol.json" url_post="/api/post/" pollInterval={1000} />
@@ -31,7 +31,7 @@ var LolStoriesWrapper = React.createClass ({
   }
 })
 
-var HappyStoriesWrapper = React.createClass ({
+export var HappyStoriesWrapper = React.createClass ({
   render: function() {
     return (
       <HappyStories url="/api/post_happy.json" url_post="/api/post/" pollInterval={1000} />
@@ -39,7 +39,7 @@ var HappyStoriesWrapper = React.createClass ({
   }
 })
 
-var WowStoriesWrapper = React.createClass ({
+export var WowStoriesWrapper = React.createClass ({
   render: function() {
     return (
       <WowStories url="/api/post_wow.json" url_post="/api/post/" pollInterval={1000} />
@@ -47,7 +47,7 @@ var WowStoriesWrapper = React.createClass ({
   }
 })
 
-var SadStoriesWrapper = React.createClass ({
+export var SadStoriesWrapper = React.createClass ({
   render: function() {
     return (
       <SadStories url="/api/post_sad.json" url_post="/api/post/" pollInterval={1000} />
@@ -55,7 +55,7 @@ var SadStoriesWrapper = React.createClass ({
   }
 })
 
-var AngryStoriesWrapper = React.createClass ({
+export var AngryStoriesWrapper = React.createClass ({
   render: function() {
     return (
       <AngryStories url="/api/post_angry.json" url_post="/api/post/" pollInterval={1000} />
@@ -63,7 +63,7 @@ var AngryStoriesWrapper = React.createClass ({
   }
 })
 
-function requireAuth(nextState, replace) {
+export function requireAuth(nextState, replace) {
     if (!auth.loggedIn()) {
         replace({ 
             pathname:'SignIn',
@@ -81,11 +81,11 @@ ReactDOM.render(
           <Router.Route path='WowStories' component={WowStoriesWrapper}/>
           <Router.Route path='SadStories' component={SadStoriesWrapper}/>
           <Router.Route path='AngryStories' component={AngryStoriesWrapper}/>
+          <Router.Route path='HappyStories' component={HappyStoriesWrapper}/>
+        </Router.Route>
           <Router.Route path='SignUp' component={signUp} />
           <Router.Route path='SignIn' component={Login} />
           <Router.Route path='Logout' component={Logout} />
-          <Router.Route path='HappyStories' component={HappyStoriesWrapper}/>
-        </Router.Route>
       </Router.Router>,
     document.getElementById('container')
 )

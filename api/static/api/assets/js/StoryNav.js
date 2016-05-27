@@ -48,8 +48,7 @@ const StoryNav = React.createClass({
                     )}
                 </li>
                 <li style={divStyle}> <Link to="SignUp"> <strong> Sign Up  </strong> </Link>  </li>
-                <li style={divStyle}> <Link to="/"> <img className="storySearch-storyNav" src="/static/api/assets/img/nav_symbols/src.jpg" /> </Link> </li>
-                <li style={divStyle}> <Link to="/"> <img className="storyUpload-storyNav" src="/static/api/assets/img/nav_symbols/upload-arrow.png" /> </Link> </li>
+                <li style={divStyle}> <Link to="SignIn"> <img className="storyUpload-storyNav" src="/static/api/assets/img/nav_symbols/upload-arrow.png" /> </Link> </li>
 
             </ul>
             {this.props.children}
@@ -59,6 +58,7 @@ const StoryNav = React.createClass({
         )
     }
 })
+//<li style={divStyle}> <Link to="/"> <img className="storySearch-storyNav" src="/static/api/assets/img/nav_symbols/src.jpg" /> </Link> </li>
 
 module.exports = StoryNav;
 

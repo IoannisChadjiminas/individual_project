@@ -12,6 +12,12 @@ ul.storyEmoticons-storyNav {
     margin: 0;
     padding: 0;
     overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  background-color: #00a087;
     //-moz-box-shadow: 1px 2px 4px rgba(192,192,192,1);
     //-webkit-box-shadow: 1px 2px 4px rgba(192,192,192,1);
     //box-shadow: 2px 2px 4px rgba(192,192,192,1);

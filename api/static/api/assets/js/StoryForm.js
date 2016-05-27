@@ -1,5 +1,10 @@
 var React = require('react')
-
+var Form = require('react-bootstrap').Form
+var FormGroup = require('react-bootstrap').FormGroup
+var ControlLabel = require('react-bootstrap').ControlLabel
+var Button = require('react-bootstrap').Button
+var FormControl = require('react-bootstrap').FormControl
+var Col = require('react-bootstrap').Col
 class StoryForm extends React.Component {
     constructor(){
       super()
@@ -45,44 +50,32 @@ class StoryForm extends React.Component {
 
     
     render() {
-      return (
-        <form className = "storyForm" onSubmit={this.handleSubmit}>
-            <input 
-              type="text" 
-              placeholder="Your name" 
-              value={this.state.by}
-              onChange={this.handleNameChange}
-            />
-            <br />
-            <br />
-            <input 
-              type="text" 
-              placeholder="Title"
-              value={this.state.title} 
-              onChange={this.handleTitleChange}
-            />
-            <br />
-            <br />
-            <input 
-              type="text" 
-              placeholder="http://example/story"
-              value={this.state.url}
-              onChange={this.handleUrlChange} 
-            />
-            <br />
-            <br />
-            <input 
-              type="text" 
-              placeholder="SiteHost" 
-              value={this.state.site_host}
-              onChange={this.handleSiteHostChange}
-            />
-            <br />
-            <br />
-            <input type="submit" value="Post" />
-        </form>
+       return ( 
+
+          <Form horizontal onSubmit={this.handleSubmit}>
+            <FormGroup controlId="formInlineName">
+            <ControlLabel> Submit Story </ControlLabel>
+             <FormControl type="text" placeholder="Your Name" value={this.state.by} onChange={this.handleNameChange}  />
+            </FormGroup>
+            <FormGroup controlId="formInlineEmail">
+              <FormControl type="text" placeholder="title" value={this.state.title} onChange={this.handleTitleChange}/>
+            </FormGroup>
+            <FormGroup controlId="formInlineEmail">
+              <FormControl type="text" placeholder="http://example/story" value={this.state.url} onChange={this.handleUrlChange}/>
+            </FormGroup>
+            <FormGroup controlId="formInlineEmail">
+              <FormControl type="text" placeholder="Site Host" value={this.state.site_host} onChange={this.handleSiteHostChange}/>
+            </FormGroup>
+            <FormGroup>
+            <Button type="submit" value="POST">
+              Post
+            </Button>
+            </FormGroup>
+          </Form>
         )
     }
 }
+
+
 
 module.exports = StoryForm
