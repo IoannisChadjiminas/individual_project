@@ -1,3 +1,4 @@
+
 var React = require('react')
 var auth = require('./auth')
 
@@ -14,7 +15,7 @@ module.exports = React.createClass({
     render: function() {
         return (
             <div>
-            <p> You are now logged in </p>
+            <p> You are nw logged in </p>
             <p> Are you sure that you want to logout? </p>
             <button onClick={this.logoutHandler}>Log out</button>
             </div>
