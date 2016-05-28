@@ -24,12 +24,13 @@ var spanstyle = {
 
 
 class SignUpForm extends React.Component {
-    constructor() {
-      super()
+    constructor(props,context) {
+      super(props)
       this.state = {username:'', password: ''}
       this.handleUsernameChange = this.handleUsernameChange.bind(this)
       this.handlePassChange = this.handlePassChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
+      context.router
     }
     
     handleUsernameChange (event) {
@@ -49,6 +50,12 @@ class SignUpForm extends React.Component {
         }
 
         this.props.onSignSubmit({username: username, password: password})
+
+      auth.login(username, password, (loggedIn) => {
+        this.context.router.replace('/')
+
+      })
+      
         this.setState({username:'', password:''})
 
 
@@ -84,4 +91,7 @@ class SignUpForm extends React.Component {
     }
 }
 
+SignUpForm.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
 module.exports = SignUpForm

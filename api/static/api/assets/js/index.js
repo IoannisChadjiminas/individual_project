@@ -64,14 +64,14 @@ export var AngryStoriesWrapper = React.createClass ({
   }
 })
 
-export function requireAuth(nextState, replace) {
+/*export function requireAuth(nextState, replace) {
     if (!auth.loggedIn()) {
         replace({ 
             pathname:'SignIn',
             state: {nextPathname: '/'}
         })
     }
-}
+}*/
 
 
 ReactDOM.render(
