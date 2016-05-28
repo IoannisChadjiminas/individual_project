@@ -7,6 +7,7 @@ var ControlLabel = require('react-bootstrap').ControlLabel
 var Button = require('react-bootstrap').Button
 var FormControl = require('react-bootstrap').FormControl
 var Col = require('react-bootstrap').Col
+var Link = require('react-router').Link
 /*module.exports = React.createClass({
     contextTypes: {
         router: React.PropTypes.object.isRequired
@@ -34,6 +35,17 @@ var Col = require('react-bootstrap').Col
     }
 })*/
 
+var spanNewUserstyle = {
+  float: 'right',
+  fontSize: '10px',
+  marginTop: '15px',
+  paddingRight: '4px'
+};
+
+var spanstyle = {
+  float: 'right',
+  marginTop: '9px',
+};
 
 const login = withRouter(
   React.createClass({
@@ -81,42 +93,27 @@ const login = withRouter(
        return ( 
           <Form horizontal onSubmit={this.handleSubmit}>
             <FormGroup controlId="formInlineName">
-             <Col  xsHidden smHidden md={4}>    </Col>
-             <Col md={4}>
               <ControlLabel>Name</ControlLabel>
               {' '}
              <FormControl type="text" placeholder="Jane Doe" value={this.state.username} onChange={this.handleUsernameChange}  />
-             </Col>
-            <Col  xsHidden smHidden md={4}>    </Col>
             </FormGroup>
             {' '}
             <FormGroup controlId="formInlineEmail">
-            <Col  xsHidden smHidden md={4}>    </Col>
-            <Col md={4}>
               <ControlLabel>Password</ControlLabel>
               {' '}
               <FormControl type="password" placeholder="password" value={this.state.password} onChange={this.handlePassChange}/>
-            </Col>
-            <Col  xsHidden smHidden md={4}>    </Col>
             </FormGroup>
             {' '}
             <FormGroup>
-            <Col  xsHidden smHidden md={4}>    </Col>
-            <Col md={4}>
             <Button type="submit" value="POST">
-              signIn
+              SignIn
             </Button>
-            </Col>
-            <Col  xsHidden smHidden md={4}>    </Col>
+            <span style={spanstyle}> <Link to="SignUp"> Register </Link> </span> <span> </span> <span style={spanNewUserstyle}> new user? </span>
             </FormGroup>
             <FormGroup>
-            <Col  xsHidden smHidden md={4}>    </Col>
-            <Col md={4}>
               {this.state.error && (
               <p>Bad login information</p>
               )}
-            </Col>
-            <Col  xsHidden smHidden md={4}>    </Col>
             </FormGroup>
           </Form>
         )

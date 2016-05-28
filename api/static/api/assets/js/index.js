@@ -12,6 +12,7 @@ var StoryNav = require('./StoryNav')
 var signUp = require('./SignUpSubmit')
 var App = require('./app')
 var Login = require('./login')
+var SignIn = require('./SignIn')
 var auth = require('./auth')
 var Logout = require('./Logout.jsx')
 
@@ -82,10 +83,10 @@ ReactDOM.render(
           <Router.Route path='SadStories' component={SadStoriesWrapper}/>
           <Router.Route path='AngryStories' component={AngryStoriesWrapper}/>
           <Router.Route path='HappyStories' component={HappyStoriesWrapper}/>
-        </Router.Route>
           <Router.Route path='SignUp' component={signUp} />
-          <Router.Route path='SignIn' component={Login} />
+          <Router.Route path='SignIn' component={SignIn} />
           <Router.Route path='Logout' component={Logout} />
+        </Router.Route>
       </Router.Router>,
     document.getElementById('container')
 )

@@ -5,6 +5,23 @@ var ControlLabel = require('react-bootstrap').ControlLabel
 var Button = require('react-bootstrap').Button
 var FormControl = require('react-bootstrap').FormControl
 var Col = require('react-bootstrap').Col
+var Link = require('react-router').Link
+var auth = require('./auth')
+
+
+
+var spanAlreadyUserstyle = {
+  float: 'right',
+  fontSize: '10px',
+  marginTop: '15px',
+  paddingRight: '4px'
+};
+
+var spanstyle = {
+  float: 'right',
+  marginTop: '9px',
+};
+
 
 class SignUpForm extends React.Component {
     constructor() {
@@ -30,8 +47,11 @@ class SignUpForm extends React.Component {
         if (!username || !password) {
             return;
         }
+
         this.props.onSignSubmit({username: username, password: password})
         this.setState({username:'', password:''})
+
+
     }
 
     render() {
@@ -39,33 +59,25 @@ class SignUpForm extends React.Component {
 
           <Form horizontal onSubmit={this.handleSubmit}>
             <FormGroup controlId="formInlineName">
-             <Col  xsHidden smHidden md={4}>    </Col>
-             <Col md={4}>
               <ControlLabel>Name</ControlLabel>
               {' '}
              <FormControl type="text" placeholder="Jane Doe" value={this.state.username} onChange={this.handleUsernameChange}  />
-             </Col>
-            <Col  xsHidden smHidden md={4}>    </Col>
             </FormGroup>
             {' '}
             <FormGroup controlId="formInlineEmail">
-            <Col  xsHidden smHidden md={4}>    </Col>
-            <Col md={4}>
               <ControlLabel>Password</ControlLabel>
               {' '}
               <FormControl type="password" placeholder="password" value={this.state.password} onChange={this.handlePassChange}/>
-            </Col>
-            <Col  xsHidden smHidden md={4}>    </Col>
             </FormGroup>
             {' '}
             <FormGroup>
-            <Col  xsHidden smHidden md={4}>    </Col>
-            <Col md={4}>
             <Button type="submit" value="POST">
-              signUp
+              SignUp
             </Button>
-            </Col>
-            <Col  xsHidden smHidden md={4}>    </Col>
+            <span style={spanstyle}> <Link to="SignIn"> SignIn </Link> </span> <span> </span> <span style={spanAlreadyUserstyle}> already user? </span>
+            </FormGroup>
+            <FormGroup>
+              {this.props.user_exists ? <p> This username already exists! </p> : <Link to='/'> </Link>}
             </FormGroup>
           </Form>
         )
