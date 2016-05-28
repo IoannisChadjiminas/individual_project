@@ -8,6 +8,7 @@ var HappyStories = require('./Pages/HappyStories.jsx')
 var WowStories = require('./Pages/WowStories.jsx')
 var SadStories = require('./Pages/SadStories.jsx')
 var AngryStories = require('./Pages/AngryStories.jsx')
+var MostRecentStories =require('./Pages/MostRecentStories.jsx')
 var StoryNav = require('./StoryNav')
 var signUp = require('./SignUpSubmit')
 var App = require('./app')
@@ -20,6 +21,14 @@ export var HomeWrapper = React.createClass ({
   render: function() {
     return (
       <Home url="/api/post.json" url_post="/api/post/" pollInterval={1000} />
+    )
+  }
+})
+
+export var MostRecentStoriesWrapper = React.createClass ({
+  render: function() {
+    return (
+      <MostRecentStories url="/api/post_published.json" url_post="/api/post/" pollInterval={1000} />
     )
   }
 })
@@ -83,6 +92,7 @@ ReactDOM.render(
           <Router.Route path='SadStories' component={SadStoriesWrapper}/>
           <Router.Route path='AngryStories' component={AngryStoriesWrapper}/>
           <Router.Route path='HappyStories' component={HappyStoriesWrapper}/>
+          <Router.Route path='MostRecentStories' component={MostRecentStoriesWrapper}/>
           <Router.Route path='SignUp' component={signUp} />
           <Router.Route path='SignIn' component={SignIn} />
           <Router.Route path='Logout' component={Logout} />

@@ -12,6 +12,9 @@ var divStyle ={
   float: 'right'
 }
 
+var RecentStyle = {
+  color: 'orange',
+}
 
 const StoryNav = React.createClass({
   getInitialState() {
@@ -46,6 +49,7 @@ const StoryNav = React.createClass({
             <Col md={12}> 
             <ul role="nav" className="storyEmoticons-storyNav">
                 <li> <Link to="/"> <strong> Sharing Stories </strong>  </Link> </li>
+                <li> <Link to="MostRecentStories"> <strong style={RecentStyle}> Recent </strong>  </Link>  </li>
                 <li> <Link to="LolStories"> <img className="storyLol-storyNav" src="/static/api/assets/img/emoticons/lol.png" />  </Link>  </li>
                 <li> <Link to="HappyStories"> <img className="storySatisfied-storyNav" src="/static/api/assets/img/emoticons/happy.png" /> </Link>  </li>
                 <li> <Link to="WowStories"> <img className="storyWow-storyNav" src="/static/api/assets/img/emoticons/wow.png"/> </Link>  </li>

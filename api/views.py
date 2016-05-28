@@ -63,6 +63,14 @@ class PostAngryList(generics.ListAPIView):
     serializer_class = PostSerializer
 
 
+class PostTimePublishedList(generics.ListAPIView):
+    '''
+    View to list or create a post in the system
+    '''
+    queryset = Post.objects.all().order_by('-published_date')
+    serializer_class = PostSerializer
+
+
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)  # IsOwnerOrReadOnly
     queryset = Post.objects.all()

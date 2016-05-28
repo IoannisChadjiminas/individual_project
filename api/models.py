@@ -4,10 +4,6 @@ from django.utils.timezone import utc
 # Create your models here.
 
 
-
-
-
-
 class Post (models.Model):
     owner = models.ForeignKey('auth.User', related_name='posts')
     title = models.CharField(max_length=100, default='title')
@@ -32,9 +28,6 @@ class Post (models.Model):
             now = datetime.datetime.utcnow().replace(tzinfo=utc)
             timediff = now - self.published_date
             return timediff.total_seconds()
-
-
-
 
    # class Meta:
     #    ordering = ('-score',)

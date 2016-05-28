@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^post_wow/$', views.PostWowList.as_view()),
     url(r'^post_sad/$', views.PostSadList.as_view()),
     url(r'^post_angry/$', views.PostAngryList.as_view()),
+    url(r'^post_published$', views.PostTimePublishedList.as_view()),
     url(r'^voter/$', views.VoterList.as_view()),
     url(r'^voter/(?P<pk>[0-9]+)/$', views.VoterDetail.as_view()),
 ]
