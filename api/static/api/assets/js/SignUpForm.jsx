@@ -10,6 +10,7 @@ var auth = require('./auth')
 
 
 
+
 var spanAlreadyUserstyle = {
   float: 'right',
   fontSize: '10px',
@@ -55,7 +56,7 @@ class SignUpForm extends React.Component {
         this.context.router.replace('/')
 
       })
-      
+
         this.setState({username:'', password:''})
 
 
@@ -65,6 +66,10 @@ class SignUpForm extends React.Component {
        return ( 
 
           <Form horizontal onSubmit={this.handleSubmit}>
+            <FormGroup controlId="formInlineName">
+            <ControlLabel>Create Account</ControlLabel>
+            {' '}
+            </FormGroup>
             <FormGroup controlId="formInlineName">
               <ControlLabel>Name</ControlLabel>
               {' '}

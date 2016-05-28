@@ -6,13 +6,14 @@ from django.contrib.auth import get_user_model
 
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
+    time_difference = serializers.ReadOnlyField(source='get_time_diff')
 
     class Meta:
         model = Post
         fields = ('id', 'enable_score', 'owner', 'title', 'post_type', 'by',
                   'site_host', 'score', 'score_angry', 'score_sad',
                   'score_wow', 'score_lol', 'score_happy', 'url', 'emotion',
-                  'text', 'published_date')
+                  'text', 'published_date', 'time_difference')
 
 
 class UserSerializer(serializers.ModelSerializer):

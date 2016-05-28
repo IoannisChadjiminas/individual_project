@@ -93,6 +93,10 @@ const login = withRouter(
        return ( 
           <Form horizontal onSubmit={this.handleSubmit}>
             <FormGroup controlId="formInlineName">
+            <ControlLabel>LogIn</ControlLabel>
+            {' '}
+            </FormGroup>
+            <FormGroup controlId="formInlineName">
               <ControlLabel>Name</ControlLabel>
               {' '}
              <FormControl type="text" placeholder="Jane Doe" value={this.state.username} onChange={this.handleUsernameChange}  />

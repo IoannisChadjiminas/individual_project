@@ -104,8 +104,14 @@ class VoterList(generics.ListCreateAPIView):
     queryset = Voter.objects.all()
     serializer_class = VoterSerializer
 
+    #When user press an emoji button it saves the relation user-post to database
+    #in order to restrict user to like more than one time a specific post
+    #Also it checks to save it only one time
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        if Voter.objects.filter(post=self.request.data['post'], user=self.request.user).exists():
+            pass
+        else:
+            serializer.save(user=self.request.user)
 
 
 class VoterDetail(generics.RetrieveUpdateDestroyAPIView):
