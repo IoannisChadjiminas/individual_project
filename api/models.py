@@ -8,8 +8,6 @@ class Post (models.Model):
     owner = models.ForeignKey('auth.User', related_name='posts')
     title = models.CharField(max_length=100, default='title')
     post_type = models.CharField(max_length=100, default='type')
-    by = models.CharField(max_length=100, default='by')
-    site_host = models.CharField(max_length=100, default='host')
     score_lol = models.IntegerField(default=0)
     score_happy = models.IntegerField(default=0)
     score_wow = models.IntegerField(default=0)
