@@ -40,6 +40,7 @@ class StoryForm extends React.Component {
         this.setState({url_format:true})
         return;
       }
+      this.setState({url_format:false})
       this.props.onStorySubmit({title:title, url:url})
       
       this.setState({title:'', url: ''})
@@ -69,7 +70,7 @@ class StoryForm extends React.Component {
               {this.props.many_request_error ? <p> Too many posts for today! </p> : <span />}
             </FormGroup>
             <FormGroup>
-              {this.state.url_format ? <p style={wrongUrl} > The url format seems to be incorrect! </p> : <span/>}
+              {this.state.url_format && <p style={wrongUrl} > The url format seems to be incorrect! </p>}
             </FormGroup>
           </Form>
         )
