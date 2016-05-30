@@ -179,7 +179,7 @@ REST_FRAMEWORK = {
     ),
 
     'DEFAULT_THROTTLE_RATES': {
-        #'anon': '10/day',
+        'anon': '10/day',
         'user': '5/day',
     }
 }
