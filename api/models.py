@@ -16,7 +16,7 @@ class Post (models.Model):
     emotion = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
     enable_score = models.CharField(max_length=5, default="True")
-    url = models.CharField(max_length=200, default='url')
+    url = models.URLField(max_length=200, default='url')
     text = models.TextField(default=0)
     published_date = models.DateTimeField(auto_now_add=True)
     time_difference = models.IntegerField(default=0)
