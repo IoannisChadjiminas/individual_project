@@ -5,6 +5,10 @@ var ControlLabel = require('react-bootstrap').ControlLabel
 var Button = require('react-bootstrap').Button
 var FormControl = require('react-bootstrap').FormControl
 var Col = require('react-bootstrap').Col
+
+var wrongUrl = {
+  color:'red'
+}
 class StoryForm extends React.Component {
     constructor(){
       super()
@@ -65,7 +69,7 @@ class StoryForm extends React.Component {
               {this.props.many_request_error ? <p> Too many posts for today! </p> : <span />}
             </FormGroup>
             <FormGroup>
-              {this.state.url_format ? <p> Wrong url format </p> : <span/>}
+              {this.state.url_format ? <p style={wrongUrl} > The url format seems to be incorrect! </p> : <span/>}
             </FormGroup>
           </Form>
         )
