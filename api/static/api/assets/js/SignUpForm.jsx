@@ -52,10 +52,12 @@ class SignUpForm extends React.Component {
 
         this.props.onSignSubmit({username: username, password: password})
 
-      auth.login(username, password, (loggedIn) => {
-        this.context.router.replace('/')
+      if (!this.props.user_exists){ 
+          auth.login(username, password, (loggedIn) => {
+            this.context.router.replace('/')
 
-      })
+          })
+      }
 
         this.setState({username:'', password:''})
 
