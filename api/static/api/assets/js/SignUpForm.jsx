@@ -58,6 +58,15 @@ class SignUpForm extends React.Component {
     }
 
     render() {
+      
+       if (this.props.user_exists=="true") {
+          <p> This username already exists! </p> }
+       else if (this.props.user_exists=="false") {
+          <p> You can now <Link to='SignIn'> log in! </Link> </p>
+          }
+       else 
+         <span />
+
        return ( 
 
           <Form horizontal onSubmit={this.handleSubmit}>
@@ -84,7 +93,7 @@ class SignUpForm extends React.Component {
             <span style={spanstyle}> <Link to="SignIn"> SignIn </Link> </span> <span> </span> <span style={spanAlreadyUserstyle}> already user? </span>
             </FormGroup>
             <FormGroup>
-              {this.props.user_exists ? <p> This username already exists! </p> : <p> You can now <Link to='SignIn'> log in! </Link> </p>}
+             
             </FormGroup>
           </Form>
         )

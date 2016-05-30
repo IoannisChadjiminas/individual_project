@@ -13,7 +13,7 @@ var Col = require('react-bootstrap').Col
 class SignUpSubmit extends React.Component {
     constructor(){
       super()
-      this.state = {data: [], user_exists:false}
+      this.state = {data: [], user_exists:""}
       this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this)
     }
 
@@ -25,11 +25,11 @@ class SignUpSubmit extends React.Component {
           data: userDetails,
           success: function(data) {
             this.setState({data: data});
-            this.setState({user_exists:false})
+            this.setState({user_exists:"false"})
           }.bind(this),
           error: function(xhr, status, err) {
             console.error('/api/register/', status, err.toString());
-            this.setState({user_exists:true})
+            this.setState({user_exists:"true"})
           }.bind(this)
         });
 
