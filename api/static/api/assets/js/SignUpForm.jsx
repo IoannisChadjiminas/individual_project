@@ -58,14 +58,14 @@ class SignUpForm extends React.Component {
     }
 
     render() {
-      
+       var signup_msg;
        if (this.props.user_exists=="true") {
-          <p> This username already exists! </p> }
+          signup_msg = <p> This username already exists! </p> }
        else if (this.props.user_exists=="false") {
-          <p> You can now <Link to='SignIn'> log in! </Link> </p>
+          signup_msg = <p> You can now <Link to='SignIn'> log in! </Link> </p>
           }
        else 
-         <span />
+         signup_msg = <span />
 
        return ( 
 
@@ -93,7 +93,7 @@ class SignUpForm extends React.Component {
             <span style={spanstyle}> <Link to="SignIn"> SignIn </Link> </span> <span> </span> <span style={spanAlreadyUserstyle}> already user? </span>
             </FormGroup>
             <FormGroup>
-             
+             {signup_msg}
             </FormGroup>
           </Form>
         )
