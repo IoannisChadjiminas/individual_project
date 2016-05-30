@@ -91,7 +91,7 @@ class SignUpForm extends React.Component {
             <span style={spanstyle}> <Link to="SignIn"> SignIn </Link> </span> <span> </span> <span style={spanAlreadyUserstyle}> already user? </span>
             </FormGroup>
             <FormGroup>
-              {this.props.user_exists ? <p> This username already exists! </p> : <Link to='/'> </Link>}
+              {this.props.user_exists ? <p> This username already exists! </p> : <span/>}
             </FormGroup>
           </Form>
         )
