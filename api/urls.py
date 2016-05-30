@@ -9,7 +9,8 @@ router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
-    url(r'^post/$', views.PostList.as_view()),
+    url(r'^post/$', views.PostCreate.as_view()),
+    url(r'^post_home/$', views.PostList.as_view()),
     url(r'^post/(?P<pk>[0-9]+)/$', views.PostDetail.as_view()),
     url(r'^post_lol/$', views.PostLolList.as_view()),
     url(r'^post_happy/$', views.PostHappyList.as_view()),

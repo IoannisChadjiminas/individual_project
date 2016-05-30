@@ -55,6 +55,9 @@ class StoryForm extends React.Component {
               Post
             </Button>
             </FormGroup>
+            <FormGroup>
+              {this.props.many_request_error ? <p> Too many posts for today! </p> : <span />}
+            </FormGroup>
           </Form>
         )
     }

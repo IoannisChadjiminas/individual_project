@@ -7,7 +7,7 @@ var auth = require('./auth')
 class StorySubmit extends React.Component {
   constructor(){
     super();
-    this.state = {data: []}
+    this.state = {data: [], many_request_error:false}
     this.handleStorySubmit = this.handleStorySubmit.bind(this)
   }
 
@@ -25,6 +25,7 @@ class StorySubmit extends React.Component {
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url_post, status, err.toString());
+        this.setState({many_request_error:true})
       }.bind(this)
     });
 
@@ -33,7 +34,7 @@ class StorySubmit extends React.Component {
   render() {
     return (
       <div className="storySubmit">
-        <StoryForm onStorySubmit={this.handleStorySubmit} />
+        <StoryForm onStorySubmit={this.handleStorySubmit} many_request_error={this.state.many_request_error}/>
       </div>
     );
   }

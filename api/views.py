@@ -3,20 +3,31 @@ from api.serializers import PostSerializer, UserSerializer, VoterSerializer
 from rest_framework import generics
 from rest_framework import viewsets
 from django.contrib.auth.models import User
-from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.permissions import AllowAny              
 from django.contrib.auth import get_user_model
 from api.permissions import IsOwnerOrReadOnly
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
+from rest_framework.response import Response
+
 # Create your views here.
 
 
-class PostList(generics.ListCreateAPIView):
+class PostList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Post.objects.all().order_by('-score')
     serializer_class = PostSerializer
+
+
+class PostCreate(generics.CreateAPIView):
+    '''
+    View to list or create a post in the system
+    '''
+    permission_classes = (IsAuthenticated,)
+    serializer_class = PostSerializer
+    throttle_classes = (UserRateThrottle, AnonRateThrottle,)
 
     # when a post is created is associated with the authenticated author
     def perform_create(self, serializer):
@@ -75,7 +86,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)  # IsOwnerOrReadOnly
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-
+    
     # When performing PUT through AJAX I am checking if there is a relation between the current post and
     # the current user. If there is not, then I increase the counter by one.
 
