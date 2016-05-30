@@ -76,10 +76,10 @@ class StoryForm extends React.Component {
         this.setState({url_format:true})
         return;
       }
-      this.setState({url_format:false})
+   
       this.props.onStorySubmit({title:title, url:url})
       
-      this.setState({title:'', url: ''})
+      this.setState({title:'', url: '', url_format:false})
 
     }
 
