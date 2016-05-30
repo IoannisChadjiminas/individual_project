@@ -8,7 +8,7 @@ var Col = require('react-bootstrap').Col
 class StoryForm extends React.Component {
     constructor(){
       super()
-      this.state={title:'', url: ''}
+      this.state={title:'', url: '', url_format:false}
       this.handleTitleChange = this.handleTitleChange.bind(this)
       this.handleUrlChange = this.handleUrlChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
@@ -27,7 +27,13 @@ class StoryForm extends React.Component {
       event.preventDefault();
       var title = this.state.title.trim();
       var url = this.state.url.trim();
-      if (!title || !url) {
+
+      var regex = RegExp("^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$")
+      console.log(regex.test(url))
+      
+
+      if (!title || !url || !regex.test(url)) {
+        this.setState({url_format:true})
         return;
       }
       this.props.onStorySubmit({title:title, url:url})
@@ -57,6 +63,9 @@ class StoryForm extends React.Component {
             </FormGroup>
             <FormGroup>
               {this.props.many_request_error ? <p> Too many posts for today! </p> : <span />}
+            </FormGroup>
+            <FormGroup>
+              {this.state.url_format ? <p> Wrong url format </p> : <span/>}
             </FormGroup>
           </Form>
         )
