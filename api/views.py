@@ -27,7 +27,7 @@ class PostCreate(generics.CreateAPIView):
     '''
     permission_classes = (IsAuthenticated,)
     serializer_class = PostSerializer
-    throttle_classes = (UserRateThrottle, AnonRateThrottle,)
+    throttle_classes = (UserRateThrottle,)
 
     # when a post is created is associated with the authenticated author
     def perform_create(self, serializer):
