@@ -5,22 +5,53 @@ var ControlLabel = require('react-bootstrap').ControlLabel
 var Button = require('react-bootstrap').Button
 var FormControl = require('react-bootstrap').FormControl
 var Col = require('react-bootstrap').Col
+var Radio = require('react-bootstrap').Radio
 
 var wrongUrl = {
   color:'red'
 }
+
+var imgwidth = {
+  height:'20px',
+  width:'20px'
+}
 class StoryForm extends React.Component {
     constructor(){
       super()
-      this.state={title:'', url: '', url_format:false}
+      this.state={title:'', url: '', score_lol:'', score_happy:'', score_wow:'', score_sad:'', score_angry:'', url_format:false}
       this.handleTitleChange = this.handleTitleChange.bind(this)
       this.handleUrlChange = this.handleUrlChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
+      this.handleLolChange = this.handleLolChange.bind(this)
+      this.handleHappyChange = this.handleHappyChange.bind(this)
+      this.handleWowChange = this.handleWowChange.bind(this)
+      this.handleSadChange = this.handleSadChange.bind(this)
+      this.handleAngryChange = this.handleAngryChange.bind(this)
 
     }
 
     handleTitleChange(event) {
       this.setState({title: event.target.value})
+    }
+
+    handleLolChange(event) {
+      this.setState({score_lol:'1', score_happy:'0', score_wow:'0', score_sad:'0', score_angry:'0'})
+    }
+
+    handleHappyChange(event) {
+      this.setState({score_lol:'0', score_happy:'1', score_wow:'0', score_sad:'0', score_angry:'0'})
+    }
+
+    handleWowChange(event) {
+      this.setState({score_lol:'0', score_happy:'0', score_wow:'1', score_sad:'0', score_angry:'0'})
+    }
+
+    handleSadChange(event) {
+      this.setState({score_lol:'0', score_happy:'0', score_wow:'0', score_sad:'1', score_angry:'0'})
+    }
+
+    handleAngryChange(event) {
+      this.setState({score_lol:'0', score_happy:'0', score_wow:'0', score_sad:'0', score_angry:'1'})
     }
 
     handleUrlChange(event) {
@@ -29,8 +60,13 @@ class StoryForm extends React.Component {
 
     handleSubmit(event) {
       event.preventDefault();
-      var title = this.state.title.trim();
-      var url = this.state.url.trim();
+      var title = this.state.title.trim()
+      var url = this.state.url.trim()
+      var score_lol = this.state.score_lol
+      var score_happy = this.state.score_happy
+      var score_wow = this.state.score_wow
+      var score_sad = this.state.score_sad
+      var score_angry = this.state.score_angry
 
       //var regex = RegExp("^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$")
       //url_validation
@@ -73,19 +109,20 @@ class StoryForm extends React.Component {
       console.log(re_weburl.test(url))
       
 
-      if (!title || !url || !re_weburl.test(url)) {
+      if (!title || !url || !re_weburl.test(url) || !(score_lol && score_happy && score_wow && score_sad && score_angry )) {
         this.setState({url_format:true})
         return;
       }
    
-      this.props.onStorySubmit({title:title, url:url})
+      this.props.onStorySubmit({title:title, url:url, score_lol:score_lol, score_happy:score_happy, score_wow:score_wow, score_sad:score_sad, score_angry:score_angry})
       
-      this.setState({title:'', url: '', url_format:false})
+      this.setState({title:'', url: '', score_lol:'', score_happy:'', score_wow:'', score_sad:'', score_angry:'', url_format:false})
 
     }
 
     
     render() {
+      console.log(this.state.score_lol, this.state.score_happy, this.state.score_sad, this.state.score_wow, this.state.score_angry)
        return ( 
 
           <Form horizontal onSubmit={this.handleSubmit}>
@@ -98,6 +135,26 @@ class StoryForm extends React.Component {
             <FormGroup controlId="formInlineEmail">
               <FormControl type="text" placeholder="http://example/story" value={this.state.url} onChange={this.handleUrlChange}/>
             </FormGroup>
+                        <Radio name="optradio" onChange={this.handleLolChange} inline>
+              <img style={imgwidth} src="/static/api/assets/img/emoticons/lol.png" /> 
+            </Radio>
+            {' '}
+            <Radio name="optradio" onChange={this.handleHappyChange} inline>
+              <img style={imgwidth} src="/static/api/assets/img/emoticons/happy.png" />
+            </Radio>
+            {' '}
+            <Radio name="optradio" onChange={this.handleWowChange} inline>
+              <img style={imgwidth} src="/static/api/assets/img/emoticons/wow.png"/> 
+            </Radio>
+            {' '}
+            <Radio name="optradio" onChange={this.handleSadChange} inline>
+              <img style={imgwidth} src="/static/api/assets/img/emoticons/cry.png" /> 
+            </Radio>
+            {' '}
+            <Radio name="optradio" onChange={this.handleAngryChange} inline>
+              <img style={imgwidth} src="/static/api/assets/img/emoticons/angry.png"/>
+            </Radio>
+            <FormGroup />
             <FormGroup>
             <Button type="submit" value="POST">
               Post
@@ -107,13 +164,11 @@ class StoryForm extends React.Component {
               {this.props.many_request_error ? <p> Too many posts for today! </p> : <span />}
             </FormGroup>
             <FormGroup>
-              {this.state.url_format && <p style={wrongUrl} > The url format seems to be incorrect! </p>}
+              {this.state.url_format && <p style={wrongUrl} > One field seems to be incorrect! </p>}
             </FormGroup>
           </Form>
         )
     }
 }
-
-
 
 module.exports = StoryForm
