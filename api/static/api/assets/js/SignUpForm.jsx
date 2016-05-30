@@ -52,13 +52,6 @@ class SignUpForm extends React.Component {
 
         this.props.onSignSubmit({username: username, password: password})
 
-      if (!this.props.user_exists){ 
-          auth.login(username, password, (loggedIn) => {
-            this.context.router.replace('/')
-
-          })
-      }
-
         this.setState({username:'', password:''})
 
 
@@ -91,7 +84,7 @@ class SignUpForm extends React.Component {
             <span style={spanstyle}> <Link to="SignIn"> SignIn </Link> </span> <span> </span> <span style={spanAlreadyUserstyle}> already user? </span>
             </FormGroup>
             <FormGroup>
-              {this.props.user_exists ? <p> This username already exists! </p> : <span/>}
+              {this.props.user_exists ? <p> This username already exists! </p> : <p> You can now log in! </p>}
             </FormGroup>
           </Form>
         )
