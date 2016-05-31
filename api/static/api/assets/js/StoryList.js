@@ -209,8 +209,6 @@ export class EmoticonButton extends React.Component {
            <span style={spanimagestyle}> <strong> {this.props.score_wow} </strong> </span> <img  onClick={this.handleWowclick}  className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> 
            <span style={spanimagestyle}> <strong> {this.props.score_sad} </strong> </span> <img  onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
            <span style={spanimagestyle}> <strong> {this.props.score_angry} </strong> </span> <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>
-           <CommentLink />
-           <ShareLink />
            </span>
            {this.props.source=="home_list" ? <span className="imageRank"> <span className="pplReacted"> <strong className="pplReacted-number"> {score_to_display} </strong> <span className="pplReacted-text"> </span> </span> <img src={"/static/api/assets/img/emoticons/"+ source_to_pic}/> </span>
            :<span className="imageRank"> <span className="pplReacted"> <strong className="pplReacted-number"> {this.props.score_display} </strong> <span className="pplReacted-text"> </span> </span> <img src={"/static/api/assets/img/emoticons/"+ this.props.source}/> </span>}
