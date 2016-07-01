@@ -33,7 +33,7 @@ class StoryLolBox extends React.Component {
     this.loadInterval && clearInterval(this.loadInterval);
     this.loadInterval = false;
  }
-
+//test
   render() {
     return (
       <div className="storyBox">
