@@ -25,7 +25,7 @@ export var HomeWrapper = React.createClass ({
   }
 })
 
-export var MostRecentStoriesWrapper = React.createClass ({
+/*export var MostRecentStoriesWrapper = React.createClass ({
   render: function() {
     return (
       <MostRecentStories url="/api/post_published.json" url_post="/api/post/" pollInterval={1000} />
