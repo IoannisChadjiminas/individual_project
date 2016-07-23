@@ -64,6 +64,12 @@ const StoryNav = React.createClass({
       const tooltip_angry = (
           <Tooltip id='5'><strong>Angry</strong></Tooltip>
       );
+
+      /**
+       * StoryNav is used for navigating accross the web app. Link is similar to <a />
+       * but its aware of the Router.
+       * @type {String}
+       */
         return (
             <Grid>
             <Row className="show-grid">

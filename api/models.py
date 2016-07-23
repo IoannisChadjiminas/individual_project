@@ -27,12 +27,7 @@ class Post (models.Model):
             timediff = now - self.published_date
             return timediff.total_seconds()
 
-   # class Meta:
-    #    ordering = ('-score',)
-
 
 class Voter (models.Model):
     user = models.ForeignKey('auth.User', related_name="votes")
     post = models.IntegerField(default=0)
-
-

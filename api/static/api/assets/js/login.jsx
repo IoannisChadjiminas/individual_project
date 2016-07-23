@@ -8,32 +8,6 @@ var Button = require('react-bootstrap').Button
 var FormControl = require('react-bootstrap').FormControl
 var Col = require('react-bootstrap').Col
 var Link = require('react-router').Link
-/*module.exports = React.createClass({
-    contextTypes: {
-        router: React.PropTypes.object.isRequired
-    },
-
-    handleSubmit: function(e) {
-        e.preventDefault()
-
-        var username = this.refs.username.value
-        var pass = this.refs.pass.value
-
-        auth.login(username, pass, (loggedIn) => {
-            this.context.router.replace('/')
-        })
-    },
-    
-    render: function() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <input type="text" placeholder="username" ref="username"/>
-                <input type="password" placeholder="password" ref="pass"/>
-                <input type="submit"/>
-            </form>
-        )    
-    }
-})*/
 
 var spanNewUserstyle = {
   float: 'right',

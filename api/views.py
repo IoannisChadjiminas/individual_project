@@ -9,13 +9,14 @@ from django.contrib.auth import get_user_model
 from api.permissions import IsOwnerOrReadOnly
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from rest_framework.response import Response
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 
 
 class PostList(generics.ListAPIView):
     '''
-    View to list or create a post in the system
+    View to list a post in the system
     '''
     queryset = Post.objects.all().order_by('-score')
     serializer_class = PostSerializer
@@ -23,14 +24,30 @@ class PostList(generics.ListAPIView):
 
 class PostCreate(generics.CreateAPIView):
     '''
-    View to list or create a post in the system
+    View create a post in the system
     '''
     permission_classes = (IsAuthenticated,)
     serializer_class = PostSerializer
-    throttle_classes = (UserRateThrottle,)
+    # throttle_classes = (UserRateThrottle,)
 
     # when a post is created is associated with the authenticated author
     def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class PostScraperCreate(generics.CreateAPIView):
+    '''
+    View to create a post in the system
+    '''
+    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAdminUser,)
+    serializer_class = PostSerializer
+    # when a post is created is associated with the authenticated author
+
+    def perform_create(self, serializer):
+        queryset = Post.objects.filter(url=self.request.data['url'])
+        if (queryset.exists()):
+            raise ValidationError('You have already posted this item')
         serializer.save(owner=self.request.user)
 
 

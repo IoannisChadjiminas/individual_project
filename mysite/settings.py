@@ -27,10 +27,10 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: change this before deploying to production!
 SECRET_KEY = os.environ["SECRET_KEY"]
-#SECRET_KEY = "245r22q435135542332"
+# SECRET_KEY = "245r22q435135542332"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-#DEBUG = True
+# DEBUG = True
 
 
 # Application definition
