@@ -1,6 +1,6 @@
 
 body {
-    font-family: Verdana, Arial, sans-serif;
+    font-family: Arial, sans-serif, verdana;
 }
 
 a {
@@ -20,6 +20,10 @@ $font-size-comment-share: 9px;
         font-size: $font-size-comment-share;
     }
 
+.snippet {
+    font-size:11px;
+}
+// main box decoration
 .storyItem-storyItems {
     //background-color: blue;
     //font-weight: bold;
@@ -31,9 +35,10 @@ $font-size-comment-share: 9px;
     -moz-border-radius: 2px; 
     -webkit-border-radius: 2px;
     border-width: thick;
-    padding: 10px;
-    background-color: white;
+    padding: 4px;
+    background-color: white; 
     border: 1px solid #ccc;
+    
 
     .storySubtitle-storyItems {
         color: lightgrey;
@@ -44,8 +49,16 @@ $font-size-comment-share: 9px;
 }
 
 
-$margin-value: 5px;
+$margin-value: 5px; // margin value between the emoticons ranking images
 
+//storyImg are responsible to render the img left to the title
+.storyImg{
+    float: left;
+    margin-right: 10px;
+    width: 100px;
+    height: 100px;
+
+}
 .storyLol-storyItems {
     margin: $margin-value;
          }
@@ -69,7 +82,7 @@ $margin-value: 5px;
 
 hr { 
     display: block;
-    margin-top: 0.3em;
+    margin-top: auto;
     margin-bottom: 0.3em;
     margin-left: auto;
     margin-right: auto;
@@ -126,7 +139,6 @@ hr {
 .storyItem-br{
     line-height: 2px;
 }
-
 
 
 /*.storyAngry-storyItems:hover {

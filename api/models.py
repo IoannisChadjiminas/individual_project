@@ -17,9 +17,10 @@ class Post (models.Model):
     score = models.IntegerField(default=0)
     enable_score = models.CharField(max_length=5, default="True")
     url = models.URLField(max_length=200, default='url')
-    text = models.TextField(default=0)
+    snippet = models.TextField(default=0)
     published_date = models.DateTimeField(auto_now_add=True)
     time_difference = models.IntegerField(default=0)
+    image_src = models.URLField(max_length=200, default='url')
 
     def get_time_diff(self):
         if self.published_date:

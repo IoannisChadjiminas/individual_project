@@ -8,7 +8,7 @@ var auth = require('./auth')
  *
  * Once it fetches the stories, it passes them to Azure Sentiment Analysis System.
  *
- * Finally, it passes the stories and the corresponind sentiment score to the Django Database
+ * Finally, it passes the stories and the corresponding sentiment score to the Django Database
  * 
  */ 
 class FetchArticle extends React.Component {
@@ -35,7 +35,7 @@ class FetchArticle extends React.Component {
       cache: false,
       success: function(data) {
                 // Run through the fetched item array, and
-                // for each scraped item passthe contents to the Azure server
+                // for each scraped item pass the contents to the Azure server
                 for (var key in data) {
                   if (data.hasOwnProperty(key)) {
                     this.loadDataFromAzureServer(data[key])
@@ -50,7 +50,7 @@ class FetchArticle extends React.Component {
 }
 
 /**
- * Loadd the stories to the Azure Server for sentiment analysis
+ * Loads the stories to the Azure Server for sentiment analysis
  *
  * Then, it passes the stories along with the corresponding score to be stored in Django Database
  * 
@@ -74,12 +74,14 @@ loadDataFromAzureServer (crawl_data) {
       success: function(data) {
         this.setState({data: data, story_info:crawl_data})
         console.log(data.Score + crawl_data.title)
+        console.log(crawl_data.image_src)
 
         /**
          *  Check the sentiment analysis score, if it is  bigger than a threshold 
          *  post it to a website
          */
-        if (data.Score > 0.70)
+        /*if (data.Score > 0.70)*/
+        if (crawl_data.image_src != "url" || crawl_data.title != "title") // ignore stories that don't have an image url address or title
           this.postDataToDjangoServer(crawl_data)
 
       }.bind(this),

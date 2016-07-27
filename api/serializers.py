@@ -11,9 +11,9 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ('id', 'enable_score', 'owner', 'title', 'post_type',
-                  'score', 'score_angry', 'score_sad',
+                  'score', 'score_angry', 'score_sad', 'snippet',
                   'score_wow', 'score_lol', 'score_happy', 'url', 'emotion',
-                  'text', 'published_date', 'time_difference')
+                  'published_date', 'time_difference', 'image_src')
 
 
 class UserSerializer(serializers.ModelSerializer):

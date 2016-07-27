@@ -242,11 +242,12 @@ export class StoryItem extends React.Component {
       return(  
         <div>
           <div  className="storyItem-storyItems">
-              <hr />
-              <StoryWrapTitle  title={this.props.title} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow} time_difference={this.props.time_difference}  
-                score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={this.props.url} owner={this.props.owner}/> 
-              <EmoticonButton  id={this.props.id} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow}  
-                score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={"/api/post/" + this.props.id + "/"} url_voter="/api/voter/" score_display={this.props.score_display} source={this.props.source}/>
+                  <img className = "storyImg" src={this.props.img_src} />
+                  <div className = "storyTitle"> <StoryWrapTitle  title={this.props.title} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow} time_difference={this.props.time_difference}  
+                  score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={this.props.url} owner={this.props.owner}/> </div>
+                  <p className='snippet'> {this.props.snippet} </p>
+                  <EmoticonButton  id={this.props.id} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow}  
+                  score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={"/api/post/" + this.props.id + "/"} url_voter="/api/voter/" score_display={this.props.score_display}source={this.props.source}/>
           </div>
           <p className="storyItem-br"/>
         </div>
@@ -260,7 +261,7 @@ export class StoryList extends React.Component {
       <div className="storyList">
           {this.props.data.map(function(story){
               return <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
-                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score} time_difference={story.time_difference} source={'home_list'}  />
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score} time_difference={story.time_difference} img_src={story.image_src} snippet={story.snippet} source={'home_list'}  />
           })}
       </div>
 
@@ -276,7 +277,7 @@ export class StoryLolList extends React.Component {
           {this.props.data.map(function(story){
             return story.score_lol> story.score_happy && story.score_lol> story.score_wow && story.score_lol> story.score_sad && story.score_lol> story.score_angry ?
               <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
-                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score_lol} time_difference={story.time_difference} source={'lol.png'} />
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score_lol} time_difference={story.time_difference} img_src={story.image_src} snippet={story.snippet} source={'lol.png'} />
               : <span key={story.id}  />
           })}
       </div>
@@ -292,7 +293,7 @@ export class StoryHappyList extends React.Component {
           {this.props.data.map(function(story){
             return story.score_happy> story.score_lol && story.score_happy> story.score_wow && story.score_happy> story.score_sad && story.score_happy> story.score_angry ?
               <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
-                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score_happy} time_difference={story.time_difference} source={'happy.png'}  />
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score_happy} time_difference={story.time_difference} img_src={story.image_src} snippet={story.snippet} source={'happy.png'}  />
               : <span key={story.id}  />
           })}
       </div>
@@ -308,7 +309,7 @@ export class StoryWowList extends React.Component {
           {this.props.data.map(function(story){
             return story.score_wow> story.score_happy && story.score_wow> story.score_lol && story.score_wow> story.score_sad && story.score_wow> story.score_angry ?
               <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
-                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score_wow} time_difference={story.time_difference} source={'wow.png'}  />
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score_wow} time_difference={story.time_difference} img_src={story.image_src} snippet={story.snippet} source={'wow.png'}  />
               : <span key={story.id}  />
           })}
       </div>
@@ -324,7 +325,7 @@ export class StorySadList extends React.Component {
           {this.props.data.map(function(story){
             return story.score_sad> story.score_happy && story.score_sad> story.score_wow && story.score_sad> story.score_lol && story.score_sad> story.score_angry ?
               <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
-                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score_sad} time_difference={story.time_difference} source={'cry.png'} />
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score_sad} time_difference={story.time_difference} img_src={story.image_src} snippet={story.snippet} source={'cry.png'} />
               : <span key={story.id}  />
           })}
       </div>
@@ -340,7 +341,7 @@ export class StoryAngryList extends React.Component {
           {this.props.data.map(function(story){
             return story.score_angry> story.score_happy && story.score_angry> story.score_wow && story.score_angry> story.score_lol && story.score_angry> story.score_sad ?
               <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
-                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner}  score_display={story.score_angry} time_difference={story.time_difference} source={'angry.png'} />
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner}  score_display={story.score_angry} time_difference={story.time_difference} img_src={story.image_src} snippet={story.snippet} source={'angry.png'} />
               : <span key={story.id}  />
           })}
       </div>

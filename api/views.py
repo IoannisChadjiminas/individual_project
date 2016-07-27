@@ -61,7 +61,7 @@ class PostLolList(generics.ListAPIView):
 
 class PostHappyList(generics.ListAPIView):
     '''
-    View to list or create a post in the system
+    View to list a post in the system
     '''
     queryset = Post.objects.all().order_by('-score_happy')
     serializer_class = PostSerializer
