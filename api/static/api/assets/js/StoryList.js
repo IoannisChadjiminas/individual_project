@@ -242,7 +242,7 @@ export class StoryItem extends React.Component {
           parser.href = this.props.url
           var x = parser.hostname;
       return(  
-        <LazyLoad height={500} offsetVertical ={300}>
+        /*<LazyLoad height={500} offsetVertical ={300}>*/
         <div>
           <div  className="storyItem-storyItems">
                   <br />                  
@@ -259,7 +259,7 @@ export class StoryItem extends React.Component {
           <hr />
           <p className="storyItem-br"/>
         </div>
-        </LazyLoad>
+        /*</LazyLoad>*/
         )
     }
 }
