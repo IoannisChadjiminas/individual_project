@@ -43,5 +43,8 @@
     "url": "^0.11.0",
     "webpack": "^1.13.0",
     "webpack-bundle-tracker": "0.0.93"
+  },
+  "dependencies": {
+    "react-lazy-load": "^3.0.10"
   }
 }

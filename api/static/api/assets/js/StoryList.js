@@ -1,6 +1,7 @@
 var React = require('react')
 var auth = require('./auth')
 var URI = require('urijs');
+var LazyLoad = require('react-lazy-load')
 require("../css/storyItem.scss")
 
 
@@ -175,16 +176,12 @@ export class EmoticonButton extends React.Component {
       var source_to_pic;
       var score_to_display;
       switch(highest_score[0]){
-        case "score_lol":
+        /*case "score_lol":
           source_to_pic = 'lol.png'
           score_to_display = highest_score[1]
-          break
+          break*/
         case "score_happy":
           source_to_pic = 'happy.png'
-          score_to_display = highest_score[1]
-          break
-        case "score_wow":
-          source_to_pic = 'wow.png'
           score_to_display = highest_score[1]
           break
         case "score_sad":
@@ -192,23 +189,25 @@ export class EmoticonButton extends React.Component {
           score_to_display = highest_score[1]
           break
         default:
-          source_to_pic = 'angry.png'
+          source_to_pic = 'wow.png'
           score_to_display = highest_score[1]
+          break
+        /*default:
+          source_to_pic = 'angry.png'
+          score_to_display = highest_score[1]*/
       }
 
     }
 
     return (
      <div className="storyEmoticons-storyItems"> 
-        <br />
-        <hr />
           <div className="box">
            <span className="imageBox" >
-           <span style={spanimagestyle}> <strong> {this.props.score_lol} </strong> </span> <img  onClick={this.handleLolclick}  className="storyLol-storyItems" src="/static/api/assets/img/emoticons/lol.png" /> 
+           {/*<span style={spanimagestyle}> <strong> {this.props.score_lol} </strong> </span> <img  onClick={this.handleLolclick}  className="storyLol-storyItems" src="/static/api/assets/img/emoticons/lol.png" />*/}
            <span style={spanimagestyle}> <strong> {this.props.score_happy} </strong> </span> <img  onClick={this.handleSatisfiedclick}  className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" />
            <span style={spanimagestyle}> <strong> {this.props.score_wow} </strong> </span> <img  onClick={this.handleWowclick}  className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> 
            <span style={spanimagestyle}> <strong> {this.props.score_sad} </strong> </span> <img  onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
-           <span style={spanimagestyle}> <strong> {this.props.score_angry} </strong> </span> <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>
+           {/*<span style={spanimagestyle}> <strong> {this.props.score_angry} </strong> </span> <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>*/}
            </span>
            {this.props.source=="home_list" ? <span className="imageRank"> <span className="pplReacted"> <strong className="pplReacted-number"> {score_to_display} </strong> <span className="pplReacted-text"> </span> </span> <img src={"/static/api/assets/img/emoticons/"+ source_to_pic}/> </span>
            :<span className="imageRank"> <span className="pplReacted"> <strong className="pplReacted-number"> {this.props.score_display} </strong> <span className="pplReacted-text"> </span> </span> <img src={"/static/api/assets/img/emoticons/"+ this.props.source}/> </span>}
@@ -239,18 +238,28 @@ export class ShareLink extends React.Component {
 
 export class StoryItem extends React.Component {
     render() {
+          var parser = document.createElement('a');
+          parser.href = this.props.url
+          var x = parser.hostname;
       return(  
+        <LazyLoad height={500} offsetVertical ={300}>
         <div>
           <div  className="storyItem-storyItems">
-                  <img className = "storyImg" src={this.props.img_src} />
+                  <br />                  
+                  <hr />
                   <div className = "storyTitle"> <StoryWrapTitle  title={this.props.title} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow} time_difference={this.props.time_difference}  
                   score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={this.props.url} owner={this.props.owner}/> </div>
                   <p className='snippet'> {this.props.snippet} </p>
+                  <img className = "storyImg" src={this.props.img_src} /> 
+                  <p className="storySubtitle-storyItems" > {x} </p>
+                  <hr />
                   <EmoticonButton  id={this.props.id} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow}  
                   score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={"/api/post/" + this.props.id + "/"} url_voter="/api/voter/" score_display={this.props.score_display}source={this.props.source}/>
           </div>
+          <hr />
           <p className="storyItem-br"/>
         </div>
+        </LazyLoad>
         )
     }
 }

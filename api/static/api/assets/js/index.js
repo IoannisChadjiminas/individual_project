@@ -39,13 +39,13 @@ export var MostRecentStoriesWrapper = React.createClass ({
   }
 })
 
-export var LolStoriesWrapper = React.createClass ({
+/*export var LolStoriesWrapper = React.createClass ({
   render: function() {
     return (
       <LolStories url="/api/post_lol.json" url_post="/api/post/" pollInterval={1000} />
     )
   }
-})
+})*/
 
 export var HappyStoriesWrapper = React.createClass ({
   render: function() {
@@ -71,13 +71,13 @@ export var SadStoriesWrapper = React.createClass ({
   }
 })
 
-export var AngryStoriesWrapper = React.createClass ({
+/*export var AngryStoriesWrapper = React.createClass ({
   render: function() {
     return (
       <AngryStories url="/api/post_angry.json" url_post="/api/post/" pollInterval={1000} />
     )
   }
-})
+})*/
 
 /**
  * React Router keeps your UI in sync with the URL. SPA are web pages that load once, and when the user
@@ -117,10 +117,10 @@ ReactDOM.render(
               e.g http://localhost:5000/#/LolStories */}
           <Router.Route path='FetchArticle' component={FetchArticle}/>
           <Router.Route path='CheckForScrappyJobs' component={CheckForScrappyJobs}/>
-          <Router.Route path='LolStories' component={LolStoriesWrapper}/> 
+          {/*<Router.Route path='LolStories' component={LolStoriesWrapper}/>*/} 
           <Router.Route path='WowStories' component={WowStoriesWrapper}/>
           <Router.Route path='SadStories' component={SadStoriesWrapper}/>
-          <Router.Route path='AngryStories' component={AngryStoriesWrapper}/>
+          {/*<Router.Route path='AngryStories' component={AngryStoriesWrapper}/>*/}
           <Router.Route path='HappyStories' component={HappyStoriesWrapper}/>
           <Router.Route path='MostRecentStories' component={MostRecentStoriesWrapper}/>
           <Router.Route path='SignUp' component={signUp} />

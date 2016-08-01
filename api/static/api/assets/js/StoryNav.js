@@ -45,25 +45,25 @@ const StoryNav = React.createClass({
     auth.login()
   },
     render() {
-      const tooltip_lol = (
+      /*const tooltip_lol = (
           <Tooltip id='1'><strong>Funny</strong></Tooltip>
-      );
+      );*/
 
       const tooltip_happy = (
-          <Tooltip id='2'><strong>Happy</strong></Tooltip>
+          <Tooltip id='2'><strong>Positive</strong></Tooltip>
       );
 
       const tooltip_wow = (
-          <Tooltip id='3'><strong>Wow</strong></Tooltip>
+          <Tooltip id='3'><strong>Neutral</strong></Tooltip>
       );
 
       const tooltip_sad = (
-          <Tooltip id='4'><strong>Sad</strong></Tooltip>
+          <Tooltip id='4'><strong>Negative</strong></Tooltip>
       );
 
-      const tooltip_angry = (
+      /*const tooltip_angry = (
           <Tooltip id='5'><strong>Angry</strong></Tooltip>
-      );
+      );*/
 
       /**
        * StoryNav is used for navigating accross the web app. Link is similar to <a />
@@ -78,13 +78,13 @@ const StoryNav = React.createClass({
                 <li> <Link to="/"> <strong> Sharing Stories </strong>  </Link> </li>
                 <li> <Link to="MostRecentStories"> <strong style={RecentStyle}> Recent </strong>  </Link>  </li>
                 
-                <li> 
+                {/*<li> 
                 <OverlayTrigger placement="bottom" overlay={tooltip_lol}> 
                 <Link to="LolStories">   
                   <img className="storyLol-storyNav" src="/static/api/assets/img/emoticons/lol.png" />
                   </Link>  
                   </OverlayTrigger> 
-                </li>
+                </li>*/}
                 
                 <li>
                   <OverlayTrigger placement="bottom" overlay={tooltip_happy}>  
@@ -110,13 +110,13 @@ const StoryNav = React.createClass({
                     </OverlayTrigger>
                   </li>
                 
-                  <li> 
+                  {/*<li> 
                     <OverlayTrigger placement="bottom" overlay={tooltip_angry}>
                     <Link to="AngryStories"> 
                     <img className="storyAngry-storyNav" src="/static/api/assets/img/emoticons/angry.png"/> 
                     </Link>
                     </OverlayTrigger>   
-                  </li>
+                  </li>*/}
 
                 <li style={divStyle}>
                     {this.state.loggedIn ? (

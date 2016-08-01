@@ -135,9 +135,9 @@ class StoryForm extends React.Component {
             <FormGroup controlId="formInlineEmail">
               <FormControl type="text" placeholder="http://example/story" value={this.state.url} onChange={this.handleUrlChange}/>
             </FormGroup>
-                        <Radio name="optradio" onChange={this.handleLolChange} inline>
+                     {/*   <Radio name="optradio" onChange={this.handleLolChange} inline>
               <img style={imgwidth} src="/static/api/assets/img/emoticons/lol.png" /> 
-            </Radio>
+            </Radio> */}
             {' '}
             <Radio name="optradio" onChange={this.handleHappyChange} inline>
               <img style={imgwidth} src="/static/api/assets/img/emoticons/happy.png" />
@@ -151,9 +151,9 @@ class StoryForm extends React.Component {
               <img style={imgwidth} src="/static/api/assets/img/emoticons/cry.png" /> 
             </Radio>
             {' '}
-            <Radio name="optradio" onChange={this.handleAngryChange} inline>
+            {/*<Radio name="optradio" onChange={this.handleAngryChange} inline>
               <img style={imgwidth} src="/static/api/assets/img/emoticons/angry.png"/>
-            </Radio>
+            </Radio>*/}
             <FormGroup />
             <FormGroup>
             <Button type="submit" value="POST">

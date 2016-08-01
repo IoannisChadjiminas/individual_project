@@ -59,7 +59,7 @@ loadDataFromAzureServer (crawl_data) {
     // These parameters are needed to be authenticated to the Azure Server
     this.account_key = 'WlX/QiJ11tXq0TEss4CMwaRgEblmv2aDFnWKiLeIFAA'
     this.base_url = 'https://api.datamarket.azure.com/data.ashx/amla/text-analytics/v1'
-    this.input_text = crawl_data.text
+    this.input_text = crawl_data.text // pass almost all the text for sentiment analysis
     this.creds = window.btoa('AccountKey:' + this.account_key)
     this.params = this.input_text
     this.sentiment_url = this.base_url + '/GetSentiment?' + 'Text='+url.urlencode(this.params)
@@ -78,10 +78,22 @@ loadDataFromAzureServer (crawl_data) {
 
         /**
          *  Check the sentiment analysis score, if it is  bigger than a threshold 
-         *  post it to a website
+         *  find an initial score
          */
-      if (data.Score > 0.70)
-        if (crawl_data.image_src != "url" || crawl_data.title != "title") // ignore stories that don't have an image url address or title
+      if (data.Score >= 0.65) {
+        crawl_data.score_happy = 1;
+      }
+
+      else if (data.Score >=0.30 && data.Score < 0.65) {
+        crawl_data.score_wow = 1;
+      }
+
+      else {
+        crawl_data.score_sad = 1;
+      }
+
+
+      if (crawl_data.image_src != "url" || crawl_data.title != "title") // ignore stories that don't have an image url address or title
           this.postDataToDjangoServer(crawl_data)
 
       }.bind(this),

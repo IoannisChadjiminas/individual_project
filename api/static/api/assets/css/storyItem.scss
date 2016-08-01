@@ -54,11 +54,11 @@ $margin-value: 5px; // margin value between the emoticons ranking images
 //storyImg are responsible to render the img left to the title
 .storyImg{
     float: left;
-    margin-right: 10px;
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    display:block;
 
 }
+
 .storyLol-storyItems {
     margin: $margin-value;
          }
@@ -137,6 +137,7 @@ hr {
 } 
 
 .storyItem-br{
+
     line-height: 2px;
 }
 
