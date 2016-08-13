@@ -18,7 +18,7 @@ class PostList(generics.ListAPIView):
     '''
     View to list a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score')
+    queryset = Post.objects.all().order_by('-score', '-published_date')
     serializer_class = PostSerializer
 
 
@@ -55,7 +55,7 @@ class PostLolList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_lol')
+    queryset = Post.objects.all().order_by('-score_lol', '-published_date')
     serializer_class = PostSerializer
 
 
@@ -63,7 +63,7 @@ class PostHappyList(generics.ListAPIView):
     '''
     View to list a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_happy', 'published_date')
+    queryset = Post.objects.all().order_by('-score_happy', '-published_date')
     serializer_class = PostSerializer
 
 
@@ -71,7 +71,7 @@ class PostWowList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_wow')
+    queryset = Post.objects.all().order_by('-score_wow', '-published_date')
     serializer_class = PostSerializer
 
 
@@ -79,7 +79,7 @@ class PostSadList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_sad')
+    queryset = Post.objects.all().order_by('-score_sad', '-published_date')
     serializer_class = PostSerializer
 
 
@@ -87,7 +87,7 @@ class PostAngryList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_angry')
+    queryset = Post.objects.all().order_by('-score_angry', '-published_date')
     serializer_class = PostSerializer
 
 
