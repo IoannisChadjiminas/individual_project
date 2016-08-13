@@ -109,7 +109,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_update(self, serializer):
         post = Post.objects.get(pk=self.kwargs['pk'])
-        
+
         if Voter.objects.filter(post=post.id, user=self.request.user).exists():
             if (post.emotion == 2):
                 serializer.save(score=int(post.score) -1, score_lol=int(post.score_happy) -1)
@@ -119,15 +119,15 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
                 serializer.save(score=int(post.score) -1, score_lol=int(post.score_sad) -1)
        
         if int(self.request.data['emotion']) == 1:
-                serializer.save(score=int(self.request.data['score']) +1, score_lol=int(self.request.data['score_lol']) +1)
+                serializer.save(score=int(self.request.data['score']) +1, score_lol=int(self.request.data['score_lol']) +1, emotion=int(self.request.data['emotion']))
         elif int(self.request.data['emotion']) == 2:
-                serializer.save(score=int(self.request.data['score']) +1, score_happy=int(self.request.data['score_happy']) +1)
+                serializer.save(score=int(self.request.data['score']) +1, score_happy=int(self.request.data['score_happy']) +1, emotion=int(self.request.data['emotion']))
         elif int(self.request.data['emotion']) == 3:
-                serializer.save(score=int(self.request.data['score']) +1, score_wow=int(self.request.data['score_wow']) +1)
+                serializer.save(score=int(self.request.data['score']) +1, score_wow=int(self.request.data['score_wow']) +1, emotion=int(self.request.data['emotion']))
         elif int(self.request.data['emotion']) == 4:
-                serializer.save(score=int(self.request.data['score']) +1, score_sad=int(self.request.data['score_sad']) +1)
+                serializer.save(score=int(self.request.data['score']) +1, score_sad=int(self.request.data['score_sad']) +1, emotion=int(self.request.data['emotion']))
         else:
-                serializer.save(score=int(self.request.data['score']) +1, score_angry=int(self.request.data['score_angry']) +1)
+                serializer.save(score=int(self.request.data['score']) +1, score_angry=int(self.request.data['score_angry']) +1, emotion=int(self.request.data['emotion']))
 
 
     '''
