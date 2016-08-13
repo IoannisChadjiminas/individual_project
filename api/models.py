@@ -33,4 +33,4 @@ class Post (models.Model):
 class Voter (models.Model):
     user = models.ForeignKey('auth.User', related_name="votes")
     post = models.IntegerField(default=0)
-    emotion = models.IntegerField(default=0)
+    emotion_num = models.IntegerField(default=0)
