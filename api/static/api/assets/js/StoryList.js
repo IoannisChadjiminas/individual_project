@@ -165,11 +165,11 @@ export class EmoticonButton extends React.Component {
       sortable.push(["score_wow", score_array[sw]])
       return sortable[0]}
 
-    if (sh==sw){
+    if (sh==sw && (sd<sh && sd<sw)){
       sortable.push(["score_happy", score_array[sh]])
       return sortable[0]}
 
-    if (sd==sw){
+    if (sd==sw && (sh<sd && sh<sw)){
       sortable.push(["score_sad", score_array[sd]])
       return sortable[0]}
 
