@@ -156,10 +156,23 @@ export class EmoticonButton extends React.Component {
 
   }
 
-  find_largest_score(sl, sh, sw, sd, sa)
+  find_largest_score(sh, sw, sd)
   {
-    var score_array = {score_lol:sl, score_happy:sh, score_wow:sw, score_sad:sd, score_angry:sa}
+    var score_array = {score_happy:sh, score_wow:sw, score_sad:sd}
     var sortable = []
+
+    if (score_happy==score_sad){
+      sortable.push([score_wow, score_array[score_wow]])
+      return sortable[0]}
+
+    if (score_happy==score_wow){
+      sortable.push([score_happy, score_array[score_happy]])
+      return sortable[0]}
+
+    if (score_sad==score_wow){
+      sortable.push([score_sad, score_array[score_sad]])
+      return sortable[0]}
+
     for (var score in score_array)
       sortable.push([score, score_array[score]])
     sortable.sort(function(a, b) {return b[1] - a[1]})
@@ -171,7 +184,7 @@ export class EmoticonButton extends React.Component {
   render() {
     if (this.props.source == 'home_list')
     {
-      var highest_score = this.find_largest_score(this.props.score_lol, this.props.score_happy, this.props.score_wow, this.props.score_sad, this.props.score_angry)
+      var highest_score = this.find_largest_score(this.props.score_happy, this.props.score_wow, this.props.score_sad)
       
       var source_to_pic;
       var score_to_display;
@@ -209,7 +222,7 @@ export class EmoticonButton extends React.Component {
            <span style={spanimagestyle}> <strong> {this.props.score_sad} </strong> </span> <img  onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
            {/*<span style={spanimagestyle}> <strong> {this.props.score_angry} </strong> </span> <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>*/}
            </span>
-           {this.props.source=="home_list" ? <span className="imageRank"> <span className="pplReacted"> <strong className="pplReacted-number"> {score_to_display} </strong> <span className="pplReacted-text"> </span> </span> <img src={"/static/api/assets/img/emoticons/"+ source_to_pic}/> </span>
+           {this.props.source=="home_list" ? <span className="imageRank"> {/* <span className="pplReacted"> <strong className="pplReacted-number"> {score_to_display} </strong> <span className="pplReacted-text"> </span> </span>*/} <img src={"/static/api/assets/img/emoticons/"+ source_to_pic}/> </span>
            :<span className="imageRank"> <span className="pplReacted"> <strong className="pplReacted-number"> {this.props.score_display} </strong> <span className="pplReacted-text"> </span> </span> <img src={"/static/api/assets/img/emoticons/"+ this.props.source}/> </span>}
 
     </div>
