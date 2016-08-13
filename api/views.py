@@ -18,7 +18,7 @@ class PostList(generics.ListAPIView):
     '''
     View to list a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score', '-published_date')
+    queryset = Post.objects.all().order_by('-score')
     serializer_class = PostSerializer
 
 
@@ -55,7 +55,7 @@ class PostLolList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_lol', '-published_date')
+    queryset = Post.objects.all().order_by('-score_lol')
     serializer_class = PostSerializer
 
 
@@ -63,7 +63,7 @@ class PostHappyList(generics.ListAPIView):
     '''
     View to list a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_happy', '-published_date')
+    queryset = Post.objects.all().order_by('-score_happy')
     serializer_class = PostSerializer
 
 
@@ -71,7 +71,7 @@ class PostWowList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_wow', '-published_date')
+    queryset = Post.objects.all().order_by('-score_wow')
     serializer_class = PostSerializer
 
 
@@ -79,7 +79,7 @@ class PostSadList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_sad', '-published_date')
+    queryset = Post.objects.all().order_by('-score_sad')
     serializer_class = PostSerializer
 
 
@@ -87,7 +87,7 @@ class PostAngryList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_angry', '-published_date')
+    queryset = Post.objects.all().order_by('-score_angry')
     serializer_class = PostSerializer
 
 
@@ -109,18 +109,24 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_update(self, serializer):
         post = Post.objects.get(pk=self.kwargs['pk'])
+        
         if Voter.objects.filter(post=post.id, user=self.request.user).exists():
-            pass
-        else:
-            if int(self.request.data['emotion']) == 1:
+            if (post.emotion == 2):
+                serializer.save(score=int(post.score) -1, score_lol=int(post.score_happy) -1)
+            elif (post.emotion == 3):
+                serializer.save(score=int(post.score) -1, score_lol=int(post.score_wow) -1)
+            elif (post.emotion == 4):
+                serializer.save(score=int(post.score) -1, score_lol=int(post.score_sad) -1)
+       
+        if int(self.request.data['emotion']) == 1:
                 serializer.save(score=int(self.request.data['score']) +1, score_lol=int(self.request.data['score_lol']) +1)
-            elif int(self.request.data['emotion']) == 2:
+        elif int(self.request.data['emotion']) == 2:
                 serializer.save(score=int(self.request.data['score']) +1, score_happy=int(self.request.data['score_happy']) +1)
-            elif int(self.request.data['emotion']) == 3:
+        elif int(self.request.data['emotion']) == 3:
                 serializer.save(score=int(self.request.data['score']) +1, score_wow=int(self.request.data['score_wow']) +1)
-            elif int(self.request.data['emotion']) == 4:
+        elif int(self.request.data['emotion']) == 4:
                 serializer.save(score=int(self.request.data['score']) +1, score_sad=int(self.request.data['score_sad']) +1)
-            else:
+        else:
                 serializer.save(score=int(self.request.data['score']) +1, score_angry=int(self.request.data['score_angry']) +1)
 
 

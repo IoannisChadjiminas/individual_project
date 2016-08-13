@@ -41,4 +41,4 @@ class VoterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Voter
-        fields = ('id', 'post', 'user')
+        fields = ('id', 'post', 'user', 'emotion')
