@@ -63,7 +63,7 @@ class PostHappyList(generics.ListAPIView):
     '''
     View to list a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_happy')
+    queryset = Post.objects.all().order_by('-score_happy', 'published_date')
     serializer_class = PostSerializer
 
 
