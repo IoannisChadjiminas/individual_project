@@ -111,12 +111,12 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         post = Post.objects.get(pk=self.kwargs['pk'])
 
         if Voter.objects.filter(post=post.id, user=self.request.user).exists():
-            voter_relation = Voter.objects.get(post=post.id)
-            if (voter_relation.emotion_num == 2):
+            voter_relation = Voter.objects.get(post=post.id, user=self.request.user)
+            if (voter_relation.emotion == 2):
                 serializer.save(score=int(self.request.data['score']) -1, score_happy=int(self.request.data['score_happy']) -1)
-            elif (voter_relation.emotion_num == 3):
+            elif (voter_relation.emotion == 3):
                 serializer.save(score=int(self.request.data['score']) -1, score_wow=int(self.request.data['score_wow']) -1)
-            elif (voter_relation.emotion_num == 4):
+            elif (voter_relation.emotion == 4):
                 serializer.save(score=int(self.request.data['score']) -1, score_sad=int(self.request.data['score_sad']) -1)
         else:
             pass
