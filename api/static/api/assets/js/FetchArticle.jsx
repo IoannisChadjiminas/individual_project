@@ -80,11 +80,11 @@ loadDataFromAzureServer (crawl_data) {
          *  Check the sentiment analysis score, if it is  bigger than a threshold 
          *  find an initial score
          */
-      if (data.Score >= 0.65) {
+      if (data.Score >= 0.85) {
         crawl_data.score_happy = 1;
       }
 
-      else if (data.Score >=0.30 && data.Score < 0.65) {
+      else if (data.Score >=0.40 && data.Score < 0.85) {
         crawl_data.score_wow = 1;
       }
 

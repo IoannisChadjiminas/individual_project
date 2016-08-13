@@ -249,7 +249,7 @@ export class StoryItem extends React.Component {
                   <div className = "storyTitle"> <StoryWrapTitle  title={this.props.title} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow} time_difference={this.props.time_difference}  
                   score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={this.props.url} owner={this.props.owner}/> </div>
                   <p className='snippet'> {this.props.snippet} </p>
-                  <LazyLoad height={50} offset ={100} once={true}>
+                  <LazyLoad height={100} offset ={100} once={true}>
                   <img className = "storyImg" src={this.props.img_src} /> 
                   </LazyLoad>
                   <p className="storySubtitle-storyItems" > {x} </p>
