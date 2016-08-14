@@ -73,7 +73,7 @@ var spanimagestyle = {
 export class EmoticonButton extends React.Component {
   constructor(){
     super()
-    this.state = {lol: 0, happy: 0, wow: 0, sad:0, angry:0, total:0}
+    this.state = {lol: 0, happy: 0, wow: 0, sad:0, angry:0, total:0, emotion:0}
     this.handleLolclick = this.handleLolclick.bind(this)
     this.handleSatisfiedclick = this.handleSatisfiedclick.bind(this)
     this.handleWowclick = this.handleWowclick.bind(this)
@@ -90,29 +90,29 @@ export class EmoticonButton extends React.Component {
   }
   
   handleLolclick() {
-    this.setState({lol: this.state.lol, total:this.state.total})
-    this.handleReactPoint({score: this.state.total, score_lol:this.state.lol, emotion:1})
+    this.setState({lol: this.state.lol, total:this.state.total, emotion: 1})
+    this.handleReactPoint({score: this.state.total, score_lol:this.state.lol, emotion:this.state.emotion})
 
   }
 
   handleSatisfiedclick() {
-    this.setState({happy: this.state.happy, total:this.state.total})
-    this.handleReactPoint({score: this.state.total, score_happy:this.state.happy, emotion:2})
+    this.setState({happy: this.state.happy, total:this.state.total, emotion:2})
+    this.handleReactPoint({score: this.state.total, score_happy:this.state.happy, emotion:this.state.emotion})
   }
 
   handleWowclick() {
-    this.setState({wow: this.state.wow, total:this.state.total})
-    this.handleReactPoint({score: this.state.total, score_wow: this.state.wow, emotion:3})
+    this.setState({wow: this.state.wow, total:this.state.total, emotion:3})
+    this.handleReactPoint({score: this.state.total, score_wow: this.state.wow, emotion:this.state.emotion})
   }
 
   handleCryclick() {
-    this.setState({sad: this.state.sad, total:this.state.total})
-    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, emotion:4})
+    this.setState({sad: this.state.sad, total:this.state.total, emotion:4})
+    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, emotion:this.state.emotion})
   }
 
   handleAngryclick() {
-    this.setState({angry: this.state.angry, total:this.state.total})
-    this.handleReactPoint({score: this.state.total, score_angry: this.state.angry, emotion:5})
+    this.setState({angry: this.state.angry, total:this.state.total, emotion:5})
+    this.handleReactPoint({score: this.state.total, score_angry: this.state.angry, emotion:this.state.emotion})
     
   }
 
@@ -128,7 +128,7 @@ export class EmoticonButton extends React.Component {
             },
       success: function(data) {
         this.setState({data: data});
-        this.handleReactVote({post: this.props.id, emotion: this.reactPoint.emotion}) //I added the net ajax call after the success of the previous one
+        this.handleReactVote({post: this.props.id, emotion: this.state.emotion}) //I added the net ajax call after the success of the previous one
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
