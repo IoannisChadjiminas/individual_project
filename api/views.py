@@ -127,7 +127,6 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
                 elif int(self.request.data['emotion']) == 4:
                     serializer.save(score=int(self.request.data['score']), score_wow=int(self.request.data['score_wow']) -1, score_sad=int(self.request.data['score_sad']) +1)
             elif (voter_relation.emotion == 4):
-                serializer.save(score=int(self.request.data['score']), score_sad=int(self.request.data['score_sad']) -1)
                 if int(self.request.data['emotion']) == 2:
                     serializer.save(score=int(self.request.data['score']), score_sad=int(self.request.data['score_sad']) -1, score_happy=int(self.request.data['score_happy']) +1)
                 elif int(self.request.data['emotion']) == 3:
