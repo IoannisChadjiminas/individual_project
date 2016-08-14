@@ -39,8 +39,8 @@ class PostScraperCreate(generics.CreateAPIView):
     '''
     View to create a post in the system
     '''
-    #permission_classes = (IsAuthenticated,)
-    #permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAdminUser,)
     serializer_class = PostSerializer
     # when a post is created is associated with the authenticated author
 
