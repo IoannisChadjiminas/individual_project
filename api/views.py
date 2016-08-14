@@ -121,16 +121,12 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         else:
             pass
 
-        if int(self.request.data['emotion']) == 1:
-                serializer.save(score=int(self.request.data['score']) +1, score_lol=int(self.request.data['score_lol']) +1, emotion=int(self.request.data['emotion']))
-        elif int(self.request.data['emotion']) == 2:
-                serializer.save(score=int(self.request.data['score']) +1, score_happy=int(self.request.data['score_happy']) +1, emotion=int(self.request.data['emotion']))
+        if int(self.request.data['emotion']) == 2:
+                serializer.save(score=int(self.request.data['score']) +1, score_happy=int(self.request.data['score_happy']) +1)
         elif int(self.request.data['emotion']) == 3:
-                serializer.save(score=int(self.request.data['score']) +1, score_wow=int(self.request.data['score_wow']) +1, emotion=int(self.request.data['emotion']))
+                serializer.save(score=int(self.request.data['score']) +1, score_wow=int(self.request.data['score_wow']) +1)
         elif int(self.request.data['emotion']) == 4:
-                serializer.save(score=int(self.request.data['score']) +1, score_sad=int(self.request.data['score_sad']) +1, emotion=int(self.request.data['emotion']))
-        else:
-                serializer.save(score=int(self.request.data['score']) +1, score_angry=int(self.request.data['score_angry']) +1, emotion=int(self.request.data['emotion']))
+                serializer.save(score=int(self.request.data['score']) +1, score_sad=int(self.request.data['score_sad']) +1)
 
 
     '''
