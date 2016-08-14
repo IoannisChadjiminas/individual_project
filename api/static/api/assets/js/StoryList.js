@@ -91,28 +91,28 @@ export class EmoticonButton extends React.Component {
   
   handleLolclick() {
     this.setState({lol: this.state.lol, total:this.state.total, emotion: 1})
-    this.handleReactPoint({score: this.state.total, score_lol:this.state.lol, emotion:1})
+    this.handleReactPoint({score: this.state.total, sscore_sad: this.state.sad, score_wow: this.state.wow, score_happy:this.state.happy, emotion:1})
 
   }
 
   handleSatisfiedclick() {
     this.setState({happy: this.state.happy, total:this.state.total, emotion:2})
-    this.handleReactPoint({score: this.state.total, score_happy:this.state.happy, emotion:2})
+    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, score_wow: this.state.wow, score_happy:this.state.happy, emotion:2})
   }
 
   handleWowclick() {
     this.setState({wow: this.state.wow, total:this.state.total, emotion:3})
-    this.handleReactPoint({score: this.state.total, score_wow: this.state.wow, emotion:3})
+    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, score_wow: this.state.wow, score_happy:this.state.happy, emotion:3})
   }
 
   handleCryclick() {
     this.setState({sad: this.state.sad, total:this.state.total, emotion:4})
-    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, emotion:4})
+    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, score_wow: this.state.wow, score_happy:this.state.happy, emotion:4})
   }
 
   handleAngryclick() {
     this.setState({angry: this.state.angry, total:this.state.total, emotion:5})
-    this.handleReactPoint({score: this.state.total, score_angry: this.state.angry, emotion:5})
+    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, score_wow: this.state.wow, score_happy:this.state.happy, emotion:5})
     
   }
 
