@@ -37,15 +37,17 @@ class StoryBox extends React.Component {
       success: function(data) {
       {/* Should treat the state object as immutable, 
       and you need to re-create the array so its pointing to a new object, set the new item, then reset the state.*/}
-      for (var i=0; i<this.state.data.length; i++)
+      for (var i=0; i<this.state.data.length; i++){
         for (var j=0; j< data.length; j++)
           if (this.state.data[i].id == data[j].post) {
              this.state.data[i]["emotion"] = data[j].emotion
              console.log("Hello")
+             break
           }
-        else {
-          this.state.data[i]["emotion"] = -1
-        }
+          else {
+              this.state.data[i]["emotion"] = -1
+          }
+     }
           var newArray = this.state.data;     
           this.setState({data: newArray});
       }.bind(this),
