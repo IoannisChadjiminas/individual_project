@@ -35,7 +35,7 @@ class StoryBox extends React.Component {
                 'Authorization': 'Token ' + localStorage.token
             },
       success: function(data) {
-        this.setState({data: data});
+        this.setState({voter_data: data});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error('/api/voter/', status, err.toString());
@@ -56,9 +56,11 @@ class StoryBox extends React.Component {
  }
 
   render() {
+    var initial_array = this.state.data
+    var new_array = [...initial_array, this.state.voter_data]
     return (
       <div className="storyBox">
-        <StoryList data={this.state.data} />
+        <StoryList data={this.new_array} />
       </div>
     );
   }
