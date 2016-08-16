@@ -40,10 +40,15 @@ class StoryBox extends React.Component {
       $.each(this.state.data, function(i, v) {
         for (var j=0; j< data.length; j++)
         if (v.id == data[j].post) {
-             console.log(v.id)
-             console.log(data[j].emotion);
+             v["emotion"] = data[j].emotion
           return;
-    }
+        }
+        else {
+          v["emotion"] = -1
+          return
+        }
+        console.log(this.state.data[0].emotion)
+        console.log(this.state.data[37].emotion)
 });
           var newArray = this.state.data.slice();    
           newArray.push(data);  
