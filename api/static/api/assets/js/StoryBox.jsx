@@ -68,6 +68,10 @@ class StoryBox extends React.Component {
     this.loadInterval = false;
  }
 
+ shouldComponentUpdate (nextProps, nextState) {
+  return this.state.data !== nextState.data;
+  }
+
   render() {
     return (
       <div className="storyBox">
