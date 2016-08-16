@@ -35,6 +35,8 @@ class StoryBox extends React.Component {
                 'Authorization': 'Token ' + localStorage.token
             },
       success: function(data) {
+      {/* Should treat the state object as immutable, 
+      and you need to re-create the array so its pointing to a new object, set the new item, then reset the state.*/}
           var newArray = this.state.data.slice();    
           newArray.push(data);   
           this.setState({data: newArray});
