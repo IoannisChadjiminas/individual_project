@@ -166,7 +166,7 @@ class VoterList(generics.ListCreateAPIView):
             pass
         else:
             serializer.save(user=self.request.user)
-
+    ''' 
     def get_queryset(self):
         """
         This view should return a list of all the ranks
@@ -174,8 +174,7 @@ class VoterList(generics.ListCreateAPIView):
         """
         user = self.request.user
         return Voter.objects.filter(user=user)
-
-
+    '''
 
 class VoterDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Voter.objects.all()
