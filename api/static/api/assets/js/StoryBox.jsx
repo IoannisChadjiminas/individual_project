@@ -56,8 +56,8 @@ class StoryBox extends React.Component {
  }
 
   render() {
-    var initial_array = this.state.data
-    var new_array = update(initialArray, {$push: this.vector.data});
+    var new_array = this.state.data
+    var new_array = new_array.push(this.state.voter_data)
     return (
       <div className="storyBox">
         <StoryList data={new_array} />
