@@ -26,7 +26,7 @@ var CheckForScrappyJobs = require('./CheckForScrappyJobs')
 export class HomeWrapper extends React.Component {
   render() {
     return (
-      <Home url="/api/post_home.json" url_post="/api/post/" pollInterval={1000} />
+      <Home url="/api/post_home.json" url_post="/api/post/" pollInterval={10000} />
     )
   }
 }
