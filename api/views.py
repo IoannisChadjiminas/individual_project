@@ -114,27 +114,27 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
             voter_relation = Voter.objects.get(post=post.id, user=self.request.user)
             if (voter_relation.emotion == 2):
                 if int(self.request.data['emotion']) == 2:
-                    serializer.save(score=int(self.request.data['score']), score_happy=post.score_happy)
+                    serializer.save(score=int(self.request.data['score']), score_happy=int(self.request.data['score_happy']))
                 elif int(self.request.data['emotion']) == 3:
-                    serializer.save(score=int(self.request.data['score']), score_happy=post.score_happy -1, score_wow=post.score_wow +1)
+                    serializer.save(score=int(self.request.data['score']), score_happy=int(self.request.data['score_happy']) -1, score_wow=int(self.request.data['score_wow']) +1)
                 elif int(self.request.data['emotion']) == 4:
-                    serializer.save(score=int(self.request.data['score']), score_happy=post.score_happy -1, score_sad=post.score_sad +1)
+                    serializer.save(score=int(self.request.data['score']), score_happy=int(self.request.data['score_happy']) -1, score_sad=int(self.request.data['score_sad']) +1)
             elif (voter_relation.emotion == 3):
                 if int(self.request.data['emotion']) == 2:
-                    serializer.save(score=int(self.request.data['score']), score_wow=post.score_wow -1, score_happy=post.score_happy +1)
+                    serializer.save(score=int(self.request.data['score']), score_wow=int(self.request.data['score_wow']) -1, score_happy=int(self.request.data['score_happy']) +1)
                 elif int(self.request.data['emotion']) == 3:
-                    serializer.save(score=int(self.request.data['score']), score_wow=post.score_wow)
+                    serializer.save(score=int(self.request.data['score']), score_wow=int(self.request.data['score_wow']))
                 elif int(self.request.data['emotion']) == 4:
-                    serializer.save(score=int(self.request.data['score']), score_wow=post.score_wow -1, score_sad=post.score_sad +1)
+                    serializer.save(score=int(self.request.data['score']), score_wow=int(self.request.data['score_wow']) -1, score_sad=int(self.request.data['score_sad']) +1)
             elif (voter_relation.emotion == 4):
                 if int(self.request.data['emotion']) == 2:
-                    serializer.save(score=int(self.request.data['score']), score_sad=post.score_sad -1, score_happy=post.score_happy +1)
+                    serializer.save(score=int(self.request.data['score']), score_sad=int(self.request.data['score_sad']) -1, score_happy=int(self.request.data['score_happy']) +1)
                 elif int(self.request.data['emotion']) == 3:
-                    serializer.save(score=int(self.request.data['score']), score_sad=post.score_sad -1, score_wow=post.score_wow +1)
+                    serializer.save(score=int(self.request.data['score']), score_sad=int(self.request.data['score_sad']) -1, score_wow=int(self.request.data['score_wow']) +1)
                 elif int(self.request.data['emotion']) == 4:
-                    serializer.save(score=int(self.request.data['score']), score_sad=post.score_sad)
+                    serializer.save(score=int(self.request.data['score']), score_sad=int(self.request.data['score_sad']))
         else:
-            if int(self.request.data['emotion']) ==2:
+            if int(self.request.data['emotion']) == 2:
                 serializer.save(score=int(self.request.data['score']), score_happy=post.score_happy +1)
             elif int(self.request.data['emotion']) == 3:
                 serializer.save(score=int(self.request.data['score']), score_wow=post.score_wow +1)
@@ -154,7 +154,7 @@ class VoterList(generics.ListCreateAPIView):
     '''
     View to list or create a post in the system
     '''
-    permission_classes = (IsAuthenticated)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Voter.objects.all()
     serializer_class = VoterSerializer
 
@@ -166,15 +166,7 @@ class VoterList(generics.ListCreateAPIView):
             pass
         else:
             serializer.save(user=self.request.user)
-    ''' 
-    def get_queryset(self):
-        """
-        This view should return a list of all the ranks
-        for the currently authenticated user.
-        """
-        user = self.request.user
-        return Voter.objects.filter(user=user)
-    '''
+
 
 class VoterDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Voter.objects.all()
