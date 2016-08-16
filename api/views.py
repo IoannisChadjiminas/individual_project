@@ -154,7 +154,7 @@ class VoterList(generics.ListCreateAPIView):
     '''
     View to list or create a post in the system
     '''
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated)
     queryset = Voter.objects.all()
     serializer_class = VoterSerializer
 
