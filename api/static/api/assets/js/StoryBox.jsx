@@ -8,6 +8,8 @@ class StoryBox extends React.Component {
     super();
     this.state = {data: []}
     this.loadDataFromServer = this.loadDataFromServer.bind(this)
+    this.loadVoterData = this.loadVoterData.bind(this)
+    this. callLoadsInterval = this.callLoadsInterval.bind(this)
   }
 
   loadDataFromServer () {
@@ -24,9 +26,32 @@ class StoryBox extends React.Component {
     });
   }
 
+  loadVoterData() {
+    $.ajax({
+      url: '/api/voter/',
+      dataType: 'json',
+      type: 'POST',
+      headers: {
+                'Authorization': 'Token ' + localStorage.token
+            },
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('/api/voter/', status, err.toString());
+      }.bind(this)
+    });
+
+  }
+
+  callLoadsInterval(){
+    this.loadDataFromServer()
+    this.loadVoterData()
+  }
+
   componentDidMount() {
-    this.loadDataFromServer();
-    this.loadInterval = setInterval(this.loadDataFromServer, this.props.pollInterval);
+    this.callLoadsInterval();
+    this.loadInterval = setInterval(this.callLoadsInterval, this.props.pollInterval);
   }
 
   componentWillUnmount () {
