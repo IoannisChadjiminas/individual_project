@@ -26,7 +26,7 @@ var CheckForScrappyJobs = require('./CheckForScrappyJobs')
 export class HomeWrapper extends React.Component {
   render() {
     return (
-      <Home url="/api/post_home.json" url_post="/api/post/" pollInterval={10000} />
+      <Home url="/api/post_home.json" url_post="/api/post/" pollInterval={1000} />
     )
   }
 }
@@ -34,7 +34,7 @@ export class HomeWrapper extends React.Component {
 export var MostRecentStoriesWrapper = React.createClass ({
   render: function() {
     return (
-      <MostRecentStories url="/api/post_published.json" url_post="/api/post/" pollInterval={10000} />
+      <MostRecentStories url="/api/post_published.json" url_post="/api/post/" pollInterval={1000} />
     )
   }
 })
@@ -50,7 +50,7 @@ export var MostRecentStoriesWrapper = React.createClass ({
 export var HappyStoriesWrapper = React.createClass ({
   render: function() {
     return (
-      <HappyStories url="/api/post_happy.json" url_post="/api/post/" pollInterval={10000} />
+      <HappyStories url="/api/post_happy.json" url_post="/api/post/" pollInterval={1000} />
     )
   }
 })
@@ -58,7 +58,7 @@ export var HappyStoriesWrapper = React.createClass ({
 export var WowStoriesWrapper = React.createClass ({
   render: function() {
     return (
-      <WowStories url="/api/post_wow.json" url_post="/api/post/" pollInterval={10000} />
+      <WowStories url="/api/post_wow.json" url_post="/api/post/" pollInterval={1000} />
     )
   }
 })
@@ -66,7 +66,7 @@ export var WowStoriesWrapper = React.createClass ({
 export var SadStoriesWrapper = React.createClass ({
   render: function() {
     return (
-      <SadStories url="/api/post_sad.json" url_post="/api/post/" pollInterval={10000} />
+      <SadStories url="/api/post_sad.json" url_post="/api/post/" pollInterval={1000} />
     )
   }
 })

@@ -18,7 +18,7 @@ class PostList(generics.ListAPIView):
     '''
     View to list a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score')
+    queryset = Post.objects.all().order_by('-score', '-published_date')
     serializer_class = PostSerializer
 
 
@@ -166,6 +166,15 @@ class VoterList(generics.ListCreateAPIView):
             pass
         else:
             serializer.save(user=self.request.user)
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the ranks
+        for the currently authenticated user.
+        """
+        user = self.request.user
+        return Voter.objects.filter(user=user)
+
 
 
 class VoterDetail(generics.RetrieveUpdateDestroyAPIView):

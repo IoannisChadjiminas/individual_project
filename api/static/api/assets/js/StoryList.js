@@ -155,7 +155,10 @@ export class EmoticonButton extends React.Component {
     });
 
   }
-
+  /**
+   * This function is used to find the largest score for each story in order to assign the right emoticon to each
+   * story
+   */
   find_largest_score(sh, sw, sd)
   {
     var score_array = {score_happy:sh, score_wow:sw, score_sad:sd}
