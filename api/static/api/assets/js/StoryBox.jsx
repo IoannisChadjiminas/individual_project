@@ -45,10 +45,8 @@ class StoryBox extends React.Component {
         }
         else {
           v["emotion"] = -1
-          return
+          return;
         }
-        console.log(this.state.data[0].emotion)
-        console.log(this.state.data[37].emotion)
 });
           var newArray = this.state.data.slice();    
           newArray.push(data);  
@@ -73,6 +71,8 @@ class StoryBox extends React.Component {
  }
 
   render() {
+    console.log(this.state[0].emotion)
+    console.log(this.state[33].emotion)
     return (
       <div className="storyBox">
         <StoryList data={this.state.data} />
