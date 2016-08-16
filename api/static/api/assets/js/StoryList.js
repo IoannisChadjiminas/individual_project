@@ -73,7 +73,7 @@ var spanimagestyle = {
 export class EmoticonButton extends React.Component {
   constructor(){
     super()
-    this.state = {lol: 0, happy: 0, wow: 0, sad:0, angry:0, total:0, emotion:0}
+    this.state = {score_happy: 0, score_wow: 0, score_sad:0, score:0, emotion:0}
     this.handleLolclick = this.handleLolclick.bind(this)
     this.handleSatisfiedclick = this.handleSatisfiedclick.bind(this)
     this.handleWowclick = this.handleWowclick.bind(this)
@@ -82,38 +82,28 @@ export class EmoticonButton extends React.Component {
     this.handleReactPoint = this.handleReactPoint.bind(this)
     this.handleReactVote = this.handleReactVote.bind(this)
     this.find_largest_score = this.find_largest_score.bind(this)
+    this.loadScoresFromServer = this.loadScoresFromServer.bind(this)
   }
 
   componentDidMount(){
-    this.setState({lol: this.props.score_lol, total: this.props.score, happy: this.props.score_happy,
-      wow: this.props.score_wow, sad: this.props.score_sad, angry: this.props.score_angry })
+    this.setState({score: this.props.score, score_happy: this.props.score_happy,
+      score_wow: this.props.score_wow, score_sad: this.props.score_sad})
   }
   
-  handleLolclick() {
-    this.setState({lol: this.state.lol, total:this.state.total, emotion: 1})
-    this.handleReactPoint({score: this.state.total, sscore_sad: this.state.sad, score_wow: this.state.wow, score_happy:this.state.happy, emotion:1})
-
-  }
 
   handleSatisfiedclick() {
-    this.setState({happy: this.state.happy, total:this.state.total, emotion:2})
-    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, score_wow: this.state.wow, score_happy:this.state.happy, emotion:2})
+    this.setState({score_happy: this.state.score_happy, score:this.state.score, emotion:2})
+    this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:2})
   }
 
   handleWowclick() {
-    this.setState({wow: this.state.wow, total:this.state.total, emotion:3})
-    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, score_wow: this.state.wow, score_happy:this.state.happy, emotion:3})
+    this.setState({wow: this.state.score_wow, total:this.state.score, emotion:3})
+    this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:3})
   }
 
   handleCryclick() {
-    this.setState({sad: this.state.sad, total:this.state.total, emotion:4})
-    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, score_wow: this.state.wow, score_happy:this.state.happy, emotion:4})
-  }
-
-  handleAngryclick() {
-    this.setState({angry: this.state.angry, total:this.state.total, emotion:5})
-    this.handleReactPoint({score: this.state.total, score_sad: this.state.sad, score_wow: this.state.wow, score_happy:this.state.happy, emotion:5})
-    
+    this.setState({sad: this.state.score_sad, total:this.state.score, emotion:4})
+    this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:4})
   }
 
   handleReactPoint(reactPoint) {
@@ -128,7 +118,6 @@ export class EmoticonButton extends React.Component {
             },
       success: function(data) {
         this.setState({data: data});
-        console.log(data.sad)
         this.handleReactVote({post: this.props.id, emotion: this.state.emotion}) //I added the net ajax call after the success of the previous one
       }.bind(this),
       error: function(xhr, status, err) {
@@ -148,13 +137,28 @@ export class EmoticonButton extends React.Component {
                 'Authorization': 'Token ' + localStorage.token
             },
       success: function(data) {
-        this.setState({data: data});
+        this.setState({data: data})
+        this.loadScoresFromServer()
       }.bind(this),
       error: function(xhr, status, err) {
         console.error('/api/voter/', status, err.toString());
       }.bind(this)
     });
 
+  }
+
+ loadScoresFromServer () {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
   }
   /**
    * This function is used to find the largest score for each story in order to assign the right emoticon to each
