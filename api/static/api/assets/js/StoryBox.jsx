@@ -71,8 +71,8 @@ class StoryBox extends React.Component {
  }
 
   render() {
-    console.log(this.state[0].emotion)
-    console.log(this.state[33].emotion)
+    console.log(this.state.data[0].emotion)
+    console.log(this.state.data[33].emotion)
     return (
       <div className="storyBox">
         <StoryList data={this.state.data} />
