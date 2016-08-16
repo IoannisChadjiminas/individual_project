@@ -48,8 +48,10 @@ class StoryBox extends React.Component {
           return;
         }
 });
-          var newArray = this.state.data.slice();    
-          newArray.push(data);  
+         console.log(this.state.data[0].emotion)
+         console.log(this.state.data[33].emotion)
+
+          var newArray = this.state.data.slice();     
           this.setState({data: newArray});
       }.bind(this),
       error: function(xhr, status, err) {
@@ -71,8 +73,6 @@ class StoryBox extends React.Component {
  }
 
   render() {
-    console.log(this.state.data[0].emotion)
-    console.log(this.state.data[33].emotion)
     return (
       <div className="storyBox">
         <StoryList data={this.state.data} />
