@@ -12,7 +12,7 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ('id', 'enable_score', 'owner', 'title', 'post_type',
                   'score', 'score_angry', 'score_sad', 'snippet', 'text',
-                  'score_wow', 'score_lol', 'score_happy', 'url', 'emotion',
+                  'score_wow', 'score_lol', 'score_happy', 'url',
                   'published_date', 'time_difference', 'image_src')
 
 

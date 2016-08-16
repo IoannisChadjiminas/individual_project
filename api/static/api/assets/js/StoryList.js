@@ -262,7 +262,7 @@ export class StoryItem extends React.Component {
           <div  className="storyItem-storyItems">
                   <br />                  
                   <hr />
-                  <div> {this.props.user} </div>
+                  <div> {this.props.post} </div>
                   <div> {this.props.emotion} </div>
                   <div> {this.props.id} </div>
                   <div className = "storyTitle"> <StoryWrapTitle  title={this.props.title} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow} time_difference={this.props.time_difference}  

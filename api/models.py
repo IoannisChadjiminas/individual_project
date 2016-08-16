@@ -13,7 +13,6 @@ class Post (models.Model):
     score_wow = models.IntegerField(default=0)
     score_sad = models.IntegerField(default=0)
     score_angry = models.IntegerField(default=0)
-    emotion = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
     enable_score = models.CharField(max_length=5, default="True")
     url = models.URLField(max_length=200, default='url')
