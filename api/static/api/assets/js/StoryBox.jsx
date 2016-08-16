@@ -37,9 +37,10 @@ class StoryBox extends React.Component {
       success: function(data) {
       {/* Should treat the state object as immutable, 
       and you need to re-create the array so its pointing to a new object, set the new item, then reset the state.*/}
-              $.each(this.state.data, function(i, v) {
-    if (v.id == "37") {
-        console.log(v.score);
+      $.each(this.state.data, function(i, post) {
+        for (var j =0; j<data.length; j++)
+          if (post.id == data[j].post) {
+            console.log(v.score);
         return;
     }
 });
