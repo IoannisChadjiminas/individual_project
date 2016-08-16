@@ -18,7 +18,6 @@ class StoryBox extends React.Component {
       cache: false,
       success: function(data) {
         this.setState({data: data});
-        console.log(data[0].id)
         this.loadVoterData();
       }.bind(this),
       error: function(xhr, status, err) {
