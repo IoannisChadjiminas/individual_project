@@ -60,7 +60,7 @@ class StoryBox extends React.Component {
     var new_array = new_array.push(this.state.voter_data)
     return (
       <div className="storyBox">
-        <StoryList data={new_array} />
+        <StoryList data={this.new_array} />
       </div>
     );
   }
