@@ -6,10 +6,9 @@ var StoryForm = require('./StoryForm')
 class StoryBox extends React.Component {
   constructor(){
     super();
-    this.state = {data: []}
+    this.state = {data: [], voter_data: []}
     this.loadDataFromServer = this.loadDataFromServer.bind(this)
     this.loadVoterData = this.loadVoterData.bind(this)
-    this. callLoadsInterval = this.callLoadsInterval.bind(this)
   }
 
   loadDataFromServer () {
@@ -19,6 +18,7 @@ class StoryBox extends React.Component {
       cache: false,
       success: function(data) {
         this.setState({data: data});
+        this.loadVoterData();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -44,14 +44,10 @@ class StoryBox extends React.Component {
 
   }
 
-  callLoadsInterval(){
-    this.loadDataFromServer()
-    this.loadVoterData()
-  }
 
   componentDidMount() {
-    this.callLoadsInterval();
-    this.loadInterval = setInterval(this.callLoadsInterval, this.props.pollInterval);
+    this.loadDataFromServer();
+    this.loadInterval = setInterval(this.loadDataFromServer, this.props.pollInterval);
   }
 
   componentWillUnmount () {
