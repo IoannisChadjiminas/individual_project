@@ -41,6 +41,7 @@ class StoryBox extends React.Component {
         for (var j=0; j< data.length; j++)
           if (this.state.data[i].id == data[j].post) {
              this.state.data[i]["emotion"] = data[j].emotion
+             console.log("Hello")
           }
         else {
           this.state.data[i]["emotion"] = -1
