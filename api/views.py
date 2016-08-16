@@ -154,7 +154,7 @@ class VoterList(generics.ListCreateAPIView):
     '''
     View to list or create a post in the system
     '''
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
     queryset = Voter.objects.all()
     serializer_class = VoterSerializer
 
@@ -169,7 +169,7 @@ class VoterList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         """
-        This view should return a list of all the purchases
+        This view should return a list of all the currently user rankedstories
         for the currently authenticated user.
         """
         user = self.request.user
