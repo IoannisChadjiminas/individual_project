@@ -30,7 +30,7 @@ class StoryBox extends React.Component {
     $.ajax({
       url: '/api/voter/',
       dataType: 'json',
-      type: 'POST',
+      cache: false,
       headers: {
                 'Authorization': 'Token ' + localStorage.token
             },
