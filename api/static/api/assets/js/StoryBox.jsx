@@ -26,6 +26,10 @@ class StoryBox extends React.Component {
     });
   }
 
+
+/* This is used to attach the emotion label to each fetched story from the django database for the current
+authenticated user. This helps to find which stories have been ranked by the current user.
+*/
   loadVoterData() {
     $.ajax({
       url: '/api/voter/',
@@ -37,6 +41,10 @@ class StoryBox extends React.Component {
       success: function(data) {
       {/* Should treat the state object as immutable, 
       and you need to re-create the array so its pointing to a new object, set the new item, then reset the state.*/}
+
+      {/* This logic tries to find which stories have been ranked by the current aunthenticated user by finding
+      the id of story within the relation post-voter. Then it attaches an emotion label for each story that
+      is found to the relation voter-post. */}
       for (var i=0; i<this.state.data.length; i++){
         for (var j=0; j< data.length; j++)
           if (this.state.data[i].id == data[j].post) {

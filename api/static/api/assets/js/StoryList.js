@@ -131,6 +131,7 @@ export class EmoticonButton extends React.Component {
         console.log(this.state.emotion)
         this.handleReactVote({post: this.props.id, emotion: this.state.emotion}) //I added the net ajax call after the success of the previous one
         this.loadScoresFromServer()
+
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -305,6 +306,10 @@ export class EmoticonButton extends React.Component {
           score_to_display = highest_score[1]*/
       }
 
+    
+
+    }
+
     // This logic is used to find the correct variable value for emotion. Emotion
     // is then used to make lighter the correct emoticon icon. The lighter emoticon 
     // shows the last selection of the user.
@@ -321,9 +326,8 @@ export class EmoticonButton extends React.Component {
         emotion = this.state.emotion
 
       }
-    }
     else {
-      emotion = 0;
+      emotion = 0
     }
 
 
