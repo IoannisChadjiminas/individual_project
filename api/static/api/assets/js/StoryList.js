@@ -70,42 +70,51 @@ var spanimagestyle = {
   fontSize: '8px'
 }
 
+var imageOpacity = {
+  opacity: 1
+}
+
 export class EmoticonButton extends React.Component {
   constructor(){
     super()
-    this.state = {score_happy: 0, score_wow: 0, score_sad:0, score:0, emotion:0}
-    this.handleLolclick = this.handleLolclick.bind(this)
+    this.state = {first_time: 1, score_happy: 0, score_wow:0, score_sad:0, score:0, emotion:0, data_voter:[], id_voter: []}
     this.handleSatisfiedclick = this.handleSatisfiedclick.bind(this)
     this.handleWowclick = this.handleWowclick.bind(this)
     this.handleCryclick = this.handleCryclick.bind(this)
-    this.handleAngryclick = this.handleAngryclick.bind(this)
     this.handleReactPoint = this.handleReactPoint.bind(this)
     this.handleReactVote = this.handleReactVote.bind(this)
     this.find_largest_score = this.find_largest_score.bind(this)
     this.loadScoresFromServer = this.loadScoresFromServer.bind(this)
+    this.loadVoterId = this.loadVoterId.bind(this)
+    this.updateVoterPost = this.updateVoterPost.bind(this)
+    this.url_vt;
   }
 
   componentDidMount(){
     this.setState({score: this.props.score, score_happy: this.props.score_happy,
-      score_wow: this.props.score_wow, score_sad: this.props.score_sad})
+      score_wow: this.props.score_wow, score_sad: this.props.score_sad, emotion: this.props.emotion})
   }
   
 
   handleSatisfiedclick() {
+    this.state.first_time = 0
     this.setState({score_happy: this.state.score_happy, score:this.state.score, emotion:2})
     this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:2})
   }
 
   handleWowclick() {
+    this.state.first_time = 0
     this.setState({wow: this.state.score_wow, total:this.state.score, emotion:3})
     this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:3})
   }
 
   handleCryclick() {
+    this.state.first_time = 0
     this.setState({sad: this.state.score_sad, total:this.state.score, emotion:4})
     this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:4})
   }
 
+/* This is used to update the current story with the new score */
   handleReactPoint(reactPoint) {
     $.ajax({
       url: this.props.url,
@@ -118,6 +127,8 @@ export class EmoticonButton extends React.Component {
             },
       success: function(data) {
         this.setState({data: data});
+        console.log("Emotion")
+        console.log(this.state.emotion)
         this.handleReactVote({post: this.props.id, emotion: this.state.emotion}) //I added the net ajax call after the success of the previous one
       }.bind(this),
       error: function(xhr, status, err) {
@@ -127,6 +138,12 @@ export class EmoticonButton extends React.Component {
 
   }
 
+/**
+ * [handleReactVote description]
+ * This is used to relate the voter with the post that he had ranked. Afte this
+ * call the loadVoterId().
+ * 
+ */
   handleReactVote(reactVote) {
     $.ajax({
       url: '/api/voter/',
@@ -137,8 +154,8 @@ export class EmoticonButton extends React.Component {
                 'Authorization': 'Token ' + localStorage.token
             },
       success: function(data) {
-        this.setState({data: data})
-        this.loadScoresFromServer()
+        this.setState({data: data});
+        this.loadVoterId ()
       }.bind(this),
       error: function(xhr, status, err) {
         console.error('/api/voter/', status, err.toString());
@@ -147,13 +164,83 @@ export class EmoticonButton extends React.Component {
 
   }
 
+/**
+ * [loadVoterId description]
+ * This is used to find the id of voter-post relation for the current user for the current post.
+ * To do this initially gets data from /api/voter/. That is all the relations voter-post for all the
+ * stories that the current user ranked. 
+ * 
+ *  Then, it runs through this data to find the relation by trying to match the current story id
+ *  with the post.id in the current relation
+ */
+   loadVoterId () {
+    $.ajax({
+      url: '/api/voter/',
+      dataType: 'json',
+      cache: false,
+      headers: {
+                'Authorization': 'Token ' + localStorage.token
+      },
+      success: function(data) {
+        this.setState({data_voter: data})
+      /* this loop is used to run through the data json array in order to find the id of post-voter
+      relation. This id is used to create the url to update the emotion in django-database */
+        for (var k=0; k<data.length; k++)
+          if (data[k].post == this.props.id){
+            this.setState({id_voter: data[k].id})
+            break
+        }
+        console.log('Id')
+        console.log(data[k].id)
+
+        /* This url address is formed in order to update the relation between the current user
+        and current story. It updates the emotion field. This field is used to determine which emoticon
+        is pressed by the current user for the current story */
+        this.url_vt = "/api/voter/" + data[k].id + "/"
+        this.updateVoterPost({emotion: this.state.emotion})
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  }
+
+/**
+ * [updateVoterPost description]
+ * This is used to update the emotion label in the relation voter-post. 
+ * 
+ */
+  updateVoterPost(updateDetails) {
+    $.ajax({
+      url: this.url_vt,
+      dataType: "text", 
+      contetType: "application/json", //when sending data to the server, use the content types
+      type: 'PUT',
+      data: updateDetails,
+      headers: {
+                'Authorization': 'Token ' + localStorage.token
+            },
+      success: function(data) {
+        this.setState({data: data});
+        this.loadScoresFromServer()
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+
+  }
+  
+  /* This is used to load the scores for the current story. It only updates the scores when the user
+  push one emoticon */
+
  loadScoresFromServer () {
     $.ajax({
       url: this.props.url,
       dataType: 'json',
       cache: false,
       success: function(data) {
-        this.setState({data: data});
+        this.setState({score: data.score, score_happy: data.score_happy, score_wow: data.score_wow, score_sad: data.score_sad})
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -217,17 +304,26 @@ export class EmoticonButton extends React.Component {
           source_to_pic = 'angry.png'
           score_to_display = highest_score[1]*/
       }
+    var emotion = 0
+
+    if (this.state.first_time == 1 ){
+      emotion = this.props.emotion
+    }
+    else
+      emotion = this.state.emotion
 
     }
+
+
 
     return (
      <div className="storyEmoticons-storyItems"> 
           <div className="box">
            <span className="imageBox" >
            {/*<span style={spanimagestyle}> <strong> {this.props.score_lol} </strong> </span> <img  onClick={this.handleLolclick}  className="storyLol-storyItems" src="/static/api/assets/img/emoticons/lol.png" />*/}
-           <span style={spanimagestyle}> <strong> {this.props.score_happy} </strong> </span> <img  onClick={this.handleSatisfiedclick}  className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" />
-           <span style={spanimagestyle}> <strong> {this.props.score_wow} </strong> </span> <img  onClick={this.handleWowclick}  className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> 
-           <span style={spanimagestyle}> <strong> {this.props.score_sad} </strong> </span> <img  onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
+           <span style={spanimagestyle}> <strong> {this.state.score_happy} </strong> </span> <img style={emotion == 2 ? imageOpacity : null}  onClick={this.handleSatisfiedclick}  className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" />
+           <span style={spanimagestyle}> <strong> {this.state.score_wow} </strong> </span> <img style = {emotion == 3 ? imageOpacity : null} onClick={this.handleWowclick}  className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> 
+           <span style={spanimagestyle}> <strong> {this.state.score_sad} </strong> </span> <img style = {emotion == 4 ? imageOpacity : null} onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> 
            {/*<span style={spanimagestyle}> <strong> {this.props.score_angry} </strong> </span> <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>*/}
            </span>
            {this.props.source=="home_list" ? <span className="imageRank"> {/* <span className="pplReacted"> <strong className="pplReacted-number"> {score_to_display} </strong> <span className="pplReacted-text"> </span> </span>*/} <img src={"/static/api/assets/img/emoticons/"+ source_to_pic}/> </span>
@@ -267,9 +363,6 @@ export class StoryItem extends React.Component {
           <div  className="storyItem-storyItems">
                   <br />                  
                   <hr />
-                  <div> {this.props.post} </div>
-                  <div> {this.props.emotion} </div>
-                  <div> {this.props.id} </div>
                   <div className = "storyTitle"> <StoryWrapTitle  title={this.props.title} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow} time_difference={this.props.time_difference}  
                   score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={this.props.url} owner={this.props.owner}/> </div>
                   <p className='snippet'> {this.props.snippet} </p>
@@ -279,7 +372,7 @@ export class StoryItem extends React.Component {
                   <p className="storySubtitle-storyItems" > {x} </p>
                   <hr />
                   <EmoticonButton  id={this.props.id} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow}  
-                  score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={"/api/post/" + this.props.id + "/"} url_voter="/api/voter/" score_display={this.props.score_display}source={this.props.source}/>
+                  score_happy={this.props.score_happy} score_angry={this.props.score_angry} score_sad={this.props.score_sad} url={"/api/post/" + this.props.id + "/"} url_voter="/api/voter/" score_display={this.props.score_display}source={this.props.source} emotion={this.props.emotion}/>
           </div>
           <hr />
           <p className="storyItem-br"/>
