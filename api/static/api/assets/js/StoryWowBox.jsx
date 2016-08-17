@@ -8,6 +8,7 @@ class StoryWowBox extends React.Component {
     super();
     this.state = {data: []}
     this.loadDataFromServer = this.loadDataFromServer.bind(this)
+    this.loadVoterData = this.loadVoterData.bind(this)
   }
 
   loadDataFromServer () {
@@ -17,6 +18,7 @@ class StoryWowBox extends React.Component {
       cache: false,
       success: function(data) {
         this.setState({data: data});
+        this.loadVoterData();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -24,7 +26,7 @@ class StoryWowBox extends React.Component {
     });
   }
 
-  
+
 /* This is used to attach the emotion label to each fetched story from the django database for the current
 authenticated user. This helps to find which stories have been ranked by the current user.
 */
