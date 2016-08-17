@@ -130,6 +130,7 @@ export class EmoticonButton extends React.Component {
         console.log("Emotion")
         console.log(this.state.emotion)
         this.handleReactVote({post: this.props.id, emotion: this.state.emotion}) //I added the net ajax call after the success of the previous one
+        this.loadScoresFromServer()
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -140,8 +141,8 @@ export class EmoticonButton extends React.Component {
 
 /**
  * [handleReactVote description]
- * This is used to relate the voter with the post that he had ranked. Afte this
- * call the loadVoterId().
+ * This is used to relate the voter with the post that he had ranked. After this
+ * calls the loadVoterId().
  * 
  */
   handleReactVote(reactVote) {
@@ -222,7 +223,6 @@ export class EmoticonButton extends React.Component {
             },
       success: function(data) {
         this.setState({data: data});
-        this.loadScoresFromServer()
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -304,14 +304,26 @@ export class EmoticonButton extends React.Component {
           source_to_pic = 'angry.png'
           score_to_display = highest_score[1]*/
       }
-    var emotion = 0
 
-    if (this.state.first_time == 1 ){
-      emotion = this.props.emotion
+    // This logic is used to find the correct variable value for emotion. Emotion
+    // is then used to make lighter the correct emoticon icon. The lighter emoticon 
+    // shows the last selection of the user.
+    //  
+    // It also checks that the user is authenticated. Otherwise it sets the emotion variable to
+    // zero.
+    if (localStorage.token) {
+      var emotion = 0
+
+      if (this.state.first_time == 1 ){
+        emotion = this.props.emotion
+      }
+      else
+        emotion = this.state.emotion
+
+      }
     }
-    else
-      emotion = this.state.emotion
-
+    else {
+      emotion = 0;
     }
 
 
