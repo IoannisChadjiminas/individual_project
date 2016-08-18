@@ -22,6 +22,7 @@ class StorySubmit extends React.Component {
             },
       success: function(data) {
         this.setState({data: data});
+        this.setState({many_request_error:false})
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url_post, status, err.toString());

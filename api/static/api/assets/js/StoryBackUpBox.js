@@ -6,7 +6,6 @@ var StoryHappyList = require('./StoryList').StoryHappyList
 var StoryWowList = require('./StoryList').StoryWowList
 var StorySadList = require('./StoryList').StorySadList
 var StoryAngryList = require('./StoryList').StoryAngryList
-var StoryForm = require('./StoryForm')
 
 class StoryBox extends React.Component {
   constructor(){

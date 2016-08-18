@@ -77,7 +77,7 @@ var imageOpacity = {
 export class EmoticonButton extends React.Component {
   constructor(){
     super()
-    this.state = {first_time: 1, score_happy: 0, score_wow:0, score_sad:0, score:0, emotion:0, data_voter:[], id_voter: []}
+    this.state = {first_time: 1, score_happy: 0, score_wow:0, score_sad:0, score:0, emotion:0, data_voter:[], id_voter: [], render_story:true}
     this.handleSatisfiedclick = this.handleSatisfiedclick.bind(this)
     this.handleWowclick = this.handleWowclick.bind(this)
     this.handleCryclick = this.handleCryclick.bind(this)
@@ -92,26 +92,26 @@ export class EmoticonButton extends React.Component {
 
   componentDidMount(){
     this.setState({score: this.props.score, score_happy: this.props.score_happy,
-      score_wow: this.props.score_wow, score_sad: this.props.score_sad, emotion: this.props.emotion})
+      score_wow: this.props.score_wow, score_sad: this.props.score_sad, emotion: this.props.emotion, render_story:true})
   }
   
 
   handleSatisfiedclick() {
     this.state.first_time = 0
     this.setState({score_happy: this.state.score_happy, score:this.state.score, emotion:2})
-    this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:2})
+    this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:2, render_story:true})
   }
 
   handleWowclick() {
     this.state.first_time = 0
     this.setState({wow: this.state.score_wow, total:this.state.score, emotion:3})
-    this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:3})
+    this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:3, render_story:true})
   }
 
   handleCryclick() {
     this.state.first_time = 0
     this.setState({sad: this.state.score_sad, total:this.state.score, emotion:4})
-    this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:4})
+    this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:4, render_story:true})
   }
 
 /* This is used to update the current story with the new score */
@@ -467,7 +467,7 @@ export class StorySadList extends React.Component {
           {this.props.data.map(function(story){
             return story.score_sad> story.score_happy && story.score_sad>= story.score_wow?
               <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
-                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score_sad} time_difference={story.time_difference} img_src={story.image_src} snippet={story.snippet} source={'cry.png'} emotion={story.emotion} post={story.post}/>
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score_sad} time_difference={story.time_difference} img_src={story.image_src} snippet={story.snippet} source={'cry.png'} emotion={story.emotion} post={story.post} />
               : <span key={story.id}  />
           })}
       </div>

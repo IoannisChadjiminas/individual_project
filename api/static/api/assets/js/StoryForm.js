@@ -18,7 +18,7 @@ var imgwidth = {
 class StoryForm extends React.Component {
     constructor(){
       super()
-      this.state={title:'', url: '', score_lol:'', score_happy:'', score_wow:'', score_sad:'', score_angry:'', url_format:false}
+      this.state={title:'', url: '', score_lol:'', score_happy:'', score_wow:'', score_sad:'', score_angry:'', render_story:false, url_format:false}
       this.handleTitleChange = this.handleTitleChange.bind(this)
       this.handleUrlChange = this.handleUrlChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
@@ -35,23 +35,23 @@ class StoryForm extends React.Component {
     }
 
     handleLolChange(event) {
-      this.setState({score_lol:'1', score_happy:'0', score_wow:'0', score_sad:'0', score_angry:'0'})
+      this.setState({score_lol:'1', score_happy:'0', score_wow:'0', score_sad:'0', score_angry:'0', render_story:false})
     }
 
     handleHappyChange(event) {
-      this.setState({score_lol:'0', score_happy:'1', score_wow:'0', score_sad:'0', score_angry:'0'})
+      this.setState({score_lol:'0', score_happy:'1', score_wow:'0', score_sad:'0', score_angry:'0', render_story:false})
     }
 
     handleWowChange(event) {
-      this.setState({score_lol:'0', score_happy:'0', score_wow:'1', score_sad:'0', score_angry:'0'})
+      this.setState({score_lol:'0', score_happy:'0', score_wow:'1', score_sad:'0', score_angry:'0', render_story:false})
     }
 
     handleSadChange(event) {
-      this.setState({score_lol:'0', score_happy:'0', score_wow:'0', score_sad:'1', score_angry:'0'})
+      this.setState({score_lol:'0', score_happy:'0', score_wow:'0', score_sad:'1', score_angry:'0', render_story:false})
     }
 
     handleAngryChange(event) {
-      this.setState({score_lol:'0', score_happy:'0', score_wow:'0', score_sad:'0', score_angry:'1'})
+      this.setState({score_lol:'0', score_happy:'0', score_wow:'0', score_sad:'0', score_angry:'1', render_story:false})
     }
 
     handleUrlChange(event) {
@@ -67,6 +67,7 @@ class StoryForm extends React.Component {
       var score_wow = this.state.score_wow
       var score_sad = this.state.score_sad
       var score_angry = this.state.score_angry
+      var render_story = this.state.render_story
 
       //var regex = RegExp("^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$")
       //url_validation
@@ -114,15 +115,14 @@ class StoryForm extends React.Component {
         return;
       }
    
-      this.props.onStorySubmit({title:title, url:url, score_lol:score_lol, score_happy:score_happy, score_wow:score_wow, score_sad:score_sad, score_angry:score_angry})
+      this.props.onStorySubmit({title:title, url:url, score_lol:score_lol, score_happy:score_happy, score_wow:score_wow, score_sad:score_sad, score_angry:score_angry, render_story:render_story})
       
-      this.setState({title:'', url: '', score_lol:'', score_happy:'', score_wow:'', score_sad:'', score_angry:'', url_format:false})
-
+      this.setState({title:'', url: '', score_lol:'', score_happy:'', score_wow:'', score_sad:'', score_angry:'', render_story:false, url_format:false})
+      
     }
 
     
     render() {
-      console.log(this.state.score_lol, this.state.score_happy, this.state.score_sad, this.state.score_wow, this.state.score_angry)
        return ( 
 
           <Form horizontal onSubmit={this.handleSubmit}>
@@ -161,7 +161,7 @@ class StoryForm extends React.Component {
             </Button>
             </FormGroup>
             <FormGroup>
-              {this.props.many_request_error ? <p> Too many posts for today! </p> : <span />}
+              {this.props.many_request_error ? <p> There was a problem! - the story has been already uploaded (or you have already uploaded many stories today!)  - </p> : <span />}
             </FormGroup>
             <FormGroup>
               {this.state.url_format && <p style={wrongUrl} > One field seems to be incorrect! </p>}

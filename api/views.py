@@ -18,8 +18,15 @@ class PostList(generics.ListAPIView):
     '''
     View to list a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score', '-published_date')
     serializer_class = PostSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the currently user rankedstories
+        for the currently authenticated user.
+        """
+
+        return Post.objects.filter(render_story=True).order_by('-score', '-published_date')
 
 
 class PostCreate(generics.CreateAPIView):
@@ -32,6 +39,9 @@ class PostCreate(generics.CreateAPIView):
 
     # when a post is created is associated with the authenticated author
     def perform_create(self, serializer):
+        queryset = Post.objects.filter(url=self.request.data['url'])
+        if (queryset.exists()):
+            raise ValidationError('You have already posted this item')
         serializer.save(owner=self.request.user)
 
 
@@ -63,24 +73,45 @@ class PostHappyList(generics.ListAPIView):
     '''
     View to list a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_happy', '-published_date')
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the currently user rankedstories
+        for the currently authenticated user.
+        """
+        return Post.objects.filter(render_story=True).order_by('-score_happy', '-published_date')
 
 
 class PostWowList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_wow', '-published_date')
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the currently user rankedstories
+        for the currently authenticated user.
+        """
+        return Post.objects.filter(render_story=True).order_by('-score_wow', '-published_date')
 
 
 class PostSadList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    queryset = Post.objects.all().order_by('-score_sad', '-published_date')
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the currently user rankedstories
+        for the currently authenticated user.
+        """
+        return Post.objects.filter(render_story=True).order_by('-score_sad', '-published_date')
 
 
 class PostAngryList(generics.ListAPIView):
@@ -95,7 +126,33 @@ class PostTimePublishedList(generics.ListAPIView):
     '''
     View to list or create a post in the system
     '''
-    queryset = Post.objects.all().order_by('-published_date')
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the currently user rankedstories
+        for the currently authenticated user.
+        """
+        return Post.objects.filter(render_story=True).order_by('-published_date')
+
+
+class PostSubmittedByUser(generics.ListAPIView):
+    permission_classes = (IsAdminUser,)
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the currently user rankedstories
+        for the currently authenticated user.
+        """
+        return Post.objects.filter(render_story=False)
+
+
+class PostSubmittedByUserDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAdminUser,)
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
 
 

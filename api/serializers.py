@@ -13,7 +13,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ('id', 'enable_score', 'owner', 'title', 'post_type',
                   'score', 'score_angry', 'score_sad', 'snippet', 'text',
                   'score_wow', 'score_lol', 'score_happy', 'url',
-                  'published_date', 'time_difference', 'image_src')
+                  'published_date', 'time_difference', 'image_src', 'render_story')
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -13,6 +13,8 @@ urlpatterns = [
     url(r'^post_scraper/$', views.PostScraperCreate.as_view()),
     url(r'^post_home/$', views.PostList.as_view()),
     url(r'^post/(?P<pk>[0-9]+)/$', views.PostDetail.as_view()),
+    url(r'^post_user/$', views.PostSubmittedByUser.as_view()),
+    url(r'^post_user/(?P<pk>[0-9]+)/$', views.PostSubmittedByUserDetail.as_view()),
     url(r'^post_lol/$', views.PostLolList.as_view()),
     url(r'^post_happy/$', views.PostHappyList.as_view()),
     url(r'^post_wow/$', views.PostWowList.as_view()),

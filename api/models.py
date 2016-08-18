@@ -21,6 +21,7 @@ class Post (models.Model):
     published_date = models.DateTimeField(auto_now_add=True)
     time_difference = models.IntegerField(default=0)
     image_src = models.URLField(max_length=200, default='url')
+    render_story = models.BooleanField(default=True)
 
     def get_time_diff(self):
         if self.published_date:
