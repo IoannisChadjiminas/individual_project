@@ -30,8 +30,8 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 
 #SECRET_KEY = "245r22q435135542332"
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = False
-DEBUG = True
+DEBUG = False
+#DEBUG = True
 
 
 # Application definition
@@ -160,13 +160,13 @@ WEBPACK_LOADER = {
     }
 }
 
-#if not DEBUG:
-WEBPACK_LOADER.update({
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'api/assets/dist/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json')
-        }
-    })
+if not DEBUG:
+    WEBPACK_LOADER.update({
+        'DEFAULT': {
+            'BUNDLE_DIR_NAME': 'api/assets/dist/',
+            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-prod.json')
+            }
+     })
 
 # REST_FRAMEWORK = {
 #    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
@@ -183,4 +183,10 @@ REST_FRAMEWORK = {
         'anon': '10/day',
         'user': '5/day',
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
 }
