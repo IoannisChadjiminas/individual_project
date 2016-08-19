@@ -11,6 +11,10 @@ var wrongUrl = {
   color:'red'
 }
 
+var wrongDetail = {
+  color:'red'
+}
+
 var storySubmitted = {
   color: 'blue'
 }
@@ -164,13 +168,13 @@ class StoryForm extends React.Component {
             </Button>
             </FormGroup>
             <FormGroup>
-              {this.props.many_request_error ? <p> There was a problem! - the story has been already uploaded (or you have already uploaded many stories today!)  - </p> : <span />}
+              {this.props.many_request_error ? <p style = {wrongDetail} > There was a problem! <br /> <b> The story has been already uploaded (or you have already uploaded many stories today!) </b> </p> : <span />}
             </FormGroup>
             <FormGroup>
               {this.state.url_format && <p style={wrongUrl} > One field seems to be incorrect! </p>}
             </FormGroup>
-            <FormGroup>
-              {this.props.story_submitted ? <p style={storySubmitted}> Your story has been submitted - Please wait for approval </p> : <span /> }
+            <FormGroup>   
+              {this.props.story_submitted ? <p style={storySubmitted}> Your story has been submitted! <br /> Once has been approved, it will be shown in the website interface! </p> : <span /> }
             </FormGroup>
           </Form>
         )
