@@ -28,6 +28,7 @@ class StorySubmit extends React.Component {
       error: function(xhr, status, err) {
         console.error(this.props.url_post, status, err.toString());
         this.setState({many_request_error:true})
+        this.setState({story_submitted:false})
       }.bind(this)
     });
 
