@@ -114,8 +114,7 @@ class StoryForm extends React.Component {
               "(?:[/?#]\\S*)?" +
             "$", "i"
           );
-      console.log(re_weburl.test(url))
-      
+
 
       if (!title || !url || !re_weburl.test(url) || !(score_lol && score_happy && score_wow && score_sad && score_angry )) {
         this.setState({url_format:true})
@@ -130,6 +129,9 @@ class StoryForm extends React.Component {
 
     
     render() {
+      console.log(this.state.url_format)
+      console.log(this.props.many_request_error)
+      console.log(this.props.story_submitted)
        return ( 
 
           <Form horizontal onSubmit={this.handleSubmit}>
