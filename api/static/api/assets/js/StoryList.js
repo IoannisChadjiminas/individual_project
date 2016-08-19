@@ -145,6 +145,7 @@ export class EmoticonButton extends React.Component {
  * calls the loadVoterId().
  * 
  */
+
   handleReactVote(reactVote) {
     $.ajax({
       url: '/api/voter/',
@@ -275,6 +276,11 @@ export class EmoticonButton extends React.Component {
     return sortable[0]
 
   }
+
+
+componentDidUpdate() {
+  console.log('HELLO')
+}
 
 
   render() {
