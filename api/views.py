@@ -192,13 +192,11 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
                     serializer.save(score=int(self.request.data['score']), score_sad=int(self.request.data['score_sad']))
         else:
             if int(self.request.data['emotion']) == 2:
-                serializer.save(score=int(self.request.data['score'])+1, score_happy=post.score_happy +1)
+                serializer.save(score=int(self.request.data['score'])+1, score_happy=post.score_happy +1, sa_sh=post.score_happy)
             elif int(self.request.data['emotion']) == 3:
-                serializer.save(score=int(self.request.data['score'])+1, score_wow=post.score_wow +1)
+                serializer.save(score=int(self.request.data['score'])+1, score_wow=post.score_wow +1, sa_sw=post.score_wow)
             elif int(self.request.data['emotion']) == 4:
-                serializer.save(score=int(self.request.data['score'])+1, score_sad=post.score_sad +1)
-
-
+                serializer.save(score=int(self.request.data['score'])+1, score_sad=post.score_sad +1, sa_ss=post.score_sad)
     '''
     def perform_update(self, serializer):
         post = Post.objects.get(pk=self.kwargs['pk'])
