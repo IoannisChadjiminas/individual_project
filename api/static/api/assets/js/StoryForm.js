@@ -168,13 +168,9 @@ class StoryForm extends React.Component {
             </Button>
             </FormGroup>
             <FormGroup>
-              {this.props.many_request_error ? <p> <p style = {wrongDetail} > <b> There was a problem! </b> </p> <p> - <b> The story has been already uploaded! </b> </p> <p> - <b> Or, You have excited the limit of five stories per day </b> </p> </p>: <span />}
-            </FormGroup>
-            <FormGroup>
-              {this.state.url_format && <p style={wrongUrl} > <b> One field seems to be incorrect! </b> </p>}
-            </FormGroup>
-            <FormGroup>   
-              {this.props.story_submitted ? <p> <p style={storySubmitted}> <b> Your story has been submitted! </b> </p> <p> <b> Once has been approved, it will be shown on the website interface! </b> </p> </p> : <span /> }
+              {this.props.many_request_error ? <p> <p style = {wrongDetail} > <b> There was a problem! </b> </p> <p> - <b> The story has been already uploaded! </b> </p> <p> - <b> Or, You have exceeded the limit of five stories per day </b> </p> </p>: <span />}
+              {this.state.url_format && !this.props.story_submitted && !this.props.many_request_error && <p style={wrongUrl} > <b> One field seems to be incorrect! </b> </p>} 
+              {this.props.story_submitted && !this.props.url_format && !this.props.many_request_error ? <p> <p style={storySubmitted}> <b> Your story has been submitted! </b> </p> <p> <b> Once has been approved, it will be shown on the website's interface! </b> </p> </p> : <span /> }
             </FormGroup>
           </Form>
         )
