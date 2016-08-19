@@ -130,7 +130,6 @@ export class EmoticonButton extends React.Component {
         console.log("Emotion")
         console.log(this.state.emotion)
         this.handleReactVote({post: this.props.id, emotion: this.state.emotion}) //I added the net ajax call after the success of the previous one
-        this.loadScoresFromServer()
 
       }.bind(this),
       error: function(xhr, status, err) {
@@ -224,6 +223,7 @@ export class EmoticonButton extends React.Component {
             },
       success: function(data) {
         this.setState({data: data});
+        this.loadScoresFromServer()
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
