@@ -174,7 +174,9 @@ if not DEBUG:
 # }
 
 REST_FRAMEWORK = {
-
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
 }
 
 REST_FRAMEWORK = {
@@ -188,7 +190,4 @@ REST_FRAMEWORK = {
         'user': '5/day',
     }
 
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    )
 }
