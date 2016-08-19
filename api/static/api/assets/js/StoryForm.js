@@ -11,6 +11,9 @@ var wrongUrl = {
   color:'red'
 }
 
+var storySubmitted = {
+  color: 'blue'
+}
 var imgwidth = {
   height:'20px',
   width:'20px'
@@ -165,6 +168,9 @@ class StoryForm extends React.Component {
             </FormGroup>
             <FormGroup>
               {this.state.url_format && <p style={wrongUrl} > One field seems to be incorrect! </p>}
+            </FormGroup>
+            <FormGroup>
+              {this.props.story_submitted} <p style={storySubmitted}> Your story has been submitted - Please wait for approval </p> }
             </FormGroup>
           </Form>
         )
