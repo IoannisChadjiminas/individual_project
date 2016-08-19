@@ -168,7 +168,7 @@ class StoryForm extends React.Component {
             </Button>
             </FormGroup>
             <FormGroup>
-              {this.props.many_request_error ? <p style = {wrongDetail} > There was a problem! <br /> <b> The story has been already uploaded (or you have already uploaded many stories today!) </b> </p> : <span />}
+              {this.props.many_request_error ? <p> <p style = {wrongDetail} > There was a problem! </p> <br /> <b> The story has been already uploaded (or you have already uploaded many stories today!) </b> </p> : <span />}
             </FormGroup>
             <FormGroup>
               {this.state.url_format && <p style={wrongUrl} > One field seems to be incorrect! </p>}
