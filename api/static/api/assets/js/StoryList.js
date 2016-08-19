@@ -224,6 +224,7 @@ export class EmoticonButton extends React.Component {
             },
       success: function(data) {
         this.setState({data: data});
+        this.setState({hide:1})
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -242,7 +243,7 @@ export class EmoticonButton extends React.Component {
       cache: false,
       success: function(data) {
         this.setState({score: data.score, score_happy: data.score_happy, score_wow: data.score_wow, score_sad: data.score_sad})
-        this.setState({hide:1})
+        
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -340,7 +341,7 @@ export class EmoticonButton extends React.Component {
            {/*<span style={spanimagestyle}> <strong> {this.props.score_lol} </strong> </span> <img  onClick={this.handleLolclick}  className="storyLol-storyItems" src="/static/api/assets/img/emoticons/lol.png" />*/}
            {this.state.hide == 1 ? <span><span style={spanimagestyle}> <strong> {this.state.score_happy} </strong> </span> <img style={emotion == 2 ? imageOpacity : null} onClick={this.handleSatisfiedclick} className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" /> </span>: <span><span style={spanimagestyle}> <strong> {this.state.score_happy} </strong> </span> <img style={emotion == 2 ? imageOpacity : null} className="storySatisfied-storyItems" src="/static/api/assets/img/emoticons/happy.png" /> </span>}
            {this.state.hide == 1 ? <span> <span style={spanimagestyle}> <strong> {this.state.score_wow} </strong> </span> <img style = {emotion == 3 ? imageOpacity : null} onClick={this.handleWowclick}  className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> </span> : <span> <span style={spanimagestyle}> <strong> {this.state.score_wow} </strong> </span> <img style = {emotion == 3 ? imageOpacity : null} className="storyWow-storyItems" src="/static/api/assets/img/emoticons/wow.png"/> </span>}
-           {this.state.hide == 1 ? <span> <span style={spanimagestyle}> <strong> {this.state.score_sad} </strong> </span> <img style = {emotion == 4 ? imageOpacity : null} onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> </span> : <span> <span style={spanimagestyle}> <strong> {this.state.score_sad} </strong> </span> <img style = {emotion == 4 ? imageOpacity : null} onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> </span>}
+           {this.state.hide == 1 ? <span> <span style={spanimagestyle}> <strong> {this.state.score_sad} </strong> </span> <img style = {emotion == 4 ? imageOpacity : null} onClick={this.handleCryclick}  className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> </span> : <span> <span style={spanimagestyle}> <strong> {this.state.score_sad} </strong> </span> <img style = {emotion == 4 ? imageOpacity : null} className="storyCry-storyItems" src="/static/api/assets/img/emoticons/cry.png" /> </span>}
            {/*<span style={spanimagestyle}> <strong> {this.props.score_angry} </strong> </span> <img  onClick={this.handleAngryclick}  className="storyAngry-storyItems" src="/static/api/assets/img/emoticons/angry.png"/>*/}
            </span>
            {this.props.source=="home_list" ? <span className="imageRank"> {/* <span className="pplReacted"> <strong className="pplReacted-number"> {score_to_display} </strong> <span className="pplReacted-text"> </span> </span>*/} <img src={"/static/api/assets/img/emoticons/"+ source_to_pic}/> </span>
