@@ -170,7 +170,7 @@ class StoryForm extends React.Component {
               {this.state.url_format && <p style={wrongUrl} > One field seems to be incorrect! </p>}
             </FormGroup>
             <FormGroup>
-              {this.props.story_submitted} <p style={storySubmitted}> Your story has been submitted - Please wait for approval </p> }
+              {this.props.story_submitted ? <p style={storySubmitted}> Your story has been submitted - Please wait for approval </p> : <span /> }
             </FormGroup>
           </Form>
         )
