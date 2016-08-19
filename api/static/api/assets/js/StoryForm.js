@@ -132,6 +132,16 @@ class StoryForm extends React.Component {
       console.log(this.state.url_format)
       console.log(this.props.many_request_error)
       console.log(this.props.story_submitted)
+      var message;
+      if (this.state.url_format)
+          message =  <p style={wrongUrl} > <b> One field seems to be incorrect! </b> </p>
+      else if (this.props.many_request_error && !this.state.url_format && !this.props.story_submitted)
+          message = <p> <p style = {wrongDetail} > <b> There was a problem! </b> </p> <p> - <b> The story has been already uploaded! </b> </p> <p> - <b> Or, You have exceeded the limit of five stories per day </b> </p> </p>
+      else if (this.props.story_submitted && !this.props.url_format && !this.props.many_request_error)
+          message =  <p> <p style={storySubmitted}> <b> Your story has been submitted! </b> </p> <p> <b> Once has been approved, it will be shown on the website's interface! </b> </p> </p>
+      else
+        message = <span />
+      
        return ( 
 
           <Form horizontal onSubmit={this.handleSubmit}>
@@ -170,9 +180,7 @@ class StoryForm extends React.Component {
             </Button>
             </FormGroup>
             <FormGroup>
-              {this.state.url_format && !this.props.story_submitted && <p style={wrongUrl} > <b> One field seems to be incorrect! </b> </p>}  
-              {this.props.many_request_error && !this.state.url_format && !this.props.story_submitted  ? <p> <p style = {wrongDetail} > <b> There was a problem! </b> </p> <p> - <b> The story has been already uploaded! </b> </p> <p> - <b> Or, You have exceeded the limit of five stories per day </b> </p> </p>: <span />}
-              {this.props.story_submitted && !this.props.url_format && !this.props.many_request_error ? <p> <p style={storySubmitted}> <b> Your story has been submitted! </b> </p> <p> <b> Once has been approved, it will be shown on the website's interface! </b> </p> </p> : <span /> }
+              <p> {message} </p>
             </FormGroup>
           </Form>
         )
