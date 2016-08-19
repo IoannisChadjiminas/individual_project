@@ -377,9 +377,6 @@ export class StoryItem extends React.Component {
       return(  
         <div>
           <div  className="storyItem-storyItems">
-                  <p> {this.props.sa_sh} </p>
-                  <p> {this.props.sa_sw} </p>
-                  <p> {this.props.sa_ss} </p>
                   <br />                  
                   <hr />
                   <div className = "storyTitle"> <StoryWrapTitle  title={this.props.title} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow} time_difference={this.props.time_difference}  
