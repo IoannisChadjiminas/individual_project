@@ -133,6 +133,7 @@ class StoryForm extends React.Component {
       console.log(this.props.many_request_error)
       console.log(this.props.story_submitted)
       var message;
+      
       if (this.state.url_format)
           message =  <p style={wrongUrl} > <b> One field seems to be incorrect! </b> </p>
       else if (this.props.many_request_error && !this.state.url_format && !this.props.story_submitted)
