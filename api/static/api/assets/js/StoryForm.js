@@ -174,7 +174,7 @@ class StoryForm extends React.Component {
               {this.state.url_format && <p style={wrongUrl} > One field seems to be incorrect! </p>}
             </FormGroup>
             <FormGroup>   
-              {this.props.story_submitted ? <p style={storySubmitted}> Your story has been submitted! <br /> Once has been approved, it will be shown on the website interface! </p> : <span /> }
+              {this.props.story_submitted ? <p> <p style={storySubmitted}> Your story has been submitted! </p> <p> Once has been approved, it will be shown on the website interface! </p> </p> : <span /> }
             </FormGroup>
           </Form>
         )
