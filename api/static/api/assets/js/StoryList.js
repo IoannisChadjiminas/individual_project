@@ -377,6 +377,9 @@ export class StoryItem extends React.Component {
       return(  
         <div>
           <div  className="storyItem-storyItems">
+                  <p> {this.props.sa_sh} </p>
+                  <p> {this.props.sa_sw} </p>
+                  <p> {this.props.sa_ss} </p>
                   <br />                  
                   <hr />
                   <div className = "storyTitle"> <StoryWrapTitle  title={this.props.title} score={this.props.score} score_lol={this.props.score_lol} score_wow={this.props.score_wow} time_difference={this.props.time_difference}  
@@ -403,7 +406,7 @@ export class StoryList extends React.Component {
       <div className="storyList">
           {this.props.data.map(function(story){
               return <StoryItem key={story.id} id={story.id} score={story.score} score_lol={story.score_lol} score_wow={story.score_wow}  
-                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score} time_difference={story.time_difference} img_src={story.image_src} snippet={story.snippet} source={'home_list'} emotion={story.emotion} post={story.post}/>
+                score_happy={story.score_happy} score_angry={story.score_angry} score_sad={story.score_sad} title={story.title} url={story.url} owner={story.owner} score_display={story.score} time_difference={story.time_difference} img_src={story.image_src} snippet={story.snippet} source={'home_list'} emotion={story.emotion} post={story.post} sa_sh={story.sa_sh} sa_sw={story.sa_sw} sa_ss={story.sa_ss}/>
           })}
       </div>
 
