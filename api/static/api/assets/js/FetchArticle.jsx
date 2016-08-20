@@ -82,14 +82,23 @@ loadDataFromAzureServer (crawl_data) {
          */
       if (data.Score >= 0.85) {
         crawl_data.score_happy = 1;
+        crawl_data['sa_sh'] = 1
+        crawl_data['sa_sw'] = 0
+        crawl_data['sa_ss'] = 0
       }
 
       else if (data.Score >=0.40 && data.Score < 0.85) {
         crawl_data.score_wow = 1;
+        crawl_data['sa_sh'] = 0
+        crawl_data['sa_sw'] = 1
+        crawl_data['sa_ss'] = 0
       }
 
       else {
         crawl_data.score_sad = 1;
+        crawl_data['sa_sh'] = 0
+        crawl_data['sa_sw'] = 0
+        crawl_data['sa_ss'] = 1
       }
 
 

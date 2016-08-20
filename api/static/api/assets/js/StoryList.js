@@ -127,8 +127,6 @@ export class EmoticonButton extends React.Component {
             },
       success: function(data) {
         this.setState({data: data});
-        console.log("Emotion")
-        console.log(this.state.emotion)
         this.handleReactVote({post: this.props.id, emotion: this.state.emotion}) //I added the net ajax call after the success of the previous one
         this.loadScoresFromServer()
 
@@ -192,9 +190,6 @@ export class EmoticonButton extends React.Component {
             this.setState({id_voter: data[k].id})
             break
         }
-        console.log('Id')
-        console.log(data[k].id)
-
         /* This url address is formed in order to update the relation between the current user
         and current story. It updates the emotion field. This field is used to determine which emoticon
         is pressed by the current user for the current story */
