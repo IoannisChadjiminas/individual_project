@@ -98,7 +98,7 @@ export class EmoticonButton extends React.Component {
 
   handleSatisfiedclick() {
     this.state.first_time = 0
-    this.setState({score_happy: this.state.score_happy, score:this.state.score, emotion:2})
+    this.setState({score_happy: this.state.score_happy, score:this.state.score, emotion:2, hide:0})
     this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:2, render_story:true})
   }
 
@@ -110,7 +110,7 @@ export class EmoticonButton extends React.Component {
 
   handleCryclick() {
     this.state.first_time = 0
-    this.setState({sad: this.state.score_sad, total:this.state.score, emotion:4})
+    this.setState({sad: this.state.score_sad, total:this.state.score, emotion:4, hide:0})
     this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:4, render_story:true})
   }
 
