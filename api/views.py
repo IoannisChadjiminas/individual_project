@@ -10,7 +10,7 @@ from api.permissions import IsOwnerOrReadOnly
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from rest_framework.response import Response
 from django.core.exceptions import ValidationError
-
+from rest_framework.renderers import JSONRenderer
 # Create your views here.
 
 
@@ -19,7 +19,7 @@ class PostList(generics.ListAPIView):
     View to list a post in the system
     '''
     serializer_class = PostSerializer
-
+    renderer_classes = [JSONRenderer]
     def get_queryset(self):
         """
         This view should return a list of all the currently user rankedstories
@@ -35,7 +35,8 @@ class PostCreate(generics.CreateAPIView):
     '''
     permission_classes = (IsAuthenticated,)
     serializer_class = PostSerializer
-    # throttle_classes = (UserRateThrottle,)
+    throttle_classes = (UserRateThrottle,)
+    renderer_classes = [JSONRenderer]
 
     # when a post is created is associated with the authenticated author
     def perform_create(self, serializer):
@@ -52,6 +53,7 @@ class PostScraperCreate(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,)
     permission_classes = (IsAdminUser,)
     serializer_class = PostSerializer
+    renderer_classes = [JSONRenderer]
     # when a post is created is associated with the authenticated author
 
     def perform_create(self, serializer):
@@ -67,6 +69,7 @@ class PostLolList(generics.ListAPIView):
     '''
     queryset = Post.objects.all().order_by('-score_lol', '-published_date')
     serializer_class = PostSerializer
+    renderer_classes = [JSONRenderer]
 
 
 class PostHappyList(generics.ListAPIView):
@@ -75,6 +78,7 @@ class PostHappyList(generics.ListAPIView):
     '''
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    renderer_classes = [JSONRenderer]
 
     def get_queryset(self):
         """
@@ -90,6 +94,7 @@ class PostWowList(generics.ListAPIView):
     '''
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    renderer_classes = [JSONRenderer]
 
     def get_queryset(self):
         """
@@ -105,6 +110,7 @@ class PostSadList(generics.ListAPIView):
     '''
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    renderer_classes = [JSONRenderer]
 
     def get_queryset(self):
         """
@@ -120,6 +126,7 @@ class PostAngryList(generics.ListAPIView):
     '''
     queryset = Post.objects.all().order_by('-score_angry', '-published_date')
     serializer_class = PostSerializer
+    renderer_classes = [JSONRenderer]
 
 
 class PostTimePublishedList(generics.ListAPIView):
@@ -128,6 +135,7 @@ class PostTimePublishedList(generics.ListAPIView):
     '''
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    renderer_classes = [JSONRenderer]
 
     def get_queryset(self):
         """
@@ -141,6 +149,7 @@ class PostSubmittedByUser(generics.ListAPIView):
     permission_classes = (IsAdminUser,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    renderer_classes = [JSONRenderer]
 
     def get_queryset(self):
         """
@@ -154,18 +163,21 @@ class PostSubmittedByUserDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminUser,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    renderer_classes = [JSONRenderer]
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)  # IsOwnerOrReadOnly
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    renderer_classes = [JSONRenderer]
     
     # When performing PUT through AJAX I am checking if there is a relation between the current post and
     # the current user. If there is not, then I increase the counter by one.
 #int(self.request.data['score_happy'])
     def perform_update(self, serializer):
         post = Post.objects.get(pk=self.kwargs['pk'])
+        renderer_classes = [JSONRenderer]
 
         if Voter.objects.filter(post=post.id, user=self.request.user).exists():
             voter_relation = Voter.objects.get(post=post.id, user=self.request.user)
@@ -212,6 +224,7 @@ class VoterList(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Voter.objects.all()
     serializer_class = VoterSerializer
+    renderer_classes = [JSONRenderer]
 
     #When user press an emoji button it saves the relation user-post to database
     #in order to restrict user to like more than one time a specific post
@@ -234,6 +247,7 @@ class VoterList(generics.ListCreateAPIView):
 class VoterDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Voter.objects.all()
     serializer_class = VoterSerializer
+    renderer_classes = [JSONRenderer]
 
     def perform_update(self, serializer):
         serializer.save(emotion=self.request.data['emotion'])
@@ -246,6 +260,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (IsAdminUser,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    renderer_classes = [JSONRenderer]
 
 
 class CreateUserView(generics.CreateAPIView):
@@ -255,3 +270,4 @@ class CreateUserView(generics.CreateAPIView):
     model = get_user_model()
     permission_classes = (AllowAny,)
     serializer_class = UserSerializer
+    renderer_classes = [JSONRenderer]
