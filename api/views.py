@@ -149,7 +149,6 @@ class PostSubmittedByUser(generics.ListAPIView):
     permission_classes = (IsAdminUser,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    renderer_classes = [JSONRenderer]
 
     def get_queryset(self):
         """
@@ -163,7 +162,6 @@ class PostSubmittedByUserDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminUser,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    renderer_classes = [JSONRenderer]
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
