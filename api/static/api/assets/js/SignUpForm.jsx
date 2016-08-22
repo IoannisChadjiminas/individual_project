@@ -45,7 +45,6 @@ class SignUpForm extends React.Component {
     handleSubmit (event) {
         event.preventDefault();
         var username = this.state.username.trim()
-        console.log(this.state.username.trim())
         var password = this.state.password.trim()
         if (!username || !password) {
             return;
