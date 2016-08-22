@@ -45,6 +45,7 @@ class SignUpForm extends React.Component {
     handleSubmit (event) {
         event.preventDefault();
         var username = this.state.username.trim()
+        username = username.replace(/\s/g, '')
         var password = this.state.password.trim()
         if (!username || !password) {
             return;
@@ -77,7 +78,7 @@ class SignUpForm extends React.Component {
             <FormGroup controlId="formInlineName">
               <ControlLabel>Name</ControlLabel>
               {' '}
-             <FormControl type="text" placeholder="Jane Doe" value={this.state.username} onChange={this.handleUsernameChange}  />
+             <FormControl type="text" placeholder="Jane_Doe" value={this.state.username} onChange={this.handleUsernameChange}  />
             </FormGroup>
             {' '}
             <FormGroup controlId="formInlineEmail">

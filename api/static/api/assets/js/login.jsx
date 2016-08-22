@@ -47,6 +47,7 @@ const login = withRouter(
     handleSubmit(event) {
       event.preventDefault()
       var username = this.state.username.trim()
+      username = username.replace(/\s/g, '')
       var password = this.state.password.trim()
       if (!username || !password) {
             return;

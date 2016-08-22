@@ -24,7 +24,6 @@ class SignUpSubmit extends React.Component {
           type: 'POST',
           data: userDetails,
           success: function(data) {
-            console.log(data.username)
             this.setState({data: data});
             this.setState({user_exists:"false"})
           }.bind(this),
