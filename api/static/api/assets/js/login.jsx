@@ -74,7 +74,7 @@ const login = withRouter(
             <FormGroup controlId="formInlineName">
               <ControlLabel>Name</ControlLabel>
               {' '}
-             <FormControl type="text" placeholder="Jane Doe" value={this.state.username} onChange={this.handleUsernameChange}  />
+             <FormControl type="text" placeholder="jane_doe" value={this.state.username} onChange={this.handleUsernameChange}  />
             </FormGroup>
             {' '}
             <FormGroup controlId="formInlineEmail">
