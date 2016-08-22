@@ -49,7 +49,7 @@ class SignUpForm extends React.Component {
         if (!username || !password) {
             return;
         }
-
+        console.log(username);
         this.props.onSignSubmit({username: username, password: password})
 
         this.setState({username:'', password:''})
