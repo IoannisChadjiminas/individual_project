@@ -238,7 +238,7 @@ export class EmoticonButton extends React.Component {
       cache: false,
       success: function(data) {
         this.setState({score: data.score, score_happy: data.score_happy, score_wow: data.score_wow, score_sad: data.score_sad})
-        
+        console.log('hi')
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
