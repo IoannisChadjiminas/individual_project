@@ -174,7 +174,9 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     # the current user. If there is not, then I increase the counter by one.
 #int(self.request.data['score_happy'])
     def perform_update(self, serializer):
-        post = Post.objects.get(pk=self.kwargs['pk'])
+        pk = self.request.data['post']
+        post = Post.objects.get(pk=pk)
+
         renderer_classes = [JSONRenderer]
 
         if Voter.objects.filter(post=post.id, user=self.request.user).exists():
