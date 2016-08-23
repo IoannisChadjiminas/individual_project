@@ -232,17 +232,17 @@ export class EmoticonButton extends React.Component {
   push one emoticon */
 
  loadScoresFromServer () {
-    console.log(this.props.url)
     $.ajax({
       url: this.props.url,
       dataType: 'json',
       cache: false,
       success: function(data) {
+        console.log(this.props.url)
         this.setState({score: data.score, score_happy: data.score_happy, score_wow: data.score_wow, score_sad: data.score_sad})
         console.log('hi')
         console.log(data.score_happy)
         console.log(data.score_wow)
-        console.log(data.score_sa)
+        console.log(data.score_sad)
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
