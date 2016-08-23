@@ -126,7 +126,6 @@ export class EmoticonButton extends React.Component {
                 'Authorization': 'Token ' + localStorage.token
             },
       success: function(data) {
-        data['post'] = this.props.id
         this.setState({data: data});
         this.handleReactVote({post: this.props.id, emotion: this.state.emotion}) //I added the net ajax call after the success of the previous one
         this.loadScoresFromServer()
