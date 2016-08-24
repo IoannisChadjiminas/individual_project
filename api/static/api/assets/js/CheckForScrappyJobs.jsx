@@ -35,7 +35,7 @@ class CheckForScrappyJobs extends React.Component {
     componentDidMount(){
        console.log('mountCheck')
         this.loadDataFromServer()
-        this.loadInterval = setInterval(this.loadDataFromServer, 350000)
+        this.loadInterval = setInterval(this.loadDataFromServer, 10000)
     }
 
     componentWillUnmount () {
