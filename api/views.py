@@ -168,6 +168,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)  # IsOwnerOrReadOnly
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    renderer_classes = [JSONRenderer]
     
     # When performing PUT through AJAX I am checking if there is a relation between the current post and
     # the current user. If there is not, then I increase the counter by one.
