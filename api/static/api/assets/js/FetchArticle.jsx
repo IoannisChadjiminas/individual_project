@@ -57,7 +57,8 @@ class FetchArticle extends React.Component {
  */
 loadDataFromAzureServer (crawl_data) {
     // These parameters are needed to be authenticated to the Azure Server
-    this.account_key = 'WlX/QiJ11tXq0TEss4CMwaRgEblmv2aDFnWKiLeIFAA'
+    // this.account_key = 'WlX/QiJ11tXq0TEss4CMwaRgEblmv2aDFnWKiLeIFAA'
+    this.account_key = 'sAbv//CA0RYDi9408NlqZQVSQqIehrInFniC+EThc6M'
     this.base_url = 'https://api.datamarket.azure.com/data.ashx/amla/text-analytics/v1'
     this.input_text = crawl_data.text // pass almost all the text for sentiment analysis
     this.creds = window.btoa('AccountKey:' + this.account_key)
