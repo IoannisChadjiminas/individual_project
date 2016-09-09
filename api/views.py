@@ -165,14 +165,13 @@ class PostSubmittedByUserDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)  # IsOwnerOrReadOnly
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     renderer_classes = [JSONRenderer]
     
     # When performing PUT through AJAX I am checking if there is a relation between the current post and
     # the current user. If there is not, then I increase the counter by one.
-#int(self.request.data['score_happy'])
     def perform_update(self, serializer):
         post = Post.objects.get(pk=self.kwargs['pk'])
         renderer_classes = [JSONRenderer]
@@ -207,12 +206,6 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
                 serializer.save(score=post.score+1, score_happy=post.score_happy, score_wow=post.score_wow +1, score_sad=post.score_sad)
             elif int(self.request.data['emotion']) == 4:
                 serializer.save(score=post.score+1, score_wow=post.score_wow, score_happy=post.score_happy, score_sad=post.score_sad +1)
-    '''
-    def perform_update(self, serializer):
-        post = Post.objects.get(pk=self.kwargs['pk'])
-        if Post.objects.filter(enable_score="True", id=post.id):
-            serializer.save(score=int(self.request.data['score'])+1)
-    '''
 
 
 class VoterList(generics.ListCreateAPIView):

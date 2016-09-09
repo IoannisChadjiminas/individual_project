@@ -114,25 +114,35 @@ export class EmoticonButton extends React.Component {
     this.handleReactPoint({score: this.state.score, score_sad: this.state.score_sad, score_wow: this.state.score_wow, score_happy:this.state.score_happy, emotion:4, render_story:true})
   }
 
-/* This is used to update the current story with the new score */
+/* This is used to update the current story with the new score (url = api/post) */
+
+/* In the server, I am checking if the visitor has already voted the article by ckecking 
+Voter.objects.filter(post=post.id, user=self.request.user).exists():. If he didn't vote
+then I increase the counter of the appropriate emotion by checking the emotion label
+which depends by the emoticon that the users pressed. 
+
+If he has voted, then I check the previous emotion label and the current one. If they are 
+the same I don't do anything, otherwise I reduce the previous by minus one and I increase the 
+other plus one */
+
   handleReactPoint(reactPoint) {
     $.ajax({
-      url: this.props.url,
+      url: this.props.url, // REST API endpoint
       dataType: "text", 
-      contetType: "application/json", //when sending data to the server, use the content types
+      contetType: "application/json", 
       type: 'PUT',
-      data: reactPoint,
+      data: reactPoint, // Data that will be sent to the server
       headers: {
-                'Authorization': 'Token ' + localStorage.token
+                'Authorization': 'Token ' + localStorage.token // AUthenticated Uder
             },
-      success: function(data) {
+      success: function(data) { // This is called if the AJAX call was successfull
         this.setState({data: data});
-        this.handleReactVote({post: this.props.id, emotion: this.state.emotion}) //I added the net ajax call after the success of the previous one
-        this.loadScoresFromServer()
+        this.handleReactVote({post: this.props.id, emotion: this.state.emotion}) // Another AJAX call after the success of this one
+        this.loadScoresFromServer() // AJAX call after the success of current of this one
 
       }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+      error: function(xhr, status, err) { // This is called if the AJAX call wasn't successfulls
+        console.error(this.props.url, status, err.toString()); // AJAX error message
       }.bind(this)
     });
 
@@ -140,8 +150,8 @@ export class EmoticonButton extends React.Component {
 
 /**
  * [handleReactVote description]
- * This is used to relate the voter with the post that he had ranked. After this
- * calls the loadVoterId().
+ * Once the user has voted, I relate the voter with the current post if its his first time. 
+ * After this I call the loadVoterId().
  * 
  */
   handleReactVote(reactVote) {
